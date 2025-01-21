@@ -32,12 +32,12 @@ d_psi = 0.05 * pi               # Phase gain of the RF pulse [rad]
 psi_0 = 0.5 * pi                # Initial Phase of RF pulse [rad]
 
 TR = 500                        # Repetition time for each pulse [ms]
-PW = 200                        # width of each pulse [ms]
+PW = 100                        # width of each pulse [ms]
 
 rf_amp = 0.00005                # RF amplitude [T]
 g_max = 0.0001
 g_ave = 0.1
-max_slew = 12000
+max_slew = 0.000012
 rephase_fact = 4                # How many times longer the main puse is than the rephasing pulse
 ###########################
 

@@ -27,16 +27,33 @@ def rf_gen(amp, pw, TR, d_psi, psi_0, control=False):
     return B_out[0:ntime, :]
 
 
-def slice_grad_gen(amp, pw, Gave, TR):
+def slice_grad_gen(Gmax, pw, Gave, TR):
     # This will be one Gradient pulse
-    block = np.zeros(int(np.ceil(TR / dt)))
+    block_len = int(np.ceil(TR / dt))
+    block = np.zeros(block_len)
     p_len = int(np.ceil(pw / dt))
 
-    p_rephase_len = int(np.minimum(np.ceil(p_len / rephase_fact), np.floor(TR / dt)))
+    # Construct the ramp up to the max amplitude
+    main_ramp = np.arange(0, Gmax, max_slew * dt)
+    main_ramp_len = np.size(main_ramp)
 
-    block[0:p_len] = amp
-    block[p_len:p_len + p_rephase_len] = Gave - amp * rephase_fact
+    # Construct the main gradient pulse for one repetition
+    block[0:main_ramp_len] = main_ramp
+    block[main_ramp_len:main_ramp_len + p_len] = Gmax
+    block[main_ramp_len + p_len:2 * main_ramp_len + p_len] = main_ramp[::-1]
+
+    # Construct the rephasing pulse
+    cur_g_sum = np.sum(block) * dt
+    reph_g_sum = Gave - cur_g_sum
+    reph_amp = np.sqrt(np.abs(reph_g_sum * max_slew * dt))
+    reph_ramp = np.arange(0, -reph_amp, -max_slew * dt)
+    reph_ramp_len = np.size(reph_ramp)
+
+    block[2 * main_ramp_len + p_len:2 * main_ramp_len + p_len + reph_ramp_len] = reph_ramp
+    block[2 * main_ramp_len + p_len + reph_ramp_len:2 * main_ramp_len + p_len + 2 * reph_ramp_len] = reph_ramp[::-1]
+
+    print(np.sum(block))
 
     # Create the final pulse sequence and return
-    nreps = int(np.ceil(ntime / p_len))
+    nreps = int(np.ceil(ntime / block_len))
     return np.tile(block, (nreps))[0 : ntime]
