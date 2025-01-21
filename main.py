@@ -19,16 +19,16 @@ if __name__ == '__main__':
     Gy = np.zeros(ntime)
     Gz = slice_grad_gen(g_max, PW, g_ave, TR)
 
-    Bt[:, x] = Bt[:, x] + (Gx * xpos)
-    Bt[:, y] = Bt[:, y] + (Gy * ypos)
+    Bt[:, z] = Bt[:, z] + (Gx * xpos)
+    Bt[:, z] = Bt[:, z] + (Gy * ypos)
     Bt[:, z] = Bt[:, z] + (Gz * zpos)
 
-    #M = blochsim(Bt)
+    M = blochsim(Bt)
 
-    #plt.plot(time_s, rf)
-    plt.plot(time_s, Bt[:, x], label = 'x')
-    plt.plot(time_s, Bt[:, y], label = 'y')
-    plt.plot(time_s, Bt[:, z], label = 'z')
+    #plt.plot(time_s, Gz)
+    plt.plot(time_s, M[:, x], label = 'x')
+    plt.plot(time_s, M[:, y], label = 'y')
+    plt.plot(time_s, M[:, z], label = 'z')
     plt.legend()
     plt.show()
 
