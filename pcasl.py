@@ -52,7 +52,7 @@ def slice_grad_gen(Gmax, pw, Gave, TR):
     block[2 * main_ramp_len + p_len:2 * main_ramp_len + p_len + reph_ramp_len] = reph_ramp
     block[2 * main_ramp_len + p_len + reph_ramp_len:2 * main_ramp_len + p_len + 2 * reph_ramp_len] = reph_ramp[::-1]
 
-    print(np.sum(block))
+    # print(np.sum(block))
 
     # Create the final pulse sequence and return
     nreps = int(np.ceil(ntime / block_len))
