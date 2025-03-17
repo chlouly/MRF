@@ -13,8 +13,8 @@ if __name__ == '__main__':
     zpos = (time * zvel) + zpos_init
 
     Bt = np.zeros((ntime, n_dim))
-    # Bt[:, x:z] = rf_gen(rf_amp, PW, TR, d_psi, psi_0, control=0)
-    Bt[:, x:z] = fse_pulsetrain(PW, TR, fill=True)
+    Bt[:, x:z] = rf_gen(rf_amp, PW, TR, d_psi, psi_0, control=0)
+    #Bt[:, x:z] = fse_pulsetrain(PW, TR, fill=True)
     #Bt[:, x] = Bt[:, x] + 0.0001
 
     Gx = np.zeros(ntime)

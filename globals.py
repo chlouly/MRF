@@ -25,7 +25,7 @@ time_s = time * 10**3           # Time vector for displaying in [s]
 
 xpos = 0.0                      #[cm]
 ypos = 0.0                      #[cm]
-zvel = 0                   #[cm/ms]
+zvel = 10**-3                   #[cm/ms]
 zpos_init = -T * zvel/2         #[cm]
 
 d_psi = 0.05 * pi               # Phase gain of the RF pulse [rad]
