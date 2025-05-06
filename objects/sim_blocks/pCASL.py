@@ -63,9 +63,11 @@ class pCASL(SimObj):
         # We only see activation in the labeling case
         if not self.control:
             # The rect function starts at the start time of the pulse + BAT ms
-            start_t += self.params.BAT
+            # Add the time to the start queue
+            start_t += [self.params.BAT]
             # We assume the rect ends BAT ms after the the pulsetrain ends
-            end_t += self.params.BAT + self.T
+            # Add the time to the end queue
+            end_t += [self.params.BAT + self.T]
         
         # We call SimObj's definition of set_s_sig()
         return super().set_s_sig(start_t, end_t)
@@ -102,7 +104,7 @@ def pcasl_rf_gen(flip, ntime, dt, pw, TR, d_psi, psi_0, control=False):
     return B_out[0:ntime, :]
 
 
-def slice_grad_gen(Gmax, pw, Gave, TR):
+def slice_grad_gen(Gmax, pw, Gave, TR, dt, ntime):
     # This will be one Gradient pulse
     block_len = int(np.ceil(TR / dt))
     block = np.zeros(block_len)
@@ -126,8 +128,6 @@ def slice_grad_gen(Gmax, pw, Gave, TR):
 
     block[2 * main_ramp_len + p_len:2 * main_ramp_len + p_len + reph_ramp_len] = reph_ramp
     block[2 * main_ramp_len + p_len + reph_ramp_len:2 * main_ramp_len + p_len + 2 * reph_ramp_len] = reph_ramp[::-1]
-
-    # print(np.sum(block))
 
     # Create the final pulse sequence and return
     nreps = int(np.ceil(ntime / block_len))

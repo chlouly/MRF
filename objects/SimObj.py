@@ -60,7 +60,7 @@ class SimObj:
         self.time = self.time_inds * self.dt        # Vector of Timepoints [ms]
 
         self.B = np.zeros((self.ntime, 3))          # (ntime, 3) array of B vectors [T] (initally set to 0s)
-        self.s = np.zeros((self.ntime, 1))          # (ntime, ) array of arterial magnetization values (initially set to 0s)
+        self.s = np.zeros((self.ntime, ))          # (ntime, ) array of arterial magnetization values (initially set to 0s)
 
         self.TR = TR                                
         self.PW = PW
@@ -112,10 +112,22 @@ class SimObj:
 
 
     def set_s_sig(self, start_t, end_t):
-        self.s =  - (self.params.F * 2 * self.params.alpha * self.params.M0_f / self.params.lam) * np.exp(-self.params.BAT / self.params.T1_b) * ((self.time >= start_t) & (self.time < end_t)) 
+        # If both queues are empty, return, nothing to do.
+        if (len(start_t) == 0) or (len(end_t) == 0):
+            return ([], [])
+        elif start_t[0] <= self.T:
+            # Pulse plays during this block
+            self.s =  - (self.params.F * 2 * self.params.alpha * self.params.M0_f / self.params.lam) * np.exp(-self.params.BAT / self.params.T1_b) * ((self.time >= start_t[0]) & (self.time < end_t[0]))
 
-        start_t = np.max((0.0, start_t - self.T))
-        end_t = np.max((0.0, end_t - self.T))
+        # Update start and end times
+        start_t[0] = np.max((0.0, start_t[0] - self.T))
+        end_t[0] = np.max((0.0, end_t[0] - self.T))
+
+        if end_t[0] == 0:
+            # If what pulse is done, we delete it
+            start_t.pop(0)
+            end_t.pop(0)
+        
         return (start_t , end_t)
    
 

@@ -64,3 +64,5 @@ class Params:
 
         self.CBV = CBV
         self.BAT = BAT
+
+        

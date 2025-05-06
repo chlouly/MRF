@@ -93,8 +93,8 @@ class MRFSim:
             runs set_rf() to incorporate the RF pulses into the sim
             runs set_s_sig() (see SimObj.set_s_sig() for details)
         """
-        s_start = 0
-        s_end = 0
+        s_start = []
+        s_end = []
 
         for sim in self.sims:
             sim.set_gradients()
@@ -187,7 +187,7 @@ class MRFSim:
         This is mainly used for plotting purposes. Once this array is calculated, 
         it is stored in case it is needed later.
         """
-        s_out = np.empty(0)
+        s_out = np.empty((0,))
 
         for sim in self.sims:
             s_out= np.append(s_out, sim.s, axis=0)
