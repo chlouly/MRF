@@ -111,24 +111,64 @@ class SimObj:
         self.B = self.B + rf
 
 
-    def set_s_sig(self, start_t, end_t):
-        # If both queues are empty, return, nothing to do.
-        if (len(start_t) == 0) or (len(end_t) == 0):
-            return ([], [])
-        elif start_t[0] <= self.T:
-            # Pulse plays during this block
-            self.s =  - (self.params.F * 2 * self.params.alpha * self.params.M0_f / self.params.lam) * np.exp(-self.params.BAT / self.params.T1_b) * ((self.time >= start_t[0]) & (self.time < end_t[0]))
+    def set_s_sig(self, time_queue):
+        """
+        This method sets the s(t) function for each block. The MRFSim object calls
+        this method for each block. If a block is a pCASL labeling block, then a start
+        and end time are added to the time_queues (whos state is held in
+        the MRFSim.setup() method). These start and end times denote the beginning
+        and end of each rect function in s(t).
+
+        Input Parameters:
+            time_queue:     A queue of start times and end times for incoming boluses. The times
+                            in [ms] are w.r. to the starting time of the block, i.e. if a block 
+                            begins at time 2000 ms, a start time of 1000 ms would mean 1000 ms AFTER the
+                            beginning of the block (3000 ms). Similarly if the end time was 2000 ms,
+                            then the bolus would pass at 4000 ms with respect to the pulse sequence.
+                            This queue is a list of the following tuples:
+                                (Bolus Arrival [ms], Bolus Departure [ms])
+                            Where each entry refers to one bolus of labeled blood.
+        
+        Output Values:
+            time_queue:     An updated version of the input queue. All times in the queue are shifted
+                            to be w.r. to the NEXT block in the sequence, and if a bolus has already
+                            passed by that point, it is removed from the queue. This state is passed 
+                            off to the calling function (MRFSim.setup()), so that it may be used as 
+                            input when this method is called on the next block in the pulse sequence 
+                            (MRFSim.sims).
+        
+        NOTE: If set_s_sig() is called on an instantiation of the pCASL(SimObj) class, the control
+              flow of this program is handed off to its definition of this method instead of directly
+              to this definition. The pCASL(SimObj).set_s_sig() method essentially adds a start time
+              and an end time to the end of the queue ONLY if it is a labeling block, not
+              control. After it does that, it calls the SimObj.set_s_sig() and passes it's modified
+              queue as input, essentially making it so that upon seeing a labeling sequence, the
+              code knows that a new bolus is coming.
+        """
+        # If the queue is empty, return, nothing to do.
+        if len(time_queue) == 0:
+            return ([])
+        elif time_queue[0][0] < self.T:
+            # Pulse plays during this block iff the start time of the pulse is less
+            # than the durration of the block
+            self.s =  - (self.params.F * 2 * self.params.alpha * self.params.M0_f / self.params.lam) * \
+                np.exp(-self.params.BAT / self.params.T1_b) * ((self.time >= time_queue[0][0]) & (self.time < time_queue[0][1]))
 
         # Update start and end times
-        start_t[0] = np.max((0.0, start_t[0] - self.T))
-        end_t[0] = np.max((0.0, end_t[0] - self.T))
-
-        if end_t[0] == 0:
-            # If what pulse is done, we delete it
-            start_t.pop(0)
-            end_t.pop(0)
-        
-        return (start_t , end_t)
+        # We now want to make the start and end times w.r. to the 
+        # beginning of the next block, so we subtract the length of
+        # this block.
+        #
+        # If a start time is < 0, we know that part of
+        # the bolus appears in this block, so we set the start
+        # time to 0 so that the rest of the bolus immediatly appears
+        # in the next block.
+        # If an end time is <= 0, we know that bolus has passed, so
+        # we can take it off the queue
+        #
+        # The following line of code performs the logic described above
+        # and returns the queue:
+        return [(max(0.0, t[0] - self.T), t[1] - self.T) for t in time_queue if t[1] > self.T]
    
 
     def run_np_ljn(self, M_start=M_start_default):

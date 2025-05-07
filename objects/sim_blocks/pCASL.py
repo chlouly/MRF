@@ -52,25 +52,27 @@ class pCASL(SimObj):
         pass
 
 
-    def set_s_sig(self, start_t, end_t):
+    def set_s_sig(self, time_queue):
         """
         This method overrides SimObj's definition of set_s_sig(). The arterial longitudinal
         magnetization is affected by a pCASL pulse, and for now we assume that it takes the
         the form of a rect function. Here, we create a start and end time for the rect function
-        created by this pulse, and we pass those times off to SimObj's definition of set_s_sig().
-        See SimObj's definition of this method for details
+        created by this pulse, we add those times to a queue in the form of a tuple, and we pass 
+        the updated queue off to SimObj's definition of set_s_sig().
+
+        See SimObj's definition of this method for details...
         """
         # We only see activation in the labeling case
         if not self.control:
-            # The rect function starts at the start time of the pulse + BAT ms
-            # Add the time to the start queue
-            start_t += [self.params.BAT]
-            # We assume the rect ends BAT ms after the the pulsetrain ends
-            # Add the time to the end queue
-            end_t += [self.params.BAT + self.T]
+            # The rect function starts BAT ms from the beginning of the pulse
+            # The rect ends BAT ms after the the pulsetrain ends BAT + durration of pulse ms
+            # from the beginning of the pulse. So we add:
+            #       (Bolus Start [ms], Bolus End [ms])
+            #    =  (BAT [ms], BAT + self.T [ms])
+            time_queue += [(self.params.BAT, self.params.BAT + self.T)]
         
         # We call SimObj's definition of set_s_sig()
-        return super().set_s_sig(start_t, end_t)
+        return super().set_s_sig(time_queue)
 
 
 

@@ -93,13 +93,13 @@ class MRFSim:
             runs set_rf() to incorporate the RF pulses into the sim
             runs set_s_sig() (see SimObj.set_s_sig() for details)
         """
-        s_start = []
-        s_end = []
+        # Initialize an empty queue of bolus times
+        time_queue = []
 
         for sim in self.sims:
             sim.set_gradients()
             sim.set_rf()
-            s_start, s_end = sim.set_s_sig(s_start, s_end)
+            time_queue = sim.set_s_sig(time_queue)
 
 
     def run_one_np(self):
