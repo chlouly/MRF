@@ -26,10 +26,11 @@ if __name__ == '__main__':
     sim_l = MRFSim()
 
     # Now I add all 4 blocks of the sequence
-    sim_l.add_sim(DeadAir(params, 2000, dt_dead))               # Add dead air
-    sim_l.add_sim(pCASL(params, 1800, 1, 0.5, dt_live))         # Add the first pCASL sequence
-    sim_l.add_sim(DeadAir(params, 5000, dt_dead))               # Add the second dead air
-    sim_l.add_sim(FSE(params, 500, 50, 3, dt_live))             # Add the readout section
+    for _ in range(5):
+        sim_l.add_sim(DeadAir(params, 2000, dt_dead))               # Add dead air
+        sim_l.add_sim(pCASL(params, 2000, 1, 0.5, dt_live))         # Add the first pCASL sequence
+        sim_l.add_sim(DeadAir(params, 5000, dt_dead))               # Add the second dead air
+        sim_l.add_sim(FSE(params, 500, 50, 3, dt_live))             # Add the readout section
 
     # I deepcopy to create an actual copy of the labeling simulator
     # This will be a separate object with all of the same elements as the first one
@@ -58,12 +59,17 @@ if __name__ == '__main__':
     sim_c.run_all_np()
 
     # Plot the simulated magnetizations
-    sim_l.plot_M(dsample=10)
-    sim_c.plot_M(dsample=10)
+    #sim_l.plot_M(dsample=10)
+    #sim_c.plot_M(dsample=10)
+
+    sim_l.plot_samples()
+    sim_c.plot_samples()
 
     # Subtract the label and control magnetizations
     M_sub = sim_l.get_M() - sim_c.get_M()
     time_vec = sim_l.get_times()
+
+    print(sim_l.samples)
     
 
     # Plot the sibtraction

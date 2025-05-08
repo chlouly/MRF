@@ -45,10 +45,12 @@ class MRFSim:
         """
         self.cur_sim = 0
         self.num_sim = 0
+        self.cur_time = 0
 
         self.M_cur = M_init
 
         self.samples = np.array([])
+        self.sample_times = np.array([])
 
         self.sims = []
 
@@ -117,8 +119,14 @@ class MRFSim:
         self.M_cur = self.sims[self.cur_sim].M[-1, :]
 
         # Get the samples from the current simulation and ass them to the array
-        # of all samples
-        self.samples = np.append(self.samples, self.sims[self.cur_sim].sample())
+        # of all samples, as well as the time in which they were taken w.r. to
+        # the pulse sequence
+        if np.size(self.sims[self.cur_sim].sample_times) != 0:
+            self.samples = np.append(self.samples, self.sims[self.cur_sim].sample())
+            self.sample_times = np.append(self.sample_times, self.sims[self.cur_sim].sample_times + self.cur_time)
+
+        # Increment the current time
+        self.cur_time += self.sims[self.cur_sim].T
 
         # Increment the index for the current simulation
         self.cur_sim += 1
@@ -142,15 +150,17 @@ class MRFSim:
         This is mainly used for plotting purposes. Once this array is calculated, 
         it is stored in case it is needed later.
         """
+
+        if hasattr(self, "time_vec"):
+            # We have already calculated this, nothing to do.
+            return self.time_vec
+        
         cur_time = 0.0
-        t_out = np.empty(0)
+        self.time_vec = np.empty(0)
 
         for sim in self.sims:
-            t_out = np.append(t_out, sim.time + cur_time)
+            self.time_vec = np.append(self.time_vec, sim.time + cur_time)
             cur_time += sim.T
-
-        self.time_vec = t_out
-        return t_out
     
 
     def get_M(self):
@@ -206,9 +216,9 @@ class MRFSim:
         Helper function that plots the effective B field for the entire simulation,
         allowing users to display the pulse sequence that they are working with.
         """
-        if not hasattr(self, "time_vec"):
-            self.get_times()
 
+        # Get the things to plot
+        self.get_times()
         B = self.get_B()
 
         plt.plot(self.time_vec[::dsample ], B[::dsample, 0], label = 'x')
@@ -228,9 +238,9 @@ class MRFSim:
         Helper function that plots the simulated magnetization for the entire simulation,
         allowing users to display results of the simulation.
         """
-        if not hasattr(self, "time_vec"):
-            self.get_times()
 
+        # Get the things to plot
+        self.get_times()
         M = self.get_M()
 
         plt.plot(self.time_vec[::dsample ], M[::dsample, 0], label = 'x tissue')
@@ -250,9 +260,9 @@ class MRFSim:
         """
         Helper function that plots arterial magnetization for the entire simulation.
         """
-        if not hasattr(self, "time_vec"):
-            self.get_times()
 
+        # Get the things to plot
+        self.get_times()
         s = self.get_s()
 
         plt.plot(self.time_vec[::dsample ], s[::dsample], label = 's(t)')
@@ -262,5 +272,23 @@ class MRFSim:
         plt.ylabel("Arterial magnetization (z component)")
         plt.title("s(t) signal")
         plt.legend()
+        plt.show()
+
+    def plot_samples(self, ylim=[]):
+        """
+        Helper function that plots the samples of the pulse sequence
+        """
+
+        if np.size(self.samples) == 0:
+            # We did not collect any samples so there isn't anything
+            # to do
+            return
+        
+        plt.plot(self.sample_times, self.samples)
+        if not ylim == []:
+            plt.ylim(ylim)
+        plt.xlabel("Sample Time [ms]")
+        plt.ylabel("Sample Intensity")
+        plt.title("Samples")
         plt.show()
 

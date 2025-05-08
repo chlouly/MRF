@@ -189,7 +189,7 @@ class SimObj:
         This method runs a python implementation of the LJN Bloch simulation
         algorithm.
         """
-        self.M = np_blochsim_ljn(self.B, self.s, self.params, self.dt, self.ntime, M_start, self.absorption, self.saturation, timer=True)
+        self.M = np_blochsim_ljn(self.B, self.s, self.params, self.dt, self.ntime, M_start, self.absorption, self.saturation, timer=False)
 
     
     def sample(self):
