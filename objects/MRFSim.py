@@ -48,6 +48,8 @@ class MRFSim:
 
         self.M_cur = M_init
 
+        self.samples = np.array([])
+
         self.sims = []
 
 
@@ -113,6 +115,10 @@ class MRFSim:
         # Take the LAST vector from the simulated magnetization
         # and use it as the starting magnetization for the next sim (M_cur)
         self.M_cur = self.sims[self.cur_sim].M[-1, :]
+
+        # Get the samples from the current simulation and ass them to the array
+        # of all samples
+        self.samples = np.append(self.samples, self.sims[self.cur_sim].sample())
 
         # Increment the index for the current simulation
         self.cur_sim += 1

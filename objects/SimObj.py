@@ -41,17 +41,21 @@ class SimObj:
     M_start_default = np.array([0.0, 0.0, 1.0, 1.0])
 
 
-    def __init__(self, params, T, TR, PW, dt):
+    def __init__(self, params, T, TR, PW, dt, sample_times=np.array([])):
         """
         Method that instantiates the SimObj class.
 
         Parameters:
-            params:     An instance of the Params class.
-            T:          The durration of this block [ms]
-            TR:         Time between pulses in the RF pulsetrains for this block [ms]
-                        (Not always used)
-            PW:         Pulse width [ms]
-            dt:         Simulation timestep [ms]
+            params:         An instance of the Params class.
+            T:              The durration of this block [ms]
+            TR:             Time between pulses in the RF pulsetrains for this block [ms]
+                            (Not always used)
+            PW:             Pulse width [ms]
+            dt:             Simulation timestep [ms]
+            sample_times:   An array of times at which you would like to sample the signal.
+                            These times must be within the time range of the simulation
+                            block [0, T) ms. They will be rounded down to the nearest 
+                            time value that is simulated.
         """
         self.T = T                                  # Simulation durration [ms]
         self.dt = dt                                # Simulation timestep [ms]
@@ -64,6 +68,13 @@ class SimObj:
 
         self.TR = TR                                
         self.PW = PW
+
+        # Input validation: Make sure the sample points are within the block
+        if np.any((sample_times >= self.T) | (sample_times < 0.0)):
+            raise ValueError("ERROR: Sample times must be within the length of the block [0.0, ", self.T, ") ms.")
+
+        self.sample_times = sample_times
+        self.M_art = np.array([])   # Array of samples of the arterial magnetization z component M_art(t)
 
         self.params = params
 
@@ -153,6 +164,10 @@ class SimObj:
             # than the durration of the block
             self.s =  - (self.params.F * 2 * self.params.alpha * self.params.M0_f / self.params.lam) * \
                 np.exp(-self.params.BAT / self.params.T1_b) * ((self.time >= time_queue[0][0]) & (self.time < time_queue[0][1]))
+            
+            # We also sample the arterial magnetization M_art
+            self.M_art = 1 - (2 * self.params.alpha * np.exp(-(self.sample_times - time_queue[0][0]) / self.params.T1_b)) \
+                * ((self.sample_times >= time_queue[0][0]) & (self.sample_times < time_queue[0][1]))
 
         # Update start and end times
         # We now want to make the start and end times w.r. to the 
@@ -160,15 +175,13 @@ class SimObj:
         # this block.
         #
         # If a start time is < 0, we know that part of
-        # the bolus appears in this block, so we set the start
-        # time to 0 so that the rest of the bolus immediatly appears
-        # in the next block.
+        # the bolus appears in this block.
         # If an end time is <= 0, we know that bolus has passed, so
         # we can take it off the queue
         #
         # The following line of code performs the logic described above
         # and returns the queue:
-        return [(max(0.0, t[0] - self.T), t[1] - self.T) for t in time_queue if t[1] > self.T]
+        return [(t[0] - self.T, t[1] - self.T) for t in time_queue if t[1] > self.T]
    
 
     def run_np_ljn(self, M_start=M_start_default):
@@ -179,6 +192,35 @@ class SimObj:
         self.M = np_blochsim_ljn(self.B, self.s, self.params, self.dt, self.ntime, M_start, self.absorption, self.saturation, timer=True)
 
     
+    def sample(self):
+        """
+        This function obtains samples from the simulated magnetization and returns them. This
+        method will be called from the MRFSim object where the samples will be stored and added
+        to a dictionary. We use the following to calculate samples:
+
+            Samples = (1 - CBV) * |M_xy(t_smaple)|_l2 + CBV * M_art(t_sample) * sin(beta)
+
+        Where beta is the flip angle from the RO sequence. Since we are simulating the effects of 
+        the readout on the tissue magnetization (first 3 of the 4 components of M(t) or self.M in 
+        the SimObj instance),we do not need to use sin(beta) to emulate the readout, we just take the
+        l2 norm of the transverse components. However we do not simulate the readout on the arterial
+        magnetization (not the same as s(t)), we use the sin(beta) to capture the RO effects on the blood.
+
+        NOTE: We are using beta = 90  deg here for now (sin(90) = 1, so it isn't written in the code), 
+        since our readouts at the moment start with a 90y pulse, however a more general approach may 
+        be used in the future if needed.
+
+        Output:
+            An (n, ) numpy array of samples from this block, where n is the number of sample times.
+        """
+
+        # Get an array of time indices for each sample
+        # TODO: If we have more than one sample per block, worry about the order (ascending time)
+        self.sample_inds = np.int32(np.floor(self.sample_times / self.dt))
+
+        return np.linalg.norm(self.M[self.sample_inds, 0:2], axis=1) * (1 - self.params.CBV) \
+                + self.M_art * self.params.CBV
+
 
     """
     The commented sections below are methods that run simulations using an various
