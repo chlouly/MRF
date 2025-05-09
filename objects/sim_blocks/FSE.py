@@ -6,8 +6,14 @@
 ##########################################################################
 
 import numpy as np
-from globals import *
 from ..SimObj import SimObj
+
+pi = np.pi
+gambar = 42570                  # Gyromagnetic coefficient [kHz/T]
+gam = gambar * 2 * 3.14159      # Gamma [kRad/sT]
+
+x = 0
+y = 1
 
 
 class FSE(SimObj):

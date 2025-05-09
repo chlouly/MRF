@@ -6,9 +6,14 @@
 ##########################################################################
 
 import numpy as np
-from globals import *
-import matplotlib.pyplot as plt
 from ..SimObj import SimObj
+
+pi = np.pi
+gambar = 42570                  # Gyromagnetic coefficient [kHz/T]
+gam = gambar * 2 * 3.14159      # Gamma [kRad/sT]
+
+x = 0
+y = 1
 
 
 class pCASL(SimObj):
@@ -106,32 +111,32 @@ def pcasl_rf_gen(flip, ntime, dt, pw, TR, d_psi, psi_0, control=False):
     return B_out[0:ntime, :]
 
 
-def slice_grad_gen(Gmax, pw, Gave, TR, dt, ntime):
-    # This will be one Gradient pulse
-    block_len = int(np.ceil(TR / dt))
-    block = np.zeros(block_len)
-    p_len = int(np.ceil(pw / dt))
+# def slice_grad_gen(Gmax, pw, Gave, TR, dt, ntime):
+#     # This will be one Gradient pulse
+#     block_len = int(np.ceil(TR / dt))
+#     block = np.zeros(block_len)
+#     p_len = int(np.ceil(pw / dt))
 
-    # Construct the ramp up to the max amplitude
-    main_ramp = np.arange(0, Gmax, max_slew * dt)
-    main_ramp_len = np.size(main_ramp)
+#     # Construct the ramp up to the max amplitude
+#     main_ramp = np.arange(0, Gmax, max_slew * dt)
+#     main_ramp_len = np.size(main_ramp)
 
-    # Construct the main gradient pulse for one repetition
-    block[0:main_ramp_len] = main_ramp
-    block[main_ramp_len:main_ramp_len + p_len] = Gmax
-    block[main_ramp_len + p_len:2 * main_ramp_len + p_len] = main_ramp[::-1]
+#     # Construct the main gradient pulse for one repetition
+#     block[0:main_ramp_len] = main_ramp
+#     block[main_ramp_len:main_ramp_len + p_len] = Gmax
+#     block[main_ramp_len + p_len:2 * main_ramp_len + p_len] = main_ramp[::-1]
 
-    # Construct the rephasing pulse
-    cur_g_sum = np.sum(block) * dt
-    reph_g_sum = Gave - cur_g_sum
-    reph_amp = np.sqrt(np.abs(reph_g_sum * max_slew * dt))
-    reph_ramp = np.arange(0, -reph_amp, -max_slew * dt)
-    reph_ramp_len = np.size(reph_ramp)
+#     # Construct the rephasing pulse
+#     cur_g_sum = np.sum(block) * dt
+#     reph_g_sum = Gave - cur_g_sum
+#     reph_amp = np.sqrt(np.abs(reph_g_sum * max_slew * dt))
+#     reph_ramp = np.arange(0, -reph_amp, -max_slew * dt)
+#     reph_ramp_len = np.size(reph_ramp)
 
-    block[2 * main_ramp_len + p_len:2 * main_ramp_len + p_len + reph_ramp_len] = reph_ramp
-    block[2 * main_ramp_len + p_len + reph_ramp_len:2 * main_ramp_len + p_len + 2 * reph_ramp_len] = reph_ramp[::-1]
+#     block[2 * main_ramp_len + p_len:2 * main_ramp_len + p_len + reph_ramp_len] = reph_ramp
+#     block[2 * main_ramp_len + p_len + reph_ramp_len:2 * main_ramp_len + p_len + 2 * reph_ramp_len] = reph_ramp[::-1]
 
-    # Create the final pulse sequence and return
-    nreps = int(np.ceil(ntime / block_len))
-    return np.tile(block, (nreps))[0 : ntime]
+#     # Create the final pulse sequence and return
+#     nreps = int(np.ceil(ntime / block_len))
+#     return np.tile(block, (nreps))[0 : ntime]
 

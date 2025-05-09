@@ -1,8 +1,25 @@
+from pathlib import Path
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
 import numpy as np
-from globals import *
+from test_globals import *
 from objects import *
 
-def test():
+"""
+This is the most basic test case. It is intended to test the validity of the actual simulations
+not necessarilly the infrastructure around them. Run this test case and visually inspect the
+resulting figures. This consists of 3 separate simulations, which are as follows:
+
+    1)  An inversion pulse in x
+    2)  An inversion pulse in y
+    3)  Dead time to observe the decay of the signal.
+
+Good luck!
+"""
+
+if __name__ == "__main__":
     # Test to visually confirm that simulation outputs are correct
     Test_sim = MRFSim()
     dt = 10**-1

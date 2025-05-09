@@ -11,9 +11,11 @@
 ##########################################################################
 
 import numpy as np
-from globals import gam
 import time as tm
 
+# Constant
+gambar = 42570                  # Gyromagnetic coefficient [kHz/T]
+gam = gambar * 2 * 3.14159      # Gamma [kRad/sT]
 
 def is_approx(a, b, rel_tol=1e-12, abs_tol=0.0):
     """
