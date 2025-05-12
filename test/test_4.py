@@ -41,10 +41,6 @@ if __name__ == "__main__":
     samples = samples[20::]
     subs = samples[0::2] - samples[1::2]
 
-    # M_art = np.array([])
-    # for sim in ps.sims:
-    #     M_art = np.append(M_art, sim.M_art)
-
     plt.plot(subs)
     plt.show()
     

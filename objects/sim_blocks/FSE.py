@@ -45,10 +45,6 @@ class FSE(SimObj):
         # Append the ReadOut sample times to the sample times array
         self.sample_times = np.append(self.sample_times, RO_samples)
 
-        # This is the "nothing happens" case for M_art, we set it now and if a
-        # bolus comes it will be changed later
-        self.M_art = 0 * self.sample_times + 1
-
         # Call the parent class' definition of set_rf() to add the pulse to
         # the objects effective B field.
         super().set_rf(rf)

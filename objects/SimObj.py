@@ -82,7 +82,6 @@ class SimObj:
             raise ValueError("ERROR: Sample times must be within the length of the block [0.0, ", self.T, ") ms.")
 
         self.sample_times = sample_times
-        self.M_art = np.array([])   # Array of samples of the arterial magnetization z component M_art(t)
 
         self.params = params
 
@@ -172,10 +171,6 @@ class SimObj:
             # than the durration of the block
             self.s =  - (self.params.F * 2 * self.params.alpha * self.params.M0_f / self.params.lam) * \
                 np.exp(-self.params.BAT / self.params.T1_b) * ((self.time >= time_queue[0][0]) & (self.time < time_queue[0][1]))
-            
-            # We also sample the arterial magnetization M_art
-            self.M_art = 1 - (2 * self.params.alpha * np.exp(-(self.sample_times - time_queue[0][0]) / self.params.T1_b)) \
-                * ((self.sample_times >= time_queue[0][0]) & (self.sample_times < time_queue[0][1]))
 
         # Update start and end times
         # We now want to make the start and end times w.r. to the 
@@ -206,7 +201,7 @@ class SimObj:
         method will be called from the MRFSim object where the samples will be stored and added
         to a dictionary. We use the following to calculate samples:
 
-            Samples = (1 - CBV) * |M_xy(t_smaple)|_l2 + CBV * M_art(t_sample) * sin(beta)
+            Samples = (1 - CBV) * |M_xy(t_smaple)|_l2 + CBV * s(t_sample) * sin(beta)
 
         Where beta is the flip angle from the RO sequence. Since we are simulating the effects of 
         the readout on the tissue magnetization (first 3 of the 4 components of M(t) or self.M in 
@@ -225,10 +220,6 @@ class SimObj:
         # Get an array of time indices for each sample
         # TODO: If we have more than one sample per block, worry about the order (ascending time)
         self.sample_inds = np.int32(np.floor(self.sample_times / self.dt))
-
-        # return np.linalg.norm(self.M[self.sample_inds, 0:2], axis=1) * (1 - self.params.CBV) \
-        #         + self.M_art * self.params.CBV
-
 
         return np.linalg.norm(self.M[self.sample_inds, 0:2], axis=1) * (1 - self.params.CBV) \
                 + self.s[self.sample_inds] * self.params.CBV
