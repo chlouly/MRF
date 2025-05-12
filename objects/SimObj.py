@@ -41,6 +41,14 @@ class SimObj:
     M_start_default = np.array([0.0, 0.0, 1.0, 1.0])
 
 
+    def __new__(cls, params, T, *args, **kwargs):
+        # Basically just input validation, not important
+        if T <= 0:
+            # If we have 0 or negative time, nothing happens so we do not create an instance
+            return None
+        return super().__new__(cls)
+
+
     def __init__(self, params, T, TR, PW, dt, sample_times=np.array([])):
         """
         Method that instantiates the SimObj class.
@@ -218,8 +226,12 @@ class SimObj:
         # TODO: If we have more than one sample per block, worry about the order (ascending time)
         self.sample_inds = np.int32(np.floor(self.sample_times / self.dt))
 
+        # return np.linalg.norm(self.M[self.sample_inds, 0:2], axis=1) * (1 - self.params.CBV) \
+        #         + self.M_art * self.params.CBV
+
+
         return np.linalg.norm(self.M[self.sample_inds, 0:2], axis=1) * (1 - self.params.CBV) \
-                + self.M_art * self.params.CBV
+                + self.s[self.sample_inds] * self.params.CBV
 
 
     """

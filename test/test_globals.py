@@ -36,10 +36,10 @@ g_ave = 0.000000006
 max_slew = 0.5
 
 # white matter values
-F = 0.00001
+F = 50 / 60 / 1000 / 100
 lam = 0.9
-CBV = 0.005
-BAT = 7000
+CBV = 0.02
+BAT = 4000
 a_0 = 2
 
 T1_s = 100

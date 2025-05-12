@@ -59,6 +59,10 @@ class MRFSim:
         """
         This method adds a SimObj to the END of the list of blocks to be simulated.
         """
+        if SimObj is None:
+            # SimObj did not exist, most likely because T <= 0
+            return
+
         self.sims.append(SimObj)
         self.num_sim += 1
 

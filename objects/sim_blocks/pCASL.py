@@ -33,6 +33,20 @@ class pCASL(SimObj):
     saturation = 1000
 
 
+    def __init__(self, params, T, dt, sample_times=np.array([]), control=0):
+        """
+        Creates an instance of the DeadAir class - DeadAir(SimObj)
+
+        Input Arguments:
+            params:     Instance of Params object
+            T:          Block length [ms]
+            dt:         Timestep [ms]
+            control:    Bool for label vs control pulse. (default = 0)
+        """
+        self.control = control
+        super().__init__(params, T, 0, 0, dt, sample_times)
+
+
     def set_rf(self):
         """
         This method overrides SimObj's definition of set_rf(). We don't directly
