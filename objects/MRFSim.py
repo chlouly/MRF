@@ -39,10 +39,11 @@ class MRFSim:
     """
 
 
-    def __init__(self):
+    def __init__(self, params):
         """
         This method creates a new and empty instantiation of MRFSim.
         """
+        self.params = params
         self.cur_sim = 0
         self.num_sim = 0
         self.cur_time = 0
@@ -107,7 +108,26 @@ class MRFSim:
         for sim in self.sims:
             sim.set_gradients()
             sim.set_rf()
-            time_queue = sim.set_s_sig(time_queue)
+            time_queue = sim.set_s_shape(time_queue, self.params.BAT)
+            sim.scale_s(self.params.F, self.params.lam, self.params.alpha, self.params.M0_f, self.params.BAT, self.params.T1_b)
+
+
+    def compute_s(self):
+        self.params.recompute_s = False
+        self.params.rescale_s = False
+
+        time_queue = []
+
+        for sim in self.sims:
+            time_queue = sim.set_s_shape(time_queue, self.params)
+            sim.scale_s(self.params.F, self.params.lam, self.params.alpha, self.params.M0_f, self.params.BAT, self.params.T1_b)
+
+    
+    def scale_s(self):
+        self.params.rescale_s = False
+
+        for sim in self.sims:
+            sim.scale_s(self.params.F, self.params.lam, self.params.alpha, self.params.M0_f, self.params.BAT, self.params.T1_b)
 
 
     def run_one_np(self):
@@ -116,7 +136,7 @@ class MRFSim:
         using the LJN simulator written in python.
         """
         # Run the current SimObj
-        self.sims[self.cur_sim].run_np_ljn(self.M_cur)
+        self.sims[self.cur_sim].run_np_ljn(self.params, self.M_cur)
 
         # Take the LAST vector from the simulated magnetization
         # and use it as the starting magnetization for the next sim (M_cur)
@@ -126,7 +146,7 @@ class MRFSim:
         # of all samples, as well as the time in which they were taken w.r. to
         # the pulse sequence
         if np.size(self.sims[self.cur_sim].sample_times) != 0:
-            self.samples = np.append(self.samples, self.sims[self.cur_sim].sample())
+            self.samples = np.append(self.samples, self.sims[self.cur_sim].sample(self.params.CBV))
             self.sample_times = np.append(self.sample_times, self.sims[self.cur_sim].sample_times + self.cur_time)
 
         # Increment the current time
@@ -143,6 +163,41 @@ class MRFSim:
         """
         while self.cur_sim < self.num_sim:
             self.run_one_np()
+
+
+    # FOR NEXT COMMIT
+    # def generate_dict(self):
+    #     iter(self.params)
+
+    #     try:
+    #         while True:
+    #             # Modify s(t) if needed
+    #             if self.params.recompute_s:
+    #                 self.compute_s()
+    #             elif self.params.rescale_s:
+    #                 self.scale_s()
+
+    #             # Run simulations for the entire pulse sequence
+    #             self.run_all_np()
+
+    #             # TODO: Store samples
+
+    #             # Soft reset to prepare for the next run
+    #             self.soft_reset()
+
+    #             # Move on to the next set of parameters
+    #             next(self.params)
+
+    #     except StopIteration:
+    #         print("Dictionary Generation Complete!!")
+
+
+    # def soft_reset(self):
+    #     self.cur_sim = 0
+    #     self.cur_time = 0
+    #     self.M_cur = M_init
+    #     self.samples = np.array([])
+    #     self.sample_times = np.array([])
 
 
     def get_times(self):

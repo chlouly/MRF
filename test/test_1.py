@@ -21,7 +21,6 @@ Good luck!
 
 if __name__ == "__main__":
     # Test to visually confirm that simulation outputs are correct
-    Test_sim = MRFSim()
     dt = 10**-1
     T = 1000
     ntime = int(np.ceil(T / dt))
@@ -31,10 +30,11 @@ if __name__ == "__main__":
 
 
     #  -  Test 1, 180x pulse  -  #
-    p1 = Params(1000000, 1000000, 1000000, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1)
+    p1 = Params(1000000, 1000000, 1000000, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1)
+    Test_sim = MRFSim(p1)
     B1 = np.zeros((ntime, 3))
     B1[:, 0] = pi / (gam * T)
-    Test_sim.add_sim(Custom(p1, B1, s_empty, dt))
+    Test_sim.add_sim(Custom(B1, s_empty, dt))
 
     Test_sim.plot_B()
     Test_sim.plot_s()
@@ -47,9 +47,10 @@ if __name__ == "__main__":
 
     #  -  Test 2, 180y pulse  -  #
     p2 = p1
+    Test_sim = MRFSim(p2)
     B2 = np.zeros((ntime, 3))
     B2[:, 1] = pi / (gam * T)
-    Test_sim.add_sim(Custom(p2, B2, s_empty, dt))
+    Test_sim.add_sim(Custom(B2, s_empty, dt))
 
     Test_sim.plot_B()
     Test_sim.plot_s()
@@ -61,9 +62,10 @@ if __name__ == "__main__":
 
 
     #  -  Test 3, Decay  -  #
-    p3 = Params(100, 300, 1000, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1)
+    p3 = Params(100, 300, 1000, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1)
+    Test_sim = MRFSim(p3)
     B3 = np.zeros((ntime, 3))
-    Test_sim.add_sim(Custom(p3, B3, s_empty, dt))
+    Test_sim.add_sim(Custom(B3, s_empty, dt))
 
     Test_sim.plot_B()
     Test_sim.plot_s()

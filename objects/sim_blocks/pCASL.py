@@ -33,7 +33,7 @@ class pCASL(SimObj):
     saturation = 1000
 
 
-    def __init__(self, params, T, dt, sample_times=np.array([]), control=0):
+    def __init__(self, T, dt, sample_times=np.array([]), control=0):
         """
         Creates an instance of the DeadAir class - DeadAir(SimObj)
 
@@ -44,7 +44,7 @@ class pCASL(SimObj):
             control:    Bool for label vs control pulse. (default = 0)
         """
         self.control = control
-        super().__init__(params, T, 0, 0, dt, sample_times)
+        super().__init__(T, 0, 0, dt, sample_times)
 
 
     def set_rf(self):
@@ -71,7 +71,7 @@ class pCASL(SimObj):
         pass
 
 
-    def set_s_sig(self, time_queue):
+    def set_s_shape(self, time_queue, BAT):
         """
         This method overrides SimObj's definition of set_s_sig(). The arterial longitudinal
         magnetization is affected by a pCASL pulse, and for now we assume that it takes the
@@ -88,11 +88,10 @@ class pCASL(SimObj):
             # from the beginning of the pulse. So we add:
             #       (Bolus Start [ms], Bolus End [ms])
             #    =  (BAT [ms], BAT + self.T [ms])
-            time_queue += [(self.params.BAT, self.params.BAT + self.T)]
+            time_queue += [(BAT, BAT + self.T)]
         
         # We call SimObj's definition of set_s_sig()
-        return super().set_s_sig(time_queue)
-
+        return super().set_s_shape(time_queue, BAT)
 
 
 def pcasl_rf_gen(flip, ntime, dt, pw, TR, d_psi, psi_0, control=False):

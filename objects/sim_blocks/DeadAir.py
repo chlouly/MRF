@@ -17,7 +17,7 @@ class DeadAir(SimObj):
     """
 
 
-    def __init__(self, params, T, dt):
+    def __init__(self, T, dt):
         """
         Creates an instance of the DeadAir class - DeadAir(SimObj)
 
@@ -25,7 +25,7 @@ class DeadAir(SimObj):
             params:     Instance of Params object
             dt:         Timestep [ms]
         """
-        super().__init__(params, T, 0, 0, dt)
+        super().__init__(T, 0, 0, dt)
 
 
     def set_rf(self):

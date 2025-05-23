@@ -31,14 +31,14 @@ if __name__ == '__main__':
     params = Params(T1_f, T2_f, T1_s, 0.0001, 0.0001, F, lam, zvel, zpos_init, CBV, BAT, 1, 1)
 
     # Here, I create an instance of one simulator object (this one is the labeling case)
-    sim_l = MRFSim()
+    sim_l = MRFSim(params)
 
     # Now I add all 4 blocks of the sequence
     for _ in range(num_rep):
-        sim_l.add_sim(DeadAir(params, 2000, dt_dead))               # Add dead air
-        sim_l.add_sim(pCASL(params, 2000, 1, 0.5, dt_live))         # Add the first pCASL sequence
-        sim_l.add_sim(DeadAir(params, 5000, dt_dead))               # Add the second dead air
-        sim_l.add_sim(FSE(params, 500, 50, 3, dt_live))             # Add the readout section
+        sim_l.add_sim(DeadAir(2000, dt_dead))               # Add dead air
+        sim_l.add_sim(pCASL(2000, dt_live))         # Add the first pCASL sequence
+        sim_l.add_sim(DeadAir(5000, dt_dead))               # Add the second dead air
+        sim_l.add_sim(FSE(500, 50, 3, dt_live))             # Add the readout section
 
     # I deepcopy to create an actual copy of the labeling simulator
     # This will be a separate object with all of the same elements as the first one
@@ -59,8 +59,8 @@ if __name__ == '__main__':
     # General plorring to validate that all of the state arrays (B(t), s(t)) make sense
     sim_l.plot_B(dsample=10)
     sim_l.plot_s(dsample=10)
-    # sim_c.plot_B(dsample=10)
-    # sim_c.plot_s(dsample=10)
+    sim_c.plot_B(dsample=10)
+    sim_c.plot_s(dsample=10)
 
     # Run all blocks (using the simulator written in python with numpy)
     sim_l.run_all_np()

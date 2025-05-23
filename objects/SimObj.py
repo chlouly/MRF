@@ -41,15 +41,26 @@ class SimObj:
     M_start_default = np.array([0.0, 0.0, 1.0, 1.0])
 
 
-    def __new__(cls, params, T, *args, **kwargs):
-        # Basically just input validation, not important
-        if T <= 0:
-            # If we have 0 or negative time, nothing happens so we do not create an instance
+    def __new__(cls, *args, **kwargs):
+        # Input Validation
+        if not args or not isinstance(args[0], (int, float)):
+            # Checks if we do not have positional arguments (we should)
+            #raise ValueError("Error: You must pass arguments when creating a SimObj object...")
+            return super().__new__(cls)
+        # elif not isinstance(args[0], (int, float)):
+        #     # Makes sure T (args[0]) is an isntance of int or float
+        #     raise ValueError("Error: T must be an integer or a float.")
+        elif args[0] <= 0.0:
+            # If T (args[0]) <= 0, we do not create a block. None is returned instead of
+            # raising an error. MRFSim.add_block() does nothing when None is passed as an
+            # input.
             return None
+        
+        # If we make it here, we proceed as normal.
         return super().__new__(cls)
 
 
-    def __init__(self, params, T, TR, PW, dt, sample_times=np.array([])):
+    def __init__(self, T, TR, PW, dt, sample_times=np.array([])):
         """
         Method that instantiates the SimObj class.
 
@@ -83,10 +94,8 @@ class SimObj:
 
         self.sample_times = sample_times
 
-        self.params = params
 
-
-    def set_gradients(self, grads):
+    def set_gradients(self, grads, params):
         """
         This incorporates the effects of the gradient fields into the total B field
         stored in an instance of the SimObj class or one of its children. It does this
@@ -108,10 +117,10 @@ class SimObj:
         """
         # Getting an array of z positions over time (assuming that the spin is only moving
         # through space in the z direction)
-        zpos = (self.time * self.params.zvel) + self.params.zpos_init
+        zpos = (self.time * params.zvel) + params.zpos_init
 
         # Elementwise Multipication and 
-        self.B[:, 2] = self.B[:, 2] + (self.params.xpos * grads[:, 0]) + (self.params.ypos * grads[:, 1]) + (zpos * grads[:, 2])
+        self.B[:, 2] = self.B[:, 2] + (params.xpos * grads[:, 0]) + (params.ypos * grads[:, 1]) + (zpos * grads[:, 2])
 
 
     def set_rf(self, rf):
@@ -129,7 +138,7 @@ class SimObj:
         self.B = self.B + rf
 
 
-    def set_s_sig(self, time_queue):
+    def set_s_shape(self, time_queue, BAT):
         """
         This method sets the s(t) function for each block. The MRFSim object calls
         this method for each block. If a block is a pCASL labeling block, then a start
@@ -162,15 +171,23 @@ class SimObj:
               control. After it does that, it calls the SimObj.set_s_sig() and passes it's modified
               queue as input, essentially making it so that upon seeing a labeling sequence, the
               code knows that a new bolus is coming.
+
+
+              - (params.F * 2 * params.alpha * params.M0_f / params.lam) * \
+                np.exp(-params.BAT / params.T1_b) * 
         """
         # If the queue is empty, return, nothing to do.
         if len(time_queue) == 0:
+            self.s_shape = 0.0 * self.time
             return ([])
         elif time_queue[0][0] < self.T:
             # Pulse plays during this block iff the start time of the pulse is less
             # than the durration of the block
-            self.s =  - (self.params.F * 2 * self.params.alpha * self.params.M0_f / self.params.lam) * \
-                np.exp(-self.params.BAT / self.params.T1_b) * ((self.time >= time_queue[0][0]) & (self.time < time_queue[0][1]))
+            self.s_shape = ((self.time >= time_queue[0][0]) & (self.time < time_queue[0][1]))
+        else:
+            # There are no pulses playing in this block
+            self.s_shape = 0.0 * self.time
+
 
         # Update start and end times
         # We now want to make the start and end times w.r. to the 
@@ -185,17 +202,24 @@ class SimObj:
         # The following line of code performs the logic described above
         # and returns the queue:
         return [(t[0] - self.T, t[1] - self.T) for t in time_queue if t[1] > self.T]
+    
+
+    def scale_s(self, F, lam, alpha, M0_f, BAT, T1_b):
+        if not hasattr(self, "s_shape"):
+            raise ValueError("SimObj doesnt have the s_shape")
+        
+        self.s = - (2 * F * alpha * M0_f / lam) * np.exp(-BAT / T1_b) * self.s_shape
    
 
-    def run_np_ljn(self, M_start=M_start_default):
+    def run_np_ljn(self, params, M_start=M_start_default):
         """
         This method runs a python implementation of the LJN Bloch simulation
         algorithm.
         """
-        self.M = np_blochsim_ljn(self.B, self.s, self.params, self.dt, self.ntime, M_start, self.absorption, self.saturation, timer=False)
+        self.M = np_blochsim_ljn(self.B, self.s, params, self.dt, self.ntime, M_start, self.absorption, self.saturation, timer=False)
 
     
-    def sample(self):
+    def sample(self, CBV):
         """
         This function obtains samples from the simulated magnetization and returns them. This
         method will be called from the MRFSim object where the samples will be stored and added
@@ -213,16 +237,21 @@ class SimObj:
         since our readouts at the moment start with a 90y pulse, however a more general approach may 
         be used in the future if needed.
 
+        Input:
+            CBV:    Cerebral Blood Volume. The fraction of blood in a voxel.
+
         Output:
             An (n, ) numpy array of samples from this block, where n is the number of sample times.
         """
-
         # Get an array of time indices for each sample
         # TODO: If we have more than one sample per block, worry about the order (ascending time)
-        self.sample_inds = np.int32(np.floor(self.sample_times / self.dt))
+        # If we have not already calculated the sample inds, we can skip this part
+        if not hasattr(self, "sample_inds"):
+            self.sample_inds = np.int32(np.floor(self.sample_times / self.dt))
 
-        return np.linalg.norm(self.M[self.sample_inds, 0:2], axis=1) * (1 - self.params.CBV) \
-                + self.s[self.sample_inds] * self.params.CBV
+        # Now we return an array of the actual samples.
+        return np.linalg.norm(self.M[self.sample_inds, 0:2], axis=1) * (1 - CBV) \
+                + self.s[self.sample_inds] * CBV
 
 
     """

@@ -6,6 +6,7 @@
 ##########################################################################
 
 from ..SimObj import SimObj
+from numpy import size, shape
 
 class Custom(SimObj):
     """
@@ -17,12 +18,22 @@ class Custom(SimObj):
     """
 
 
-    def __init__(self, params, B, s, dt):  
+    def __new__(cls, B, s, dt):
+        if (shape(B)[1] != 3) | (len(shape(B)) > 2):
+            raise ValueError("Error: B(t) must have 3 spatial dimensions (Must be of shape (n, 3))")
+        if shape(s)[0] != shape(B)[0]:
+            raise ValueError("Error: s(t) and B(t) must have the same number of timepoints")
+        
+        T = len(s) * dt
+
+        return super().__new__(cls, T)
+        
+
+    def __init__(self, B, s, dt):  
         """
         Creates an instance of the Custom class - Custom(SimObj)
 
         Input Arguments:
-            params:     Instance of Params object
             B:          (n, 3) numpy array describing the effective B field in the rotating frame
                         (Including RF excitement and possibly gradients)
             s:          (n, 1) numpy array describing the arterial activation function.
@@ -31,7 +42,7 @@ class Custom(SimObj):
         ntime = len(s)
         T = ntime * dt
 
-        super().__init__(params, T, 0, 0, dt)
+        super().__init__(T, 0, 0, dt)
 
         self.B = B
         self.s = s
