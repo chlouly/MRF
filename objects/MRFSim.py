@@ -166,38 +166,38 @@ class MRFSim:
 
 
     # FOR NEXT COMMIT
-    # def generate_dict(self):
-    #     iter(self.params)
+    def generate_dict(self):
+        iter(self.params)
 
-    #     try:
-    #         while True:
-    #             # Modify s(t) if needed
-    #             if self.params.recompute_s:
-    #                 self.compute_s()
-    #             elif self.params.rescale_s:
-    #                 self.scale_s()
+        try:
+            while True:
+                # Modify s(t) if needed
+                if self.params.recompute_s:
+                    self.compute_s()
+                elif self.params.rescale_s:
+                    self.scale_s()
 
-    #             # Run simulations for the entire pulse sequence
-    #             self.run_all_np()
+                # Run simulations for the entire pulse sequence
+                self.run_all_np()
 
-    #             # TODO: Store samples
+                # TODO: Store samples
 
-    #             # Soft reset to prepare for the next run
-    #             self.soft_reset()
+                # Soft reset to prepare for the next run
+                self.soft_reset()
 
-    #             # Move on to the next set of parameters
-    #             next(self.params)
+                # Move on to the next set of parameters
+                next(self.params)
 
-    #     except StopIteration:
-    #         print("Dictionary Generation Complete!!")
+        except StopIteration:
+            print("Dictionary Generation Complete!!")
 
 
-    # def soft_reset(self):
-    #     self.cur_sim = 0
-    #     self.cur_time = 0
-    #     self.M_cur = M_init
-    #     self.samples = np.array([])
-    #     self.sample_times = np.array([])
+    def soft_reset(self):
+        self.cur_sim = 0
+        self.cur_time = 0
+        self.M_cur = M_init
+        self.samples = np.array([])
+        self.sample_times = np.array([])
 
 
     def get_times(self):
