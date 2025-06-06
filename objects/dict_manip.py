@@ -39,7 +39,7 @@ def init_dict(name, params, num_samples):
         dict.create_dataset(BAT_name, np.shape(params.BAT_vals), data=params.BAT_vals)
 
         # Set asside space for the last-stored parameter indices
-        dict.create_dataset(idx_name, params.get_shape())
+        dict.create_dataset(idx_name, np.size(params.get_shape()))
         
         # Set asside space for the actual dictionary
         dict.create_dataset(dict_name, params.get_shape() + (num_samples,), compression='gzip')

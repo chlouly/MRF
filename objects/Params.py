@@ -120,6 +120,7 @@ class Params:
 
         return self
 
+
     def __next__(self):
         """
         This method moves along the iteration by one step. The function cascades
@@ -271,6 +272,34 @@ class Params:
         print("Current Indices: [ CBV:", self.CBV_ind, " , ks:", self.ks_ind, " , kf:",self.kf_ind, \
                 " , T1_f:",self.T1_f_ind, " , T2_f:",self.T2_f_ind, " , T1_s:",self.T1_s_ind, " , F:", \
                 self.F_ind, " , a:", self.alpha_ind, " , BAT:", self.BAT_ind, " ]")
+        
+
+    def get_shape(self):
+        return ( \
+            np.size(self.T1_f_vals), \
+            np.size(self.T2_f_vals), \
+            np.size(self.T1_s_vals), \
+            np.size(self.alpha_vals), \
+            np.size(self.F_vals), \
+            np.size(self.ks_vals), \
+            np.size(self.kf_vals), \
+            np.size(self.CBV_vals), \
+            np.size(self.BAT_vals), \
+            )
+    
+
+    def get_cur_idx(self):
+        return ( \
+            self.T1_f_ind, \
+            self.T2_f_ind, \
+            self.T1_s_ind, \
+            self.alpha_ind, \
+            self.F_ind, \
+            self.ks_ind, \
+            self.kf_ind, \
+            self.CBV_ind, \
+            self.BAT_ind, \
+            )
 
 
         

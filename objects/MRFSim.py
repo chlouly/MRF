@@ -7,6 +7,7 @@
 import numpy as np
 from UM_Blochsim.blochsim import *
 import matplotlib.pyplot as plt
+from .dict_manip import *
 
 M_init = np.array([0.0, 0.0, 1.0, 1.0])
 
@@ -166,9 +167,14 @@ class MRFSim:
 
 
     # FOR NEXT COMMIT
-    def generate_dict(self):
+    def generate_dict(self, dict_filename):
+        # Initialize params so that we can iterate over it
         iter(self.params)
 
+        # Initialize the dictionary file
+        init_dict(dict_filename, self.params, np.size(self.sample_times))
+
+        # Do the actual looping now
         try:
             while True:
                 # Modify s(t) if needed
@@ -180,7 +186,8 @@ class MRFSim:
                 # Run simulations for the entire pulse sequence
                 self.run_all_np()
 
-                # TODO: Store samples
+                #Store samples
+                store_entry(dict_filename, self.params.get_cur_idx())
 
                 # Soft reset to prepare for the next run
                 self.soft_reset()
