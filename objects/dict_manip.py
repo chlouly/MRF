@@ -59,5 +59,3 @@ def store_entry(name, param_idx, entry):
     with h5py.File(name, "r+") as dict:
         dict[dict_name][param_idx + (slice(None),)] = entry
         dict[idx_name][:] = list(param_idx)
-
-    print("Done with entry")

@@ -274,32 +274,56 @@ class Params:
                 self.F_ind, " , a:", self.alpha_ind, " , BAT:", self.BAT_ind, " ]")
         
 
+            #     --FIRST--
+            # - CBV
+            # - ks
+            # - kf
+            # - T1_f
+            # - T2_f
+            # - T1_s
+            # - F
+            # - alpha
+            # - BAT
+            # --LAST--
+
     def get_shape(self):
-        return ( \
+        if not hasattr(self, "val_shape"):
+            self.val_shape = ( \
+            np.size(self.CBV_vals), \
+            np.size(self.ks_vals), \
+            np.size(self.kf_vals), \
             np.size(self.T1_f_vals), \
             np.size(self.T2_f_vals), \
             np.size(self.T1_s_vals), \
-            np.size(self.alpha_vals), \
             np.size(self.F_vals), \
-            np.size(self.ks_vals), \
-            np.size(self.kf_vals), \
-            np.size(self.CBV_vals), \
+            np.size(self.alpha_vals), \
             np.size(self.BAT_vals), \
             )
+        
+        return self.val_shape
     
 
     def get_cur_idx(self):
         return ( \
+            self.ks_ind, \
+            self.CBV_ind, \
+            self.kf_ind, \
             self.T1_f_ind, \
             self.T2_f_ind, \
             self.T1_s_ind, \
-            self.alpha_ind, \
             self.F_ind, \
-            self.ks_ind, \
-            self.kf_ind, \
-            self.CBV_ind, \
+            self.alpha_ind, \
             self.BAT_ind, \
             )
+    
+    def get_num_combs(self):
+        if not hasattr(self, "total_combs"):
+            self.total_combs = np.prod(self.get_shape())
+
+        return self.total_combs
+    
+    def get_comp_perc(self):
+        return np.ravel_multi_index(self.get_cur_idx(), self.get_shape(), order="F") / self.get_num_combs()
 
 
         

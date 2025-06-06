@@ -9,6 +9,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from .dict_manip import *
 from .sim_blocks import *
+from .pb import create_pb, refresh_pb
 
 M_init = np.array([0.0, 0.0, 1.0, 1.0])
 
@@ -198,6 +199,9 @@ class MRFSim:
         # Initialize the dictionary file
         init_dict(dict_filename, self.params, np.size(self.sample_times))
 
+        # Create Progress Bar
+        create_pb()
+
         # Do the actual looping now
         try:
             while True:
@@ -215,6 +219,9 @@ class MRFSim:
 
                 # Soft reset to prepare for the next run
                 self.soft_reset()
+
+                # Refresh the progress bar
+                refresh_pb(self.params.get_comp_perc())
 
                 # Move on to the next set of parameters
                 next(self.params)
