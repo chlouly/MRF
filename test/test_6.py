@@ -7,18 +7,23 @@ import numpy as np
 from test_globals import *
 from objects import *
 
+SCHED_PATH = "/home/clouly/DEV/sched_bldr"
+DICT_PATH = "/home/clouly/DEV/dicts"
+
 
 if __name__ == "__main__":
-    # T1 and T2 fitting
-    T1_f = np.linspace(0, 1000, 100)
-    T2_f = np.linspace(0, 2000, 100)
+    # T1 and T2 fitting (generating dictionary)
+    T1_f = np.linspace(10, 1000, 100)
+    T2_f = np.linspace(10, 2000, 100)
     
 
     p = Params(T1_f, T2_f, T1_s, 0.0000, 0.0000, 0, lam, 0, 0, CBV, BAT, 1, 1)
     ps = MRFSim(p)
 
-    # Read ps schedule file to initialize
+    ps.read_sched(SCHED_PATH + "/90002")
 
-    ps.generate_dict("90002.h5")
+    ps.setup()
+
+    ps.generate_dict(DICT_PATH + "/90002.h5")
 
     

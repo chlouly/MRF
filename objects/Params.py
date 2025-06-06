@@ -61,25 +61,25 @@ class Params:
         self.zpos_init = zpos_init              #[cm]
 
         # Now we check if any of those lists are of length > 1
-        if not self.any_to_fit():
+        #if not self.any_to_fit():
             # We know all of these arrays will have EXACTLY 1 element
             # If they were empty, that would have been caught in arr_or_num()
             # If they had length > 1 then we would not be in this conditional
             # statement.
             # So we can set all of the current simulation values to the first
             # (and only) element of the corresponding arrays
-            self.T1_f = self.T1_f_vals[0]
-            self.T2_f = self.T2_f_vals[0]
-            self.T1_s = self.T1_s_vals[0]
-            self.alpha = self.alpha_vals[0]
-            self.F = self.F_vals[0]
-            self.ks = self.ks_vals[0]
-            self.kf = self.kf_vals[0]
-            self.CBV = self.CBV_vals[0]
-            self.BAT = self.BAT_vals[0]
-            # This way, we do not have to call iter() in any way to initialize
-            # if the object doesnt have anything to iterate over anywqays.
-            self.calc_R_T_vals()
+        self.T1_f = self.T1_f_vals[0]
+        self.T2_f = self.T2_f_vals[0]
+        self.T1_s = self.T1_s_vals[0]
+        self.alpha = self.alpha_vals[0]
+        self.F = self.F_vals[0]
+        self.ks = self.ks_vals[0]
+        self.kf = self.kf_vals[0]
+        self.CBV = self.CBV_vals[0]
+        self.BAT = self.BAT_vals[0]
+        # This way, we do not have to call iter() in any way to initialize
+        # if the object doesnt have anything to iterate over anywqays.
+        self.calc_R_T_vals()
 
 
     def __iter__(self):

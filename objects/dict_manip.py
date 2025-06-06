@@ -26,23 +26,29 @@ def init_dict(name, params, num_samples):
         return
     
     # Now we will initialize the file containing the dictionary.
-    with h5py.File(name, "w") as dict:
-        # Load the physiological parameter values into the file
-        dict.create_dataset(T1f_name, np.shape(params.T1_f_vals), data=params.T1_f_vals)
-        dict.create_dataset(T2f_name, np.shape(params.T2_f_vals), data=params.T2_f_vals)
-        dict.create_dataset(T1s_name, np.shape(params.T1_s_vals), data=params.T1_s_vals)
-        dict.create_dataset(alpha_name, np.shape(params.alpha_vals), data=params.alpha_vals)
-        dict.create_dataset(F_name, np.shape(params.F_vals), data=params.F_vals)
-        dict.create_dataset(ks_name, np.shape(params.ks_vals), data=params.ks_vals)
-        dict.create_dataset(kf_name, np.shape(params.kf_vals), data=params.kf_vals)
-        dict.create_dataset(CBV_name, np.shape(params.CBV_vals), data=params.CBV_vals)
-        dict.create_dataset(BAT_name, np.shape(params.BAT_vals), data=params.BAT_vals)
+    #try:
+    d = h5py.File(name, "w")
+    # Load the physiological parameter values into the file
+    d.create_dataset(T1f_name, np.shape(params.T1_f_vals), data=params.T1_f_vals)
+    d.create_dataset(T2f_name, np.shape(params.T2_f_vals), data=params.T2_f_vals)
+    d.create_dataset(T1s_name, np.shape(params.T1_s_vals), data=params.T1_s_vals)
+    d.create_dataset(alpha_name, np.shape(params.alpha_vals), data=params.alpha_vals)
+    d.create_dataset(F_name, np.shape(params.F_vals), data=params.F_vals)
+    d.create_dataset(ks_name, np.shape(params.ks_vals), data=params.ks_vals)
+    d.create_dataset(kf_name, np.shape(params.kf_vals), data=params.kf_vals)
+    d.create_dataset(CBV_name, np.shape(params.CBV_vals), data=params.CBV_vals)
+    d.create_dataset(BAT_name, np.shape(params.BAT_vals), data=params.BAT_vals)
 
-        # Set asside space for the last-stored parameter indices
-        dict.create_dataset(idx_name, np.size(params.get_shape()))
-        
-        # Set asside space for the actual dictionary
-        dict.create_dataset(dict_name, params.get_shape() + (num_samples,), compression='gzip')
+    # Set asside space for the last-stored parameter indices
+    d.create_dataset(idx_name, np.size(params.get_shape()))
+    
+    # Set asside space for the actual dictionary
+    #dict.create_dataset(dict_name, params.get_shape() + (num_samples,), compression='gzip')
+    d.create_dataset(dict_name, params.get_shape() + (num_samples,))
+    #dict.visititems(lambda name, obj: print(name))
+    d.close()
+    # except Exception as e:
+    #     raise e
 
 
 def store_entry(name, param_idx, entry):
@@ -50,6 +56,8 @@ def store_entry(name, param_idx, entry):
     This function stores an entry in the dictionary and updates the last simulated index.
     """
 
-    with h5py.File(name, "w") as dict:
-        dict[dict_name][param_idx, :] = entry
-        dict[idx_name] = param_idx
+    with h5py.File(name, "r+") as dict:
+        dict[dict_name][param_idx + (slice(None),)] = entry
+        dict[idx_name][:] = list(param_idx)
+
+    print("Done with entry")

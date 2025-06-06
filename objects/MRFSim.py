@@ -5,9 +5,10 @@
 ##########################################################################
 
 import numpy as np
-from UM_Blochsim.blochsim import *
+#from UM_Blochsim.blochsim import *
 import matplotlib.pyplot as plt
 from .dict_manip import *
+from .sim_blocks import *
 
 M_init = np.array([0.0, 0.0, 1.0, 1.0])
 
@@ -130,6 +131,29 @@ class MRFSim:
         for sim in self.sims:
             sim.scale_s(self.params.F, self.params.lam, self.params.alpha, self.params.M0_f, self.params.BAT, self.params.T1_b)
 
+    
+    def read_sched(self, sched_dir: str):
+        # All schedules are found in a mrf_schedule.txt file
+        sched_dir = sched_dir + "/mrf_schedule.txt"
+
+        with open(sched_dir, "r") as sched:
+            for line in sched:
+                # Get Values for one line
+                vals = list(map(float, line.split()))
+
+                # Add Blocks to the sim (the scheduler has times in seconds,
+                # We use miliseconds).
+                self.add_sim(DeadAir(vals[0] * 1000, 10))
+                self.add_sim(pCASL(vals[2], 10, control= not int(vals[1])))  # I think label == 1 control == 0 but Im not sure
+                self.add_sim(DeadAir(vals[3], 10))
+
+                # The stuff that would usually go here are prep pulses. For now we dont have those yet...
+
+                # Finally We add a readout
+                self.add_sim(FSE(500, 5, 2, 0.1))
+        
+
+
 
     def run_one_np(self):
         """
@@ -187,7 +211,7 @@ class MRFSim:
                 self.run_all_np()
 
                 #Store samples
-                store_entry(dict_filename, self.params.get_cur_idx())
+                store_entry(dict_filename, self.params.get_cur_idx(), self.samples)
 
                 # Soft reset to prepare for the next run
                 self.soft_reset()

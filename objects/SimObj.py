@@ -6,7 +6,7 @@
 
 import numpy as np
 from .simulators.np_blochsim_ljn import np_blochsim_ljn
-from UM_Blochsim.blochsim import *
+#from UM_Blochsim.blochsim import *
 
 
 class SimObj:
