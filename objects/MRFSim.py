@@ -108,12 +108,16 @@ class MRFSim:
         # Initialize an empty queue of bolus times
         time_queue = []
 
+        T = 0.0
+
         for sim in self.sims:
             sim.set_gradients()
             sim.set_rf()
+            if np.size(sim.sample_times) != 0:
+                self.sample_times = np.append(self.sample_times, sim.sample_times + T)
             time_queue = sim.set_s_shape(time_queue, self.params.BAT)
             sim.scale_s(self.params.F, self.params.lam, self.params.alpha, self.params.M0_f, self.params.BAT, self.params.T1_b)
-
+            T += sim.T
 
     def compute_s(self):
         self.params.recompute_s = False
@@ -173,7 +177,7 @@ class MRFSim:
         # the pulse sequence
         if np.size(self.sims[self.cur_sim].sample_times) != 0:
             self.samples = np.append(self.samples, self.sims[self.cur_sim].sample(self.params.CBV))
-            self.sample_times = np.append(self.sample_times, self.sims[self.cur_sim].sample_times + self.cur_time)
+            #self.sample_times = np.append(self.sample_times, self.sims[self.cur_sim].sample_times + self.cur_time)
 
         # Increment the current time
         self.cur_time += self.sims[self.cur_sim].T
@@ -235,7 +239,7 @@ class MRFSim:
         self.cur_time = 0
         self.M_cur = M_init
         self.samples = np.array([])
-        self.sample_times = np.array([])
+        #self.sample_times = np.array([])
 
 
     def get_times(self):

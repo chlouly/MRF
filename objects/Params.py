@@ -274,18 +274,6 @@ class Params:
                 self.F_ind, " , a:", self.alpha_ind, " , BAT:", self.BAT_ind, " ]")
         
 
-            #     --FIRST--
-            # - CBV
-            # - ks
-            # - kf
-            # - T1_f
-            # - T2_f
-            # - T1_s
-            # - F
-            # - alpha
-            # - BAT
-            # --LAST--
-
     def get_shape(self):
         if not hasattr(self, "val_shape"):
             self.val_shape = ( \
