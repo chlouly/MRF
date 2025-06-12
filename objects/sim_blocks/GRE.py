@@ -8,6 +8,7 @@
 import numpy as np
 from ..SimObj import SimObj
 from ..simulators.np_blochsim_ljn import np_blochsim_ljn
+from ..simulators.UM_Blochsim.blochsim import blochsim_ljn
 
 pi = np.pi
 gambar = 42570                  # Gyromagnetic coefficient [kHz/T]
@@ -91,10 +92,6 @@ class GRE(SimObj):
         self.set_rf(params)
         self.set_gradients()    # Currently does nothing
 
-
-    def run_np_ljn(self, params, M_start=...):
-        self.M = np_blochsim_ljn(self.B, self.s, params, self.dt, self.ntime, M_start, self.absorption, self.saturation, crusher_inds=self.crusher_inds, timer=False)
-    
 
 # 117 mG * 1 ms = 180 degree flip
 def gre_pulsetrain(PW, ESP, ETL, delay, T, dt, flip, phase=0):

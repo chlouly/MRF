@@ -228,7 +228,12 @@ class SimObj:
         This method runs a python implementation of the LJN Bloch simulation
         algorithm.
         """
-        self.M = np_blochsim_ljn(self.B, self.s, params, self.dt, self.ntime, M_start, self.absorption, self.saturation, timer=False)
+        if hasattr(self, "crusher_inds"):
+            crusher_inds = self.crusher_inds
+        else:
+            crusher_inds = np.array([])
+
+        self.M = np_blochsim_ljn(self.B, self.s, params, self.dt, self.ntime, M_start, crusher_inds=crusher_inds, absorption=self.absorption, s_sat=self.saturation, timer=False)
 
     
     def sample(self, CBV):
@@ -279,5 +284,10 @@ class SimObj:
     
 
     def run_ljn(self, p: Params,  M_start=M_start_default):
-        self.M = blochsim_ljn(self.B, self.s, M_start, p.R1f_app, p.R2f_app, p.R1s_app, self.dt, p.ks, p.kf, p.f, p.M0_f, p.M0_s, self.absorption, self.saturation)
+        if hasattr(self, "crusher_inds"):
+            crusher_inds = self.crusher_inds
+        else:
+            crusher_inds = np.array([])
+
+        self.M = blochsim_ljn(self.B, self.s, M_start, p.R1f_app, p.R2f_app, p.R1s_app, self.dt, p.ks, p.kf, p.f, p.M0_f, p.M0_s, crusher_inds=crusher_inds, absorp=self.absorption, s_sat=self.saturation)
 
