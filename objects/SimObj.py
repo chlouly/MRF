@@ -6,7 +6,8 @@
 
 import numpy as np
 from .simulators.np_blochsim_ljn import np_blochsim_ljn
-#from UM_Blochsim.blochsim import *
+from .simulators.UM_Blochsim.blochsim import blochsim_ljn
+from .Params import Params
 
 
 class SimObj:
@@ -266,6 +267,6 @@ class SimObj:
     #     self.M = blochsim_rk4(self.B, self.params.T1_b, self.params.T2_b, self.dt,)
     
 
-    # def run_ljn(self, M_start=M_start_default):
-    #     self.M = blochsim_ljn(self.B, self.s, M_start, self.params.T1_s, self.params.T1_b, self.params.T2_b, self.dt, self.params.ks, self.params.kf, 1, self.params.F, self.params.lam)
+    def run_ljn(self, p: Params,  M_start=M_start_default):
+        self.M = blochsim_ljn(self.B, self.s, M_start, p.R1f_app, p.R2f_app, p.R1s_app, self.dt, p.ks, p.kf, p.f, p.M0_f, p.M0_s, self.absorption, self.saturation)
 

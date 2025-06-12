@@ -166,7 +166,8 @@ class MRFSim:
         using the LJN simulator written in python.
         """
         # Run the current SimObj
-        self.sims[self.cur_sim].run_np_ljn(self.params, self.M_cur)
+        #self.sims[self.cur_sim].run_np_ljn(self.params, self.M_cur)
+        self.sims[self.cur_sim].run_ljn(self.params, self.M_cur)
 
         # Take the LAST vector from the simulated magnetization
         # and use it as the starting magnetization for the next sim (M_cur)
