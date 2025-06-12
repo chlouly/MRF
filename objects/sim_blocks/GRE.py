@@ -27,7 +27,19 @@ class GRE(SimObj):
     therefor we set the semisolid absorption coefficient to 1.0 to represent
     perfect absorption.
     """
-    absorption = 1.0    
+    absorption = 1.0  
+
+
+    def  __init__(self, PW, ETL, delay, ESP, dt, sample_times=np.array([])):
+        # This is the time of the block
+        T = delay + (ETL * ESP)
+
+        if (PW > ESP):
+            raise ValueError("Error: Pulse width must be <= Echo Spacing ")             
+        elif (T <= 0):
+            raise ValueError("Error: The provided timing parameters created a block with 0 or negative time.")
+        
+        super().__init__(T, PW, ETL, delay, ESP, dt, sample_times=np.array([]))
 
 
     def set_rf(self, params):

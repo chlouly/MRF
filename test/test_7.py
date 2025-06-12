@@ -20,8 +20,8 @@ if __name__ == "__main__":
     sim = MRFSim(params)
 
     sim.add_sim(DeadAir(1000, dt_dead))
-    sim.add_sim(GRE(2000, 20, 20, 100, 50, dt_live))
-    sim.add_sim(DeadAir(1000, dt_dead))
+    sim.add_sim(GRE(20, 20, 100, 50, dt_live))
+    #sim.add_sim(DeadAir(1000, dt_dead))
 
     sim.setup()
 
