@@ -7,6 +7,7 @@
 
 import numpy as np
 from ..SimObj import SimObj
+from ..simulators.np_blochsim_ljn import np_blochsim_ljn
 
 pi = np.pi
 gambar = 42570                  # Gyromagnetic coefficient [kHz/T]
@@ -15,6 +16,8 @@ gam = gambar * 2 * 3.14159      # Gamma [kRad/sT]
 x = 0
 y = 1
 
+# For this GRE, Crushers play about 3.5ms before each RF Pulse
+crusher_offset = 3.5
 
 class GRE(SimObj):
     """
@@ -39,7 +42,7 @@ class GRE(SimObj):
         elif (T <= 0):
             raise ValueError("Error: The provided timing parameters created a block with 0 or negative time.")
         
-        super().__init__(T, PW, ETL, delay, ESP, dt, sample_times=np.array([]))
+        super().__init__(T, PW, ETL, delay, ESP, dt, sample_times)
 
 
     def set_rf(self, params):
@@ -57,6 +60,9 @@ class GRE(SimObj):
         # Append the ReadOut sample times to the sample times array
         self.sample_times = np.append(self.sample_times, RO_samples)
 
+        # Add Crushers
+        self.crusher_inds = np.int32((np.arange(self.ETL) * np.ceil(self.ESP / self.dt)) + np.ceil((self.delay - crusher_offset) / self.dt))
+
         # Call the parent class' definition of set_rf() to add the pulse to
         # the objects effective B field.
         super().set_rf(rf)
@@ -72,6 +78,7 @@ class GRE(SimObj):
         """
         pass
 
+
     def set_flip(self, params):
         """
         This method lets you change the flip angle and RF phase of this block. It re-calls
@@ -83,6 +90,10 @@ class GRE(SimObj):
 
         self.set_rf(params)
         self.set_gradients()    # Currently does nothing
+
+
+    def run_np_ljn(self, params, M_start=...):
+        self.M = np_blochsim_ljn(self.B, self.s, params, self.dt, self.ntime, M_start, self.absorption, self.saturation, crusher_inds=self.crusher_inds, timer=False)
     
 
 # 117 mG * 1 ms = 180 degree flip

@@ -16,7 +16,7 @@ if __name__ == "__main__":
     num_rep = 5
 
     # Here I am creating a Params object to give the simulation it's operating parameters
-    params = Params(T1_f, T2_f, T1_s, 0.0001, 0.0001, F, lam, zvel, zpos_init, CBV, BAT, 1, 1, 90)
+    params = Params(T1_f, T2_f, T1_s, 0.0001, 0.0001, F, lam, zvel, zpos_init, CBV, BAT, 1, 1, 15)
     sim = MRFSim(params)
 
     sim.add_sim(DeadAir(1000, dt_dead))
