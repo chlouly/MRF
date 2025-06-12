@@ -142,7 +142,7 @@ class SimObj:
         self.B = self.B + rf
 
 
-    def set_flip(self, flip, phase=0):
+    def set_flip(self, params):
         """
         This is the default case for a child object's definition of set_flip. It does nothing
         """

@@ -72,7 +72,7 @@ class GRE(SimObj):
         """
         pass
 
-    def set_flip(self, flip, phase=0):
+    def set_flip(self, params):
         """
         This method lets you change the flip angle and RF phase of this block. It re-calls
         the method that sets the RF series.
@@ -81,7 +81,7 @@ class GRE(SimObj):
         # Reset the Effective B-Field
         self.B = np.zeros((self.ntime, 3))
 
-        self.set_rf(flip, phase)
+        self.set_rf(params)
         self.set_gradients()    # Currently does nothing
     
 

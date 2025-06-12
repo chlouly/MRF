@@ -138,7 +138,7 @@ class MRFSim:
             sim.scale_s(self.params.F, self.params.lam, self.params.alpha, self.params.M0_f, self.params.BAT, self.params.T1_b)
 
 
-    def modify_flips(self, flip, phase=0):
+    def modify_flips(self):
         """
         This Method runs through all simulator blocks and calls the set_flip method that changes the flip angle of the block,
         and recalculates the Effective B field. This is only the case for the gradient echo pulse, all others currently
@@ -149,7 +149,7 @@ class MRFSim:
             - phase:    RF Pulse Phase, in degrees.
         """
         for sim in self.sims:
-            sim.set_flip(flip, phase)
+            sim.set_flip(self.params)
 
     
     def read_sched(self, sched_dir: str):
@@ -171,9 +171,7 @@ class MRFSim:
 
                 # Finally We add a readout
                 self.add_sim(FSE(500, 5, 2, 0.1))
-        
-
-
+    
 
     def run_one_np(self):
         """
