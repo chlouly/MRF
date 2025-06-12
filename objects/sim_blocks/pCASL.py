@@ -44,10 +44,10 @@ class pCASL(SimObj):
             control:    Bool for label vs control pulse. (default = 0)
         """
         self.control = control
-        super().__init__(T, 0, 0, dt, sample_times)
+        super().__init__(T, 0, 0, 0, 0, dt, sample_times)
 
 
-    def set_rf(self):
+    def set_rf(self, params):
         """
         This method overrides SimObj's definition of set_rf(). We don't directly
         simulate the effects of a pCASL pulse train, we merely simulate its expected

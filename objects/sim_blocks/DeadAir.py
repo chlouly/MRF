@@ -25,10 +25,10 @@ class DeadAir(SimObj):
             params:     Instance of Params object
             dt:         Timestep [ms]
         """
-        super().__init__(T, 0, 0, dt)
+        super().__init__(T, 0, 0, 0, 0, dt)
 
 
-    def set_rf(self):
+    def set_rf(self, params):
         """
         This method overrides SimObj's definition of set_rf(). There should be no
         RF pulses in a DeadAir block, therefor we want no modification to this

@@ -3,3 +3,4 @@ __pycache__/*
 UM_Blochsim
 UM_Blochsim/*
 *.vscode
+*.env

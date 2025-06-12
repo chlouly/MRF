@@ -150,7 +150,7 @@ def np_ljn_setp(M, B, s, p, dt, ACE, absorption, s_sat):
     return np.matmul(ACE, out - D) + D
 
 
-def np_blochsim_ljn(B, s, p, dt, n_time, M_start, absorption, s_sat=0.0, timer=False):
+def np_blochsim_ljn(B, s, p, dt, n_time, M_start, absorption, s_sat=0.0, crusher_inds=np.array([]), timer=False):
     """
     This function runs a simulation using the method outlined in the LJN paper.
 
@@ -203,8 +203,17 @@ def np_blochsim_ljn(B, s, p, dt, n_time, M_start, absorption, s_sat=0.0, timer=F
     M[0, :] = M_start
 
     # Now we loop through all timepoints and run one step at each timepoint
+    cur_crush_ind = 0
     for t in range(1, n_time):
         M[t, :] = np_ljn_setp(M[t - 1, :], B[t, :], s[t], p, dt, ACE, absorption, s_sat)
+        if (np.size(crusher_inds) > 0) and (t == crusher_inds[cur_crush_ind]):
+            # Crush it
+            M[t, 0] = 0
+            M[t, 1] = 0
+
+            # Next index
+            cur_crush_ind = (cur_crush_ind + 1) % np.size(crusher_inds)
+
 
     # We get the time at which the simulation ended in case we chose to time it
     end_t = tm.time()

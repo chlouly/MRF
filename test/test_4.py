@@ -15,22 +15,22 @@ if __name__ == "__main__":
 
     num_reps = 100
 
-    p = Params(T1_f, T2_f, T1_s, 0.0000, 0.000, F, lam, zvel, zpos_init, CBV, BAT, 1, 1)
+    p = Params(T1_f, T2_f, T1_s, 0.0000, 0.000, F, lam, zvel, zpos_init, CBV, BAT, 1, 1, 90)
     ps = MRFSim(p)
 
     for _ in range(10):
         #ps.add_sim(DeadAir((num_reps - 1) * 100, dt_dead))
-        ps.add_sim(FSE(500, 5, 2, dt_ro))
+        ps.add_sim(FSE(500, 2, 20, 5, 5, dt_ro))
         #ps.add_sim(DeadAir((num_reps - 1) * 100, dt_dead))
-        ps.add_sim(FSE(500, 5, 2, dt_ro))
+        ps.add_sim(FSE(500, 2, 20, 5, 5, dt_ro))
 
     for rep in range(num_reps):
         #ps.add_sim(DeadAir((num_reps -rep - 1) * 100, dt_dead))
         ps.add_sim(pCASL(rep * 100, dt_dead, control=(0)))
-        ps.add_sim(FSE(500, 5, 2, dt_ro))
+        ps.add_sim(FSE(500, 2, 20, 5, 5, dt_ro))
         #ps.add_sim(DeadAir((num_reps -rep - 1) * 100, dt_dead))
         ps.add_sim(pCASL(rep * 100, dt_dead, control=(1)))
-        ps.add_sim(FSE(500, 5, 2, dt_ro))
+        ps.add_sim(FSE(500, 2, 20, 5, 5, dt_ro))
         
 
     ps.setup()
