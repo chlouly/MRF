@@ -60,7 +60,7 @@ class SimObj:
         return super().__new__(cls)
 
 
-    def __init__(self, T, TR, PW, dt, sample_times=np.array([])):
+    def __init__(self, T, PW, ETL, delay, ESP, dt, sample_times=np.array([])):
         """
         Method that instantiates the SimObj class.
 
@@ -70,6 +70,9 @@ class SimObj:
             TR:             Time between pulses in the RF pulsetrains for this block [ms]
                             (Not always used)
             PW:             Pulse width [ms]
+            ETL:            Echo Train Length
+            delay:          Delay before pulses start playing
+            ESP:            Echo Spacing [ms]
             dt:             Simulation timestep [ms]
             sample_times:   An array of times at which you would like to sample the signal.
                             These times must be within the time range of the simulation
@@ -77,16 +80,17 @@ class SimObj:
                             time value that is simulated.
         """
         self.T = T                                  # Simulation durration [ms]
+        self.ESP = ESP                              # Simulation Echo Spacing [ms]
+        self.ETL = ETL                              # Simulation Echo Train Length
+        self.PW = PW                                # Simulation Pulse Width [ms]
+        self.delay = delay                          # Delay before any pulses play 
         self.dt = dt                                # Simulation timestep [ms]
         self.ntime = int(np.ceil(T / self.dt))      # Number of time samples
         self.time_inds = np.arange(self.ntime)      # Vector of time indices
         self.time = self.time_inds * self.dt        # Vector of Timepoints [ms]
 
         self.B = np.zeros((self.ntime, 3))          # (ntime, 3) array of B vectors [T] (initally set to 0s)
-        self.s = np.zeros((self.ntime, ))          # (ntime, ) array of arterial magnetization values (initially set to 0s)
-
-        self.TR = TR                                
-        self.PW = PW
+        self.s = np.zeros((self.ntime, ))           # (ntime, ) array of arterial magnetization values (initially set to 0s)
 
         # Input validation: Make sure the sample points are within the block
         if np.any((sample_times >= self.T) | (sample_times < 0.0)):
@@ -136,6 +140,13 @@ class SimObj:
                 3-vectors, even though the field is always in the transverse plane.
         """
         self.B = self.B + rf
+
+
+    def set_flip(self, flip, phase=0):
+        """
+        This is the default case for a child object's definition of set_flip. It does nothing
+        """
+        pass
 
 
     def set_s_shape(self, time_queue, BAT):

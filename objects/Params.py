@@ -14,7 +14,7 @@ class Params:
     """
 
 
-    def __init__(self, T1_f, T2_f, T1_s, ks, kf, F, lam, zvel, zpos_init, CBV, BAT, M0_f, M0_s, alpha = 0.86):
+    def __init__(self, T1_f, T2_f, T1_s, ks, kf, F, lam, zvel, zpos_init, CBV, BAT, M0_f, M0_s, flip_angle, alpha = 0.86):
         """
         This method initializes an instance of the Params object. 
 
@@ -47,6 +47,7 @@ class Params:
         self.CBV_vals = arr_or_num(CBV)
         self.BAT_vals = arr_or_num(BAT)
         self.alpha_vals = arr_or_num(alpha)
+        self.flip_vals = arr_or_num(flip_angle)
 
         # Defining simulation constants
         self.T1_b = 1600                        # Blood T1 (set to the typical 1600 ms)   
@@ -77,6 +78,7 @@ class Params:
         self.kf = self.kf_vals[0]
         self.CBV = self.CBV_vals[0]
         self.BAT = self.BAT_vals[0]
+        self.flip = self.flip_vals[0]
         # This way, we do not have to call iter() in any way to initialize
         # if the object doesnt have anything to iterate over anywqays.
         self.calc_R_T_vals()
@@ -92,6 +94,7 @@ class Params:
         # Initializing flags
         self.recompute_s = True     # Do not assume it has already been computed
         self.rescale_s = False      # We do not need to rescale if we just computed it
+        self.recompute_B = False    # Assume this has already been done by this point
 
         # PARAMETER INDICES
         self.T1_f_ind = 0
@@ -103,6 +106,7 @@ class Params:
         self.CBV_ind = 0
         self.BAT_ind = 0
         self.alpha_ind = 0
+        self.flip_ind = 0
 
         # INITIALIZING CURRENT VALUES
         self.T1_f = self.T1_f_vals[self.T1_f_ind]
@@ -114,6 +118,7 @@ class Params:
         self.kf = self.kf_vals[self.kf_ind]
         self.CBV = self.CBV_vals[self.CBV_ind]
         self.BAT = self.BAT_vals[self.BAT_ind]
+        self.flip = self.flip_vals[self.flip_ind]
 
         # Calculating apparent Rs and Ts
         self.calc_R_T_vals()
@@ -139,6 +144,7 @@ class Params:
             - F
             - alpha
             - BAT
+            - flip_angle
             --LAST--
 
         The parameters that are incremented last involve the most setup, particulatly
@@ -206,12 +212,21 @@ class Params:
         # Update BAT index
         self.BAT_ind = (self.BAT_ind + 1) % np.size(self.BAT_vals)
         self.BAT = self.BAT_vals[self.BAT_ind]
-        if self.BAT_ind == 0:
-            # Once this happens, we have reached the end of the iteration
+        if self.BAT_ind:
+            self.calc_R_T_vals()
+            self.recompute_s = True
+            return None
+        
+        # Update Flip Angle index
+        self.flip_ind = (self.flip_ind + 1) % np.size(self.flip_vals)
+        self.flip = self.flip_vals[self.flip_ind]
+        if self.flip_ind == 0:
+            # Once we get here, ther is nothing more to itterate
             raise StopIteration
-            
+        
         self.calc_R_T_vals()
         self.recompute_s = True
+        self.recompute_B = True
         return None
     
 
@@ -261,7 +276,8 @@ class Params:
                 (np.size(self.T1_s_vals) > 1) | \
                 (np.size(self.F_vals) > 1) | \
                 (np.size(self.alpha_vals) > 1) | \
-                (np.size(self.BAT_vals) > 1)
+                (np.size(self.BAT_vals) > 1) | \
+                (np.size(self.flip_vals) > 1)
 
         return self.fitting
     
@@ -271,7 +287,7 @@ class Params:
         """
         print("Current Indices: [ CBV:", self.CBV_ind, " , ks:", self.ks_ind, " , kf:",self.kf_ind, \
                 " , T1_f:",self.T1_f_ind, " , T2_f:",self.T2_f_ind, " , T1_s:",self.T1_s_ind, " , F:", \
-                self.F_ind, " , a:", self.alpha_ind, " , BAT:", self.BAT_ind, " ]")
+                self.F_ind, " , a:", self.alpha_ind, " , BAT:", self.BAT_ind, " , Flip:", self.flip_ind, " ]")
         
 
     def get_shape(self):
@@ -286,6 +302,7 @@ class Params:
             np.size(self.F_vals), \
             np.size(self.alpha_vals), \
             np.size(self.BAT_vals), \
+            np.size(self.flip_vals) \
             )
         
         return self.val_shape
@@ -302,6 +319,7 @@ class Params:
             self.F_ind, \
             self.alpha_ind, \
             self.BAT_ind, \
+            self.flip_ind \
             )
     
     def get_num_combs(self):

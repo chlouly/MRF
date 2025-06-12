@@ -112,12 +112,13 @@ class MRFSim:
 
         for sim in self.sims:
             sim.set_gradients()
-            sim.set_rf()
+            sim.set_rf(self.params)
             if np.size(sim.sample_times) != 0:
                 self.sample_times = np.append(self.sample_times, sim.sample_times + T)
             time_queue = sim.set_s_shape(time_queue, self.params.BAT)
             sim.scale_s(self.params.F, self.params.lam, self.params.alpha, self.params.M0_f, self.params.BAT, self.params.T1_b)
             T += sim.T
+
 
     def compute_s(self):
         self.params.recompute_s = False
@@ -135,6 +136,20 @@ class MRFSim:
 
         for sim in self.sims:
             sim.scale_s(self.params.F, self.params.lam, self.params.alpha, self.params.M0_f, self.params.BAT, self.params.T1_b)
+
+
+    def modify_flips(self, flip, phase=0):
+        """
+        This Method runs through all simulator blocks and calls the set_flip method that changes the flip angle of the block,
+        and recalculates the Effective B field. This is only the case for the gradient echo pulse, all others currently
+        don't depend on a flip angle.
+        
+        Input Agruments:
+            - flip:     Flip angle in degrees
+            - phase:    RF Pulse Phase, in degrees.
+        """
+        for sim in self.sims:
+            sim.set_flip(flip, phase)
 
     
     def read_sched(self, sched_dir: str):

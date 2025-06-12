@@ -21,6 +21,7 @@ The correct order is:
     - F
     - alpha
     - BAT
+    - flip
     --LAST--
 
 Where the first ones are updated the most often and the last ones are
@@ -41,7 +42,7 @@ if __name__ == "__main__":
     # Test a:
     # Checking to make sure single parameters still work as expected.
     print("\n\n-=-=- TEST 5a -=-=-")
-    p1 = Params(tc, tc, tc, tc, tc, tc, tc, tc, tc, tc, tc, tc, tc, tc)
+    p1 = Params(tc, tc, tc, tc, tc, tc, tc, tc, tc, tc, tc, tc, tc, tc, tc)
     p1_i = iter(p1)
     print("Makign sure things are initialized...")
     print("P1: CBV", p1.CBV)
@@ -67,7 +68,7 @@ if __name__ == "__main__":
     # Test b:
     # Now we will throw in an array length 1 for ks, the behavior should remain the same
     print("\n\n-=-=- TEST 5b -=-=-")
-    p2 = Params(tc, tc, tc, ta1, tc, tc, tc, tc, tc, tc, tc, tc, tc, tc)
+    p2 = Params(tc, tc, tc, ta1, tc, tc, tc, tc, tc, tc, tc, tc, tc, tc, tc)
     print("Makign sure things are initialized...")
     print("P1: CBV", p2.CBV)
     print("P1: BAT", p2.BAT)
@@ -93,7 +94,7 @@ if __name__ == "__main__":
     # Test c:
     # We will use an array of length 3 now for 2 parameters.
     print("\n\n-=-=- TEST 5c -=-=-")
-    p3 = Params(tc, tc, ta3, tc, tc, tc, tc, ta3, tc, tc, tc, tc, tc, tc)
+    p3 = Params(tc, tc, ta3, tc, tc, tc, tc, ta3, tc, tc, tc, tc, tc, tc, tc)
     print("Now we will try looping over this item...")
 
     p3_i = iter(p3)

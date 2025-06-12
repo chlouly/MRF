@@ -30,17 +30,17 @@ class FSE(SimObj):
     absorption = 1.0    
 
 
-    def set_rf(self):
+    def set_rf(self, params):
         """
         This method overrides SimObj's definition of set_gradients(). Here we use
         the fse_pulsetrain() function to create a fast spin echo RF pulsetrain.
         """
 
         # Get an array of the x and y components of the RF pulsetrain
-        rf = fse_pulsetrain(self.PW, self.TR, self.T, self.dt)
+        rf = fse_pulsetrain(self.PW, self.ESP, self.T, self.dt)
 
         # We will sample after the first 90y
-        RO_samples = np.array([self.TR])
+        RO_samples = np.array([self.ESP])
 
         # Append the ReadOut sample times to the sample times array
         self.sample_times = np.append(self.sample_times, RO_samples)
@@ -66,15 +66,15 @@ class FSE(SimObj):
 default_flips = [90, 120, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180]
 #default_flips = [90, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180]
 # 117 mG * 1 ms = 180 degree flip
-def fse_pulsetrain(pw, TR, T, dt, flips=default_flips, fill=True):
+def fse_pulsetrain(PW, ESP, T, dt, flips=default_flips, fill=True):
     cur = 0
     ntime = np.int64(np.ceil(T / dt))
     out = np.zeros((ntime, 3))
     
     # This will be one RF pulse
-    block_len = int(np.ceil(TR / dt))
+    block_len = int(np.ceil(ESP / dt))
     block = np.zeros(block_len)
-    p_len = int(np.ceil(pw / dt))
+    p_len = int(np.ceil(PW / dt))
 
     scale = pi / (180 * gam * p_len * dt)
 

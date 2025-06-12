@@ -42,13 +42,13 @@ class Custom(SimObj):
         ntime = len(s)
         T = ntime * dt
 
-        super().__init__(T, 0, 0, dt)
+        super().__init__(T, 0, 0, 0, 0, dt)
 
         self.B = B
         self.s = s
 
 
-    def set_rf(self):
+    def set_rf(self, params):
         """
         This method overrides SimObj's definition of set_rf(). The RF pulses should already be
         incorporated into this object's B field array, therefor there is nothing to do.

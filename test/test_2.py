@@ -28,7 +28,7 @@ if __name__ == '__main__':
     num_rep = 5
 
     # Here I am creating a Params object to give the simulation it's operating parameters
-    params = Params(T1_f, T2_f, T1_s, 0.0001, 0.0001, F, lam, zvel, zpos_init, CBV, BAT, 1, 1)
+    params = Params(T1_f, T2_f, T1_s, 0.0001, 0.0001, F, lam, zvel, zpos_init, CBV, BAT, 1, 1, 90)
 
     # Here, I create an instance of one simulator object (this one is the labeling case)
     sim_l = MRFSim(params)
@@ -38,7 +38,7 @@ if __name__ == '__main__':
         sim_l.add_sim(DeadAir(2000, dt_dead))               # Add dead air
         sim_l.add_sim(pCASL(2000, dt_live))         # Add the first pCASL sequence
         sim_l.add_sim(DeadAir(5000, dt_dead))               # Add the second dead air
-        sim_l.add_sim(FSE(500, 50, 3, dt_live))             # Add the readout section
+        sim_l.add_sim(FSE(500, 3, 20, 10, 40, dt_live))             # Add the readout section
 
     # I deepcopy to create an actual copy of the labeling simulator
     # This will be a separate object with all of the same elements as the first one
