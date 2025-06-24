@@ -14,6 +14,7 @@ ks_name = "ks_vals"             # Array of magnetization transfer rates that wer
 kf_name = "kf_vals"             # Array of magnetization transfer rates that were simulated
 CBV_name = "CBV_vals"           # Array of CBV values that were simulated
 BAT_name = "BAT_vals"           # Array of BAT values that were simulated
+flip_name = "flip_angle_vals"   # Array of flip angle values that were simulated
 
 
 def init_dict(name, params, num_samples):
@@ -38,6 +39,7 @@ def init_dict(name, params, num_samples):
     d.create_dataset(kf_name, np.shape(params.kf_vals), data=params.kf_vals)
     d.create_dataset(CBV_name, np.shape(params.CBV_vals), data=params.CBV_vals)
     d.create_dataset(BAT_name, np.shape(params.BAT_vals), data=params.BAT_vals)
+    d.create_dataset(flip_name, np.shape(params.flip_vals), data=params.flip_vals)
 
     # Set asside space for the last-stored parameter indices
     d.create_dataset(idx_name, np.size(params.get_shape()))
@@ -49,6 +51,8 @@ def init_dict(name, params, num_samples):
     d.close()
     # except Exception as e:
     #     raise e
+
+
 
 
 def store_entry(name, param_idx, entry):

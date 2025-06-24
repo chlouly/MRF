@@ -5,10 +5,12 @@
 ##########################################################################
 
 import numpy as np
-from .simulators.np_blochsim_ljn import np_blochsim_ljn
-from .simulators.UM_Blochsim.blochsim import blochsim_ljn
-from .Params import Params
+#from .simulators.np_blochsim_ljn import np_blochsim_ljn
+from UM_Blochsim import blochsim_ljn
+from ..Params import Params
 
+import UM_Blochsim
+print(UM_Blochsim.blochsim.__file__)
 
 class SimObj:
     """
@@ -233,7 +235,7 @@ class SimObj:
         else:
             crusher_inds = np.array([])
 
-        self.M = np_blochsim_ljn(self.B, self.s, params, self.dt, self.ntime, M_start, crusher_inds=crusher_inds, absorption=self.absorption, s_sat=self.saturation, timer=False)
+        #self.M = np_blochsim_ljn(self.B, self.s, params, self.dt, self.ntime, M_start, crusher_inds=crusher_inds, absorption=self.absorption, s_sat=self.saturation, timer=False)
 
     
     def sample(self, CBV):

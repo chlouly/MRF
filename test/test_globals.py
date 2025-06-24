@@ -27,7 +27,7 @@ flip = 20                       # flip angle degrees
 TR = 50                        # Repetition time for each pulse [ms]
 PW = 10                         # width of each pulse [ms]
 
-T1_f = 1820
+T1_f = 200
 T2_f = 150
 
 rf_amp = 15* (10**-7)                # RF amplitude [T]

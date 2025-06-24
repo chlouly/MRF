@@ -1,20 +1,17 @@
-##########################################################################
-#   This file contains all functions and classes related to simulating   #
-#   the effects of Dead Air (nothing playing on scanner).                #
-#                                                                        #
-#   Code written by Christopher Louly (clouly@umich.edu) 2025            #
-##########################################################################
-
-from ..SimObj import SimObj
+from .SimObj import SimObj
+import numpy as np
 
 # No Pulse Playing
-class DeadAir(SimObj):
+class BIR8(SimObj):
     """
-    DeadAir(SimObj)
+    BIR8(SimObj)
 
     This child class of SimObj represents a block where the scanner is not
     playing any RF excitations or gradients. 
     """
+
+    eTE = 22
+    crush_length = 750 
 
 
     def __init__(self, T, dt):
@@ -48,3 +45,24 @@ class DeadAir(SimObj):
         This method essentially does nothing.
         """
         pass
+
+    
+    def run_ljn(self, p, M_start=...):
+        self.M = np.zeros((self.ntime, 4))
+
+        # T2 decay
+        self.M[:, 2] = M_start[2] * np.exp(-self.eTE / p.T2_f)
+
+        # Crush
+        self.M[:, 0:2] = 0.0
+
+        # T1 decay curing crusher
+        self.M[:, 2] *= -np.exp(-self.crush_length / p.T1_f)
+        self.M[:, 2] += 1
+
+        # I think this will saturate the semisolid pool
+        self.M[:, 3] = 0.0
+
+        return self.M
+
+

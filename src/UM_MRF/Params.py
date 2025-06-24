@@ -6,6 +6,33 @@
 
 import numpy as np
 from numbers import Number
+import os
+import h5py
+from .dict_manip import *
+
+
+
+def arr_or_num(arg):
+    """
+    Helper function that checks if the input is a numpy array, a number, or something else.
+    This function will return a numpy array so that it can be iterated over in Params. If the
+    input is already a numpy array, the function does nothing and returns it. If the input
+    is a number, it wraps it in a numpy array (if this happens, we essentially arent iterating
+    over that particular parameter). If the input is something else, the function raises a value
+    error and stops execution.
+    """
+    if isinstance(arg, np.ndarray):
+        # If the input is a numpy array, nothing to be done,
+        # so we return it
+        return arg
+    elif isinstance(arg, Number):
+        # If the input is a number, create an arr of length
+        # 1 from it.
+        return np.array([arg])
+    else:
+        raise ValueError("Error: Input arguments to the Params constructor must be numbers or ndarrays")
+
+
 
 class Params:
     """
@@ -82,6 +109,7 @@ class Params:
         # This way, we do not have to call iter() in any way to initialize
         # if the object doesnt have anything to iterate over anywqays.
         self.calc_R_T_vals()
+        self.needs_setup = True
 
 
     def __iter__(self):
@@ -90,6 +118,9 @@ class Params:
         so that we may loop over the set of all parameters. It also sets two flags so that
         we know if we need to do any setup before simulating for each iteration.
         """
+
+        if not self.needs_setup:
+            return self
 
         # Initializing flags
         self.recompute_s = True     # Do not assume it has already been computed
@@ -122,9 +153,61 @@ class Params:
 
         # Calculating apparent Rs and Ts
         self.calc_R_T_vals()
+        self.needs_setup = False
 
         return self
+    
 
+    def resume(self, name):
+        # Check if the dictionary exists
+        if not os.path.exists(name):
+            raise ValueError(f"Error: No dictionary found at path {name}")
+        
+        file = h5py.File(name, "r")
+        # Check if we have already finished
+        if not np.any(file[idx_name]):
+            print("Nothing to do, we have already completed this dict")
+            return
+
+        # Get the parameter values
+        self.T1_f_vals = file[T1f_name][:]
+        self.T2_f_vals = file[T2f_name][:]
+        self.T1_s_vals = file[T1s_name][:]
+        self.alpha_vals = file[alpha_name][:]
+        self.F_vals = file[F_name][:]
+        self.ks_vals = file[ks_name][:]
+        self.kf_vals = file[kf_name][:]
+        self.CBV_vals = file[CBV_name][:]
+        self.BAT_vals = file[BAT_name][:]
+        self.flip_vals = file[flip_name][:]
+
+        # Set the indices
+
+        self.set_inds(np.int32(file[idx_name][:]))
+
+        # Set the current Values
+        self.T1_f = self.T1_f_vals[self.T1_f_ind]
+        self.T2_f = self.T2_f_vals[self.T2_f_ind]
+        self.T1_s = self.T1_s_vals[self.T1_s_ind]
+        self.alpha = self.alpha_vals[self.alpha_ind]
+        self.F = self.F_vals[self.F_ind]
+        self.ks = self.ks_vals[self.ks_ind]
+        self.kf = self.kf_vals[self.kf_ind]
+        self.CBV = self.CBV_vals[self.CBV_ind]
+        self.BAT = self.BAT_vals[self.BAT_ind]
+        self.flip = self.flip_vals[self.flip_ind]
+
+        print(f"Resuming dictionary generation from {100*self.get_comp_perc():.2f}%\nPATH: {name}")
+
+        self.calc_R_T_vals()
+        self.recompute_s = True
+        self.recompute_B = True
+        self.needs_setup = False
+
+        
+        
+
+        
 
     def __next__(self):
         """
@@ -289,6 +372,22 @@ class Params:
                 " , T1_f:",self.T1_f_ind, " , T2_f:",self.T2_f_ind, " , T1_s:",self.T1_s_ind, " , F:", \
                 self.F_ind, " , a:", self.alpha_ind, " , BAT:", self.BAT_ind, " , Flip:", self.flip_ind, " ]")
         
+    
+    def set_inds(self, inds):
+        if len(inds) != 10:
+            raise ValueError("Number of indices was incorrect")
+        
+        self.CBV_ind = inds[0]
+        self.ks_ind = inds[1]
+        self.kf_ind = inds[2]
+        self.T1_f_ind = inds[3]
+        self.T2_f_ind = inds[4]
+        self.T1_s_ind = inds[5]
+        self.F_ind = inds[6]
+        self.alpha_ind = inds[7]
+        self.BAT_ind = inds[8]
+        self.flip_ind = inds[9]
+        
 
     def get_shape(self):
         if not hasattr(self, "val_shape"):
@@ -310,8 +409,8 @@ class Params:
 
     def get_cur_idx(self):
         return ( \
-            self.ks_ind, \
             self.CBV_ind, \
+            self.ks_ind, \
             self.kf_ind, \
             self.T1_f_ind, \
             self.T2_f_ind, \
@@ -331,25 +430,3 @@ class Params:
     def get_comp_perc(self):
         return np.ravel_multi_index(self.get_cur_idx(), self.get_shape(), order="F") / self.get_num_combs()
 
-
-        
-
-def arr_or_num(arg):
-    """
-    Helper function that checks if the input is a numpy array, a number, or something else.
-    This function will return a numpy array so that it can be iterated over in Params. If the
-    input is already a numpy array, the function does nothing and returns it. If the input
-    is a number, it wraps it in a numpy array (if this happens, we essentially arent iterating
-    over that particular parameter). If the input is something else, the function raises a value
-    error and stops execution.
-    """
-    if isinstance(arg, np.ndarray):
-        # If the input is a numpy array, nothing to be done,
-        # so we return it
-        return arg
-    elif isinstance(arg, Number):
-        # If the input is a number, create an arr of length
-        # 1 from it.
-        return np.array([arg])
-    else:
-        raise ValueError("Error: Input arguments to the Params constructor must be numbers or ndarrays")

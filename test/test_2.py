@@ -4,7 +4,7 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from test_globals import *
-from objects import *
+from src import *
 import matplotlib.pyplot as plt
 from copy import deepcopy
 

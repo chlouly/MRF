@@ -5,7 +5,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import numpy as np
 from test_globals import *
-from objects import *
+from src import *
 
 """
 This test is only to verify that the parameters are iterating correctly.

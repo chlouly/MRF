@@ -6,7 +6,7 @@
 ##########################################################################
 
 import numpy as np
-from ..SimObj import SimObj
+from .SimObj import SimObj
 
 pi = np.pi
 gambar = 42570                  # Gyromagnetic coefficient [kHz/T]

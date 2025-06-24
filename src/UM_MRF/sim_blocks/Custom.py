@@ -5,7 +5,7 @@
 #   Code written by Christopher Louly (clouly@umich.edu) 2025            #
 ##########################################################################
 
-from ..SimObj import SimObj
+from .SimObj import SimObj
 from numpy import size, shape
 
 class Custom(SimObj):

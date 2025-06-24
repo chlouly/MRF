@@ -5,7 +5,6 @@
 ##########################################################################
 
 import numpy as np
-#from UM_Blochsim.blochsim import *
 import matplotlib.pyplot as plt
 from .dict_manip import *
 from .sim_blocks import *
@@ -163,14 +162,60 @@ class MRFSim:
 
                 # Add Blocks to the sim (the scheduler has times in seconds,
                 # We use miliseconds).
-                self.add_sim(DeadAir(vals[0] * 1000, 10))
-                self.add_sim(pCASL(vals[2], 10, control= not int(vals[1])))  # I think label == 1 control == 0 but Im not sure
-                self.add_sim(DeadAir(vals[3], 10))
 
-                # The stuff that would usually go here are prep pulses. For now we dont have those yet...
+                # First Delay
+                self.add_sim(DeadAir(vals[0] * 1000, 100))
+
+                # pCASL Section
+                if int(vals[1] == -1):
+                    # pCASL code of -1 means do nothing
+                    self.add_sim(DeadAir(vals[2] * 1000, 300))
+                else:
+                    # Otherwise we do something
+                    # Label == 1, Control == 0
+                    self.add_sim(pCASL(vals[2] * 1000, 300, control= not int(vals[1])))
+                
+                # pCASL PLD
+                self.add_sim(DeadAir(vals[3] * 1000, 300))
+
+                # Prep Pulse 1
+                self.add_sim(self.add_presat_sim(vals[4]))
+
+                # Prep 1 PLD
+                self.add_sim(DeadAir(vals[5] * 1000, 300))
+
+                # Prep Pulse 2
+                self.add_sim(self.add_presat_sim(vals[6]))
+
+                # Prep 1 PLD
+                self.add_sim(DeadAir(vals[7] * 1000, 300))
 
                 # Finally We add a readout
-                self.add_sim(FSE(500, 5, 2, 0.1))
+                self.add_sim(GRE(2.5, 20, 8, 40, 2.5))
+
+
+    def add_presat_sim(self, prep_pulse_code):
+        code = np.int32(prep_pulse_code)
+        if code == 0:     # No pulse
+            return None
+        elif code == 250:
+            raise ValueError("Error: The prep pulse with ID 00250 has not yet been added to the MRF Simulator")
+        elif code == 3200:
+            raise ValueError("Error: The prep pulse with ID 03200 has not yet been added to the MRF Simulator")
+        elif code == 6800:
+            raise ValueError("Error: The prep pulse with ID 06800 has not yet been added to the MRF Simulator")
+        elif code == 6850:  # BIR8
+            return BIR8(6850 * 0.004, 0.004)
+        elif code == 17268:
+            raise ValueError("Error: The prep pulse with ID 17268 has not yet been added to the MRF Simulator")
+        elif code == 17536:
+            raise ValueError("Error: The prep pulse with ID 17536 has not yet been added to the MRF Simulator")
+        elif code == 17846:
+            raise ValueError("Error: The prep pulse with ID 17846 has not yet been added to the MRF Simulator")
+        else:
+            raise ValueError(f"Error: No prep pulse is known with ID {code:05d}")
+                
+
     
 
     def run_one_np(self):
@@ -228,6 +273,9 @@ class MRFSim:
                     self.compute_s()
                 elif self.params.rescale_s:
                     self.scale_s()
+
+                if self.params.recompute_B:
+                    self.modify_flips()
 
                 # Run simulations for the entire pulse sequence
                 self.run_all_np()

@@ -5,7 +5,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import numpy as np
 from test_globals import *
-from objects import *
+from src import *
 
 # Testing the new gradient echo block.
 if __name__ == "__main__":

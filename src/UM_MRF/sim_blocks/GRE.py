@@ -6,9 +6,9 @@
 ##########################################################################
 
 import numpy as np
-from ..SimObj import SimObj
-from ..simulators.np_blochsim_ljn import np_blochsim_ljn
-from ..simulators.UM_Blochsim.blochsim import blochsim_ljn
+from .SimObj import SimObj
+#from ..simulators.np_blochsim_ljn import np_blochsim_ljn
+from UM_Blochsim import blochsim_ljn
 
 pi = np.pi
 gambar = 42570                  # Gyromagnetic coefficient [kHz/T]
@@ -59,7 +59,8 @@ class GRE(SimObj):
         RO_samples = np.array([self.delay + self.PW + self.dt])
 
         # Append the ReadOut sample times to the sample times array
-        self.sample_times = np.append(self.sample_times, RO_samples)
+        #self.sample_times = np.append(self.sample_times, RO_samples)
+        self.sample_times = RO_samples
 
         # Add Crushers
         self.crusher_inds = np.int32((np.arange(self.ETL) * np.ceil(self.ESP / self.dt)) + np.ceil((self.delay - crusher_offset) / self.dt))

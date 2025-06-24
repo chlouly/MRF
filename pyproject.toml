@@ -1,0 +1,14 @@
+[project]
+name = "UM_MRF"
+version = "1.0"
+dependencies = ["numpy", "UM_Blochsim"]
+
+[project.optional-dependencies]
+dev = ["Cython>3.0.0", "build", "setuptools"]
+
+[build-system]
+requires = ["Cython>=3.0.0", "setuptools", "numpy", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
