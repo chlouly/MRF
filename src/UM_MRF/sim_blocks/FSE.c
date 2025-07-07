@@ -1506,7 +1506,7 @@ static const char* const __pyx_f[] = {
 /*--- Type declarations ---*/
 struct __pyx_defaults;
 
-/* "UM_MRF/sim_blocks/FSE.py":69
+/* "UM_MRF/sim_blocks/FSE.py":63
  * #default_flips = [90, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180]
  * # 117 mG * 1 ms = 180 degree flip
  * def fse_pulsetrain(PW, ESP, T, dt, flips=default_flips, fill=True):             # <<<<<<<<<<<<<<
@@ -1869,22 +1869,6 @@ static PyObject *__Pyx__GetModuleGlobalName(PyObject *name, PY_UINT64_T *dict_ve
 #define __Pyx_GetModuleGlobalName(var, name)  (var) = __Pyx__GetModuleGlobalName(name)
 #define __Pyx_GetModuleGlobalNameUncached(var, name)  (var) = __Pyx__GetModuleGlobalName(name)
 static CYTHON_INLINE PyObject *__Pyx__GetModuleGlobalName(PyObject *name);
-#endif
-
-/* PyObjectDelAttr.proto */
-#if CYTHON_COMPILING_IN_LIMITED_API && __PYX_LIMITED_VERSION_HEX < 0x030d0000
-#define __Pyx_PyObject_DelAttr(o, n) PyObject_SetAttr(o, n, NULL)
-#else
-#define __Pyx_PyObject_DelAttr(o, n) PyObject_DelAttr(o, n)
-#endif
-
-/* PyObjectSetAttrStr.proto */
-#if CYTHON_USE_TYPE_SLOTS
-#define __Pyx_PyObject_DelAttrStr(o,n) __Pyx_PyObject_SetAttrStr(o, n, NULL)
-static CYTHON_INLINE int __Pyx_PyObject_SetAttrStr(PyObject* obj, PyObject* attr_name, PyObject* value);
-#else
-#define __Pyx_PyObject_DelAttrStr(o,n)   __Pyx_PyObject_DelAttr(o,n)
-#define __Pyx_PyObject_SetAttrStr(o,n,v) PyObject_SetAttr(o,n,v)
 #endif
 
 /* PyObjectFastCallMethod.proto */
@@ -2361,7 +2345,6 @@ static const char __pyx_k_name[] = "__name__";
 static const char __pyx_k_self[] = "self";
 static const char __pyx_k_spec[] = "__spec__";
 static const char __pyx_k_test[] = "__test__";
-static const char __pyx_k_array[] = "array";
 static const char __pyx_k_block[] = "block";
 static const char __pyx_k_flips[] = "flips";
 static const char __pyx_k_int64[] = "int64";
@@ -2372,7 +2355,6 @@ static const char __pyx_k_scale[] = "scale";
 static const char __pyx_k_super[] = "super";
 static const char __pyx_k_zeros[] = "zeros";
 static const char __pyx_k_SimObj[] = "SimObj";
-static const char __pyx_k_append[] = "append";
 static const char __pyx_k_enable[] = "enable";
 static const char __pyx_k_gambar[] = "gambar";
 static const char __pyx_k_module[] = "__module__";
@@ -2386,20 +2368,18 @@ static const char __pyx_k_block_len[] = "block_len";
 static const char __pyx_k_isenabled[] = "isenabled";
 static const char __pyx_k_metaclass[] = "__metaclass__";
 static const char __pyx_k_FSE_set_rf[] = "FSE.set_rf";
-static const char __pyx_k_RO_samples[] = "RO_samples";
 static const char __pyx_k_absorption[] = "absorption";
 static const char __pyx_k_mro_entries[] = "__mro_entries__";
 static const char __pyx_k_initializing[] = "_initializing";
 static const char __pyx_k_is_coroutine[] = "_is_coroutine";
-static const char __pyx_k_sample_times[] = "sample_times";
 static const char __pyx_k_default_flips[] = "default_flips";
 static const char __pyx_k_set_gradients[] = "set_gradients";
 static const char __pyx_k_fse_pulsetrain[] = "fse_pulsetrain";
+static const char __pyx_k_A_1D_T_t4t1_Rwaq[] = "\200A\360\016\000\t\016\210^\2301\230D\240\005\240T\250\026\250t\2604\260t\2701\360\010\000\t\016\210R\210w\220a\220q";
 static const char __pyx_k_FSE_set_gradients[] = "FSE.set_gradients";
 static const char __pyx_k_asyncio_coroutines[] = "asyncio.coroutines";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_UM_MRF_sim_blocks_FSE[] = "UM_MRF.sim_blocks.FSE";
-static const char __pyx_k_A_1D_T_t4t1_RvQat1_BgQd_Rwaq[] = "\200A\360\016\000\t\016\210^\2301\230D\240\005\240T\250\026\250t\2604\260t\2701\360\006\000\t\026\220R\220v\230Q\230a\230t\2401\360\006\000\t\r\320\014\034\230B\230g\240Q\240d\250/\270\021\360\010\000\t\016\210R\210w\220a\220q";
 static const char __pyx_k_src_UM_MRF_sim_blocks_FSE_py[] = "src/UM_MRF/sim_blocks/FSE.py";
 static const char __pyx_k_FSE_SimObj_This_child_class_of[] = "\n    FSE(SimObj)\n\n    This child class of SimObj represents a block in which we play\n    a fast spin echo.\n\n    Inside of our ROI (the brain), the fast spin echo readout is on resonance,\n    therefor we set the semisolid absorption coefficient to 1.0 to represent\n    perfect absorption.\n    ";
 static const char __pyx_k_BfARuARr_F_G1_1Be1D_BfAQ_Cq_q_2[] = "\320\000)\250\037\270\001\330\004\n\210!\330\004\014\210B\210f\220A\220R\220u\230A\230R\230r\240\021\330\004\n\210\"\210F\220\"\220G\2301\360\006\000\005\021\220\003\2201\220B\220e\2301\230D\240\002\240!\330\004\014\210B\210f\220A\220Q\330\004\014\210C\210q\220\002\220%\220q\230\003\2302\230Q\340\004\014\210C\210s\220$\220b\230\004\230B\230f\240B\240a\360\006\000\005\010\200q\210\002\210&\220\001\220\026\220r\230\025\230b\240\006\240a\240r\250\022\2506\260\022\2605\270\005\270U\300!\3003\300b\310\001\330\004\n\210!\360\006\000\005\t\210\010\220\005\220Q\220b\230\003\2301\230A\330\010\r\210Q\210b\220\t\230\025\230b\240\001\330\010\014\210D\220\002\220+\230S\240\001\330\014\017\210q\220\006\220g\230U\240%\240q\250\004\250F\260\"\260A\330\014\023\2201\340\014\017\210q\220\006\220d\230\"\230K\240u\250A\330\014\022\220$\220b\230\001\360\010\000\005\013\210%\210t\2204\220r\230\033\240B\240a\330\010\013\2101\210F\220$\220b\230\013\2405\250\001\330\010\016\210d\220\"\220A\340\004\013\2101";
@@ -2451,7 +2431,7 @@ typedef struct {
   PyTypeObject *__pyx_ptype_6UM_MRF_10sim_blocks_3FSE___pyx_defaults;
   __Pyx_CachedCFunction __pyx_umethod_PyDict_Type_pop;
   PyObject *__pyx_codeobj_tab[3];
-  PyObject *__pyx_string_tab[67];
+  PyObject *__pyx_string_tab[63];
   PyObject *__pyx_float_1_0;
   PyObject *__pyx_float_3_14159;
   PyObject *__pyx_int_0;
@@ -2518,66 +2498,62 @@ static __pyx_mstatetype * const __pyx_mstate_global = &__pyx_mstate_global_stati
 #define __pyx_n_u_FSE_set_gradients __pyx_string_tab[4]
 #define __pyx_n_u_FSE_set_rf __pyx_string_tab[5]
 #define __pyx_n_u_PW __pyx_string_tab[6]
-#define __pyx_n_u_RO_samples __pyx_string_tab[7]
-#define __pyx_n_u_SimObj __pyx_string_tab[8]
-#define __pyx_n_u_T __pyx_string_tab[9]
-#define __pyx_n_u_UM_MRF_sim_blocks_FSE __pyx_string_tab[10]
-#define __pyx_kp_u__2 __pyx_string_tab[11]
-#define __pyx_n_u_absorption __pyx_string_tab[12]
-#define __pyx_n_u_append __pyx_string_tab[13]
-#define __pyx_n_u_array __pyx_string_tab[14]
-#define __pyx_n_u_asyncio_coroutines __pyx_string_tab[15]
-#define __pyx_n_u_block __pyx_string_tab[16]
-#define __pyx_n_u_block_len __pyx_string_tab[17]
-#define __pyx_n_u_ceil __pyx_string_tab[18]
-#define __pyx_n_u_cline_in_traceback __pyx_string_tab[19]
-#define __pyx_n_u_cur __pyx_string_tab[20]
-#define __pyx_n_u_default_flips __pyx_string_tab[21]
-#define __pyx_kp_u_disable __pyx_string_tab[22]
-#define __pyx_n_u_doc __pyx_string_tab[23]
-#define __pyx_n_u_dt __pyx_string_tab[24]
-#define __pyx_kp_u_enable __pyx_string_tab[25]
-#define __pyx_n_u_fill __pyx_string_tab[26]
-#define __pyx_n_u_flip __pyx_string_tab[27]
-#define __pyx_n_u_flips __pyx_string_tab[28]
-#define __pyx_n_u_fse_pulsetrain __pyx_string_tab[29]
-#define __pyx_n_u_func __pyx_string_tab[30]
-#define __pyx_n_u_gam __pyx_string_tab[31]
-#define __pyx_n_u_gambar __pyx_string_tab[32]
-#define __pyx_kp_u_gc __pyx_string_tab[33]
-#define __pyx_n_u_initializing __pyx_string_tab[34]
-#define __pyx_n_u_int64 __pyx_string_tab[35]
-#define __pyx_n_u_is_coroutine __pyx_string_tab[36]
-#define __pyx_kp_u_isenabled __pyx_string_tab[37]
-#define __pyx_n_u_main __pyx_string_tab[38]
-#define __pyx_n_u_metaclass __pyx_string_tab[39]
-#define __pyx_n_u_module __pyx_string_tab[40]
-#define __pyx_n_u_mro_entries __pyx_string_tab[41]
-#define __pyx_n_u_name __pyx_string_tab[42]
-#define __pyx_n_u_np __pyx_string_tab[43]
-#define __pyx_n_u_ntime __pyx_string_tab[44]
-#define __pyx_n_u_numpy __pyx_string_tab[45]
-#define __pyx_n_u_out __pyx_string_tab[46]
-#define __pyx_n_u_p_len __pyx_string_tab[47]
-#define __pyx_n_u_params __pyx_string_tab[48]
-#define __pyx_n_u_pi __pyx_string_tab[49]
-#define __pyx_n_u_pop __pyx_string_tab[50]
-#define __pyx_n_u_prepare __pyx_string_tab[51]
-#define __pyx_n_u_qualname __pyx_string_tab[52]
-#define __pyx_n_u_rf __pyx_string_tab[53]
-#define __pyx_n_u_sample_times __pyx_string_tab[54]
-#define __pyx_n_u_scale __pyx_string_tab[55]
-#define __pyx_n_u_self __pyx_string_tab[56]
-#define __pyx_n_u_set_gradients __pyx_string_tab[57]
-#define __pyx_n_u_set_name __pyx_string_tab[58]
-#define __pyx_n_u_set_rf __pyx_string_tab[59]
-#define __pyx_n_u_spec __pyx_string_tab[60]
-#define __pyx_kp_u_src_UM_MRF_sim_blocks_FSE_py __pyx_string_tab[61]
-#define __pyx_n_u_super __pyx_string_tab[62]
-#define __pyx_n_u_test __pyx_string_tab[63]
-#define __pyx_n_u_x __pyx_string_tab[64]
-#define __pyx_n_u_y __pyx_string_tab[65]
-#define __pyx_n_u_zeros __pyx_string_tab[66]
+#define __pyx_n_u_SimObj __pyx_string_tab[7]
+#define __pyx_n_u_T __pyx_string_tab[8]
+#define __pyx_n_u_UM_MRF_sim_blocks_FSE __pyx_string_tab[9]
+#define __pyx_kp_u__2 __pyx_string_tab[10]
+#define __pyx_n_u_absorption __pyx_string_tab[11]
+#define __pyx_n_u_asyncio_coroutines __pyx_string_tab[12]
+#define __pyx_n_u_block __pyx_string_tab[13]
+#define __pyx_n_u_block_len __pyx_string_tab[14]
+#define __pyx_n_u_ceil __pyx_string_tab[15]
+#define __pyx_n_u_cline_in_traceback __pyx_string_tab[16]
+#define __pyx_n_u_cur __pyx_string_tab[17]
+#define __pyx_n_u_default_flips __pyx_string_tab[18]
+#define __pyx_kp_u_disable __pyx_string_tab[19]
+#define __pyx_n_u_doc __pyx_string_tab[20]
+#define __pyx_n_u_dt __pyx_string_tab[21]
+#define __pyx_kp_u_enable __pyx_string_tab[22]
+#define __pyx_n_u_fill __pyx_string_tab[23]
+#define __pyx_n_u_flip __pyx_string_tab[24]
+#define __pyx_n_u_flips __pyx_string_tab[25]
+#define __pyx_n_u_fse_pulsetrain __pyx_string_tab[26]
+#define __pyx_n_u_func __pyx_string_tab[27]
+#define __pyx_n_u_gam __pyx_string_tab[28]
+#define __pyx_n_u_gambar __pyx_string_tab[29]
+#define __pyx_kp_u_gc __pyx_string_tab[30]
+#define __pyx_n_u_initializing __pyx_string_tab[31]
+#define __pyx_n_u_int64 __pyx_string_tab[32]
+#define __pyx_n_u_is_coroutine __pyx_string_tab[33]
+#define __pyx_kp_u_isenabled __pyx_string_tab[34]
+#define __pyx_n_u_main __pyx_string_tab[35]
+#define __pyx_n_u_metaclass __pyx_string_tab[36]
+#define __pyx_n_u_module __pyx_string_tab[37]
+#define __pyx_n_u_mro_entries __pyx_string_tab[38]
+#define __pyx_n_u_name __pyx_string_tab[39]
+#define __pyx_n_u_np __pyx_string_tab[40]
+#define __pyx_n_u_ntime __pyx_string_tab[41]
+#define __pyx_n_u_numpy __pyx_string_tab[42]
+#define __pyx_n_u_out __pyx_string_tab[43]
+#define __pyx_n_u_p_len __pyx_string_tab[44]
+#define __pyx_n_u_params __pyx_string_tab[45]
+#define __pyx_n_u_pi __pyx_string_tab[46]
+#define __pyx_n_u_pop __pyx_string_tab[47]
+#define __pyx_n_u_prepare __pyx_string_tab[48]
+#define __pyx_n_u_qualname __pyx_string_tab[49]
+#define __pyx_n_u_rf __pyx_string_tab[50]
+#define __pyx_n_u_scale __pyx_string_tab[51]
+#define __pyx_n_u_self __pyx_string_tab[52]
+#define __pyx_n_u_set_gradients __pyx_string_tab[53]
+#define __pyx_n_u_set_name __pyx_string_tab[54]
+#define __pyx_n_u_set_rf __pyx_string_tab[55]
+#define __pyx_n_u_spec __pyx_string_tab[56]
+#define __pyx_kp_u_src_UM_MRF_sim_blocks_FSE_py __pyx_string_tab[57]
+#define __pyx_n_u_super __pyx_string_tab[58]
+#define __pyx_n_u_test __pyx_string_tab[59]
+#define __pyx_n_u_x __pyx_string_tab[60]
+#define __pyx_n_u_y __pyx_string_tab[61]
+#define __pyx_n_u_zeros __pyx_string_tab[62]
 /* #### Code section: module_state_clear ### */
 #if CYTHON_USE_MODULE_STATE
 static CYTHON_SMALL_CODE int __pyx_m_clear(PyObject *m) {
@@ -2601,7 +2577,7 @@ static CYTHON_SMALL_CODE int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_ptype_6UM_MRF_10sim_blocks_3FSE___pyx_defaults);
   Py_CLEAR(clear_module_state->__pyx_type_6UM_MRF_10sim_blocks_3FSE___pyx_defaults);
   for (int i=0; i<3; ++i) { Py_CLEAR(clear_module_state->__pyx_codeobj_tab[i]); }
-  for (int i=0; i<67; ++i) { Py_CLEAR(clear_module_state->__pyx_string_tab[i]); }
+  for (int i=0; i<63; ++i) { Py_CLEAR(clear_module_state->__pyx_string_tab[i]); }
   Py_CLEAR(clear_module_state->__pyx_float_1_0);
   Py_CLEAR(clear_module_state->__pyx_float_3_14159);
   Py_CLEAR(clear_module_state->__pyx_int_0);
@@ -2647,7 +2623,7 @@ static CYTHON_SMALL_CODE int __pyx_m_traverse(PyObject *m, visitproc visit, void
   Py_VISIT(traverse_module_state->__pyx_ptype_6UM_MRF_10sim_blocks_3FSE___pyx_defaults);
   Py_VISIT(traverse_module_state->__pyx_type_6UM_MRF_10sim_blocks_3FSE___pyx_defaults);
   for (int i=0; i<3; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_codeobj_tab[i]); }
-  for (int i=0; i<67; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_string_tab[i]); }
+  for (int i=0; i<63; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_string_tab[i]); }
   __Pyx_VISIT_CONST(traverse_module_state->__pyx_float_1_0);
   __Pyx_VISIT_CONST(traverse_module_state->__pyx_float_3_14159);
   __Pyx_VISIT_CONST(traverse_module_state->__pyx_int_0);
@@ -2779,7 +2755,6 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
 
 static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3FSE_3FSE_set_rf(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_params) {
   PyObject *__pyx_v_rf = NULL;
-  PyObject *__pyx_v_RO_samples = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2800,7 +2775,7 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3FSE_3FSE_set_rf(CYTHON_UNUSED Py
  *         # Get an array of the x and y components of the RF pulsetrain
  *         rf = fse_pulsetrain(self.PW, self.ESP, self.T, self.dt)             # <<<<<<<<<<<<<<
  * 
- *         # We will sample after the first 90y
+ *         # Call the parent class' definition of set_rf() to add the pulse to
 */
   __pyx_t_2 = NULL;
   __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_fse_pulsetrain); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 40, __pyx_L1_error)
@@ -2840,90 +2815,7 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3FSE_3FSE_set_rf(CYTHON_UNUSED Py
   __pyx_v_rf = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "UM_MRF/sim_blocks/FSE.py":43
- * 
- *         # We will sample after the first 90y
- *         RO_samples = np.array([self.ESP])             # <<<<<<<<<<<<<<
- * 
- *         # Append the ReadOut sample times to the sample times array
-*/
-  __pyx_t_3 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 43, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_mstate_global->__pyx_n_u_array); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 43, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_mstate_global->__pyx_n_u_ESP); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 43, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_5 = PyList_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 43, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_GIVEREF(__pyx_t_7);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_5, 0, __pyx_t_7) != (0)) __PYX_ERR(0, 43, __pyx_L1_error);
-  __pyx_t_7 = 0;
-  __pyx_t_8 = 1;
-  #if CYTHON_UNPACK_METHODS
-  if (unlikely(PyMethod_Check(__pyx_t_6))) {
-    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_6);
-    assert(__pyx_t_3);
-    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_6);
-    __Pyx_INCREF(__pyx_t_3);
-    __Pyx_INCREF(__pyx__function);
-    __Pyx_DECREF_SET(__pyx_t_6, __pyx__function);
-    __pyx_t_8 = 0;
-  }
-  #endif
-  {
-    PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_t_5};
-    __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_6, __pyx_callargs+__pyx_t_8, (2-__pyx_t_8) | (__pyx_t_8*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
-    __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 43, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-  }
-  __pyx_v_RO_samples = __pyx_t_1;
-  __pyx_t_1 = 0;
-
-  /* "UM_MRF/sim_blocks/FSE.py":46
- * 
- *         # Append the ReadOut sample times to the sample times array
- *         self.sample_times = np.append(self.sample_times, RO_samples)             # <<<<<<<<<<<<<<
- * 
- *         # Call the parent class' definition of set_rf() to add the pulse to
-*/
-  __pyx_t_6 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 46, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_append); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 46, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_mstate_global->__pyx_n_u_sample_times); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 46, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_8 = 1;
-  #if CYTHON_UNPACK_METHODS
-  if (unlikely(PyMethod_Check(__pyx_t_3))) {
-    __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_3);
-    assert(__pyx_t_6);
-    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_3);
-    __Pyx_INCREF(__pyx_t_6);
-    __Pyx_INCREF(__pyx__function);
-    __Pyx_DECREF_SET(__pyx_t_3, __pyx__function);
-    __pyx_t_8 = 0;
-  }
-  #endif
-  {
-    PyObject *__pyx_callargs[3] = {__pyx_t_6, __pyx_t_5, __pyx_v_RO_samples};
-    __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+__pyx_t_8, (3-__pyx_t_8) | (__pyx_t_8*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
-    __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-  }
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_mstate_global->__pyx_n_u_sample_times, __pyx_t_1) < 0) __PYX_ERR(0, 46, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-  /* "UM_MRF/sim_blocks/FSE.py":50
+  /* "UM_MRF/sim_blocks/FSE.py":44
  *         # Call the parent class' definition of set_rf() to add the pulse to
  *         # the objects effective B field.
  *         super().set_rf(rf)             # <<<<<<<<<<<<<<
@@ -2932,29 +2824,29 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3FSE_3FSE_set_rf(CYTHON_UNUSED Py
 */
   __pyx_t_6 = NULL;
   __Pyx_INCREF(__pyx_builtin_super);
-  __pyx_t_7 = __pyx_builtin_super; 
+  __pyx_t_5 = __pyx_builtin_super; 
   __pyx_t_4 = __Pyx_CyFunction_GetClassObj(__pyx_self);
-  if (!__pyx_t_4) { PyErr_SetString(PyExc_RuntimeError, "super(): empty __class__ cell"); __PYX_ERR(0, 50, __pyx_L1_error) }
+  if (!__pyx_t_4) { PyErr_SetString(PyExc_RuntimeError, "super(): empty __class__ cell"); __PYX_ERR(0, 44, __pyx_L1_error) }
   __Pyx_INCREF(__pyx_t_4);
   __pyx_t_8 = 1;
   {
     PyObject *__pyx_callargs[3] = {__pyx_t_6, __pyx_t_4, __pyx_v_self};
-    __pyx_t_5 = __Pyx_PyObject_FastCall(__pyx_t_7, __pyx_callargs+__pyx_t_8, (3-__pyx_t_8) | (__pyx_t_8*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+    __pyx_t_7 = __Pyx_PyObject_FastCall(__pyx_t_5, __pyx_callargs+__pyx_t_8, (3-__pyx_t_8) | (__pyx_t_8*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 50, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 44, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_7);
   }
-  __pyx_t_3 = __pyx_t_5;
+  __pyx_t_3 = __pyx_t_7;
   __Pyx_INCREF(__pyx_t_3);
   __pyx_t_8 = 0;
   {
     PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_v_rf};
     __pyx_t_1 = __Pyx_PyObject_FastCallMethod(__pyx_mstate_global->__pyx_n_u_set_rf, __pyx_callargs+__pyx_t_8, (2-__pyx_t_8) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 50, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -2982,13 +2874,12 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3FSE_3FSE_set_rf(CYTHON_UNUSED Py
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_rf);
-  __Pyx_XDECREF(__pyx_v_RO_samples);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "UM_MRF/sim_blocks/FSE.py":53
+/* "UM_MRF/sim_blocks/FSE.py":47
  * 
  * 
  *     def set_gradients(self):             # <<<<<<<<<<<<<<
@@ -3036,32 +2927,32 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_self,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len) < 0) __PYX_ERR(0, 53, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len) < 0) __PYX_ERR(0, 47, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 53, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 47, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "set_gradients", 0) < 0) __PYX_ERR(0, 53, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "set_gradients", 0) < 0) __PYX_ERR(0, 47, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 1; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("set_gradients", 1, 1, 1, i); __PYX_ERR(0, 53, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("set_gradients", 1, 1, 1, i); __PYX_ERR(0, 47, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 53, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 47, __pyx_L3_error)
     }
     __pyx_v_self = values[0];
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("set_gradients", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 53, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("set_gradients", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 47, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3094,7 +2985,7 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3FSE_3FSE_2set_gradients(CYTHON_U
   return __pyx_r;
 }
 
-/* "UM_MRF/sim_blocks/FSE.py":69
+/* "UM_MRF/sim_blocks/FSE.py":63
  * #default_flips = [90, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180]
  * # 117 mG * 1 ms = 180 degree flip
  * def fse_pulsetrain(PW, ESP, T, dt, flips=default_flips, fill=True):             # <<<<<<<<<<<<<<
@@ -3112,21 +3003,21 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3FSE_2__defaults__(CYTHON_UNUSED 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__defaults__", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 69, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 63, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__Pyx_CyFunction_Defaults(struct __pyx_defaults, __pyx_self)->arg0);
   __Pyx_GIVEREF(__Pyx_CyFunction_Defaults(struct __pyx_defaults, __pyx_self)->arg0);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __Pyx_CyFunction_Defaults(struct __pyx_defaults, __pyx_self)->arg0) != (0)) __PYX_ERR(0, 69, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __Pyx_CyFunction_Defaults(struct __pyx_defaults, __pyx_self)->arg0) != (0)) __PYX_ERR(0, 63, __pyx_L1_error);
   __Pyx_INCREF(((PyObject*)Py_True));
   __Pyx_GIVEREF(((PyObject*)Py_True));
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, ((PyObject*)Py_True)) != (0)) __PYX_ERR(0, 69, __pyx_L1_error);
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 69, __pyx_L1_error)
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, ((PyObject*)Py_True)) != (0)) __PYX_ERR(0, 63, __pyx_L1_error);
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 63, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_1);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1) != (0)) __PYX_ERR(0, 69, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1) != (0)) __PYX_ERR(0, 63, __pyx_L1_error);
   __Pyx_INCREF(Py_None);
   __Pyx_GIVEREF(Py_None);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, Py_None) != (0)) __PYX_ERR(0, 69, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, Py_None) != (0)) __PYX_ERR(0, 63, __pyx_L1_error);
   __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -3189,62 +3080,62 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_PW,&__pyx_mstate_global->__pyx_n_u_ESP,&__pyx_mstate_global->__pyx_n_u_T,&__pyx_mstate_global->__pyx_n_u_dt,&__pyx_mstate_global->__pyx_n_u_flips,&__pyx_mstate_global->__pyx_n_u_fill,0};
     struct __pyx_defaults *__pyx_dynamic_args = __Pyx_CyFunction_Defaults(struct __pyx_defaults, __pyx_self);
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len) < 0) __PYX_ERR(0, 69, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len) < 0) __PYX_ERR(0, 63, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  6:
         values[5] = __Pyx_ArgRef_FASTCALL(__pyx_args, 5);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 69, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 63, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  5:
         values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 69, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 63, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  4:
         values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 69, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 63, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  3:
         values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 69, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 63, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 69, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 63, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 69, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 63, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "fse_pulsetrain", 0) < 0) __PYX_ERR(0, 69, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "fse_pulsetrain", 0) < 0) __PYX_ERR(0, 63, __pyx_L3_error)
       if (!values[4]) values[4] = __Pyx_NewRef(__pyx_dynamic_args->arg0);
       if (!values[5]) values[5] = __Pyx_NewRef(((PyObject *)((PyObject*)Py_True)));
       for (Py_ssize_t i = __pyx_nargs; i < 4; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("fse_pulsetrain", 0, 4, 6, i); __PYX_ERR(0, 69, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("fse_pulsetrain", 0, 4, 6, i); __PYX_ERR(0, 63, __pyx_L3_error) }
       }
     } else {
       switch (__pyx_nargs) {
         case  6:
         values[5] = __Pyx_ArgRef_FASTCALL(__pyx_args, 5);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 69, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[5])) __PYX_ERR(0, 63, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  5:
         values[4] = __Pyx_ArgRef_FASTCALL(__pyx_args, 4);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 69, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[4])) __PYX_ERR(0, 63, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  4:
         values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 69, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 63, __pyx_L3_error)
         values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 69, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 63, __pyx_L3_error)
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 69, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 63, __pyx_L3_error)
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 69, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 63, __pyx_L3_error)
         break;
         default: goto __pyx_L5_argtuple_error;
       }
@@ -3260,7 +3151,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("fse_pulsetrain", 0, 4, 6, __pyx_nargs); __PYX_ERR(0, 69, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("fse_pulsetrain", 0, 4, 6, __pyx_nargs); __PYX_ERR(0, 63, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3309,7 +3200,7 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3FSE_fse_pulsetrain(CYTHON_UNUSED
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("fse_pulsetrain", 0);
 
-  /* "UM_MRF/sim_blocks/FSE.py":70
+  /* "UM_MRF/sim_blocks/FSE.py":64
  * # 117 mG * 1 ms = 180 degree flip
  * def fse_pulsetrain(PW, ESP, T, dt, flips=default_flips, fill=True):
  *     cur = 0             # <<<<<<<<<<<<<<
@@ -3319,7 +3210,7 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3FSE_fse_pulsetrain(CYTHON_UNUSED
   __Pyx_INCREF(__pyx_mstate_global->__pyx_int_0);
   __pyx_v_cur = __pyx_mstate_global->__pyx_int_0;
 
-  /* "UM_MRF/sim_blocks/FSE.py":71
+  /* "UM_MRF/sim_blocks/FSE.py":65
  * def fse_pulsetrain(PW, ESP, T, dt, flips=default_flips, fill=True):
  *     cur = 0
  *     ntime = np.int64(np.ceil(T / dt))             # <<<<<<<<<<<<<<
@@ -3327,18 +3218,18 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3FSE_fse_pulsetrain(CYTHON_UNUSED
  * 
 */
   __pyx_t_2 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 65, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_int64); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_int64); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 65, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_5 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 65, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_ceil); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_ceil); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 65, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyNumber_Divide(__pyx_v_T, __pyx_v_dt); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyNumber_Divide(__pyx_v_T, __pyx_v_dt); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 65, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_t_8 = 1;
   #if CYTHON_UNPACK_METHODS
@@ -3358,7 +3249,7 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3FSE_fse_pulsetrain(CYTHON_UNUSED
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 71, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 65, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
   }
   __pyx_t_8 = 1;
@@ -3379,13 +3270,13 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3FSE_fse_pulsetrain(CYTHON_UNUSED
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 71, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 65, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __pyx_v_ntime = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "UM_MRF/sim_blocks/FSE.py":72
+  /* "UM_MRF/sim_blocks/FSE.py":66
  *     cur = 0
  *     ntime = np.int64(np.ceil(T / dt))
  *     out = np.zeros((ntime, 3))             # <<<<<<<<<<<<<<
@@ -3393,19 +3284,19 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3FSE_fse_pulsetrain(CYTHON_UNUSED
  *     # This will be one RF pulse
 */
   __pyx_t_4 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 72, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 66, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 72, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 66, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 72, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 66, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_INCREF(__pyx_v_ntime);
   __Pyx_GIVEREF(__pyx_v_ntime);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_v_ntime) != (0)) __PYX_ERR(0, 72, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_v_ntime) != (0)) __PYX_ERR(0, 66, __pyx_L1_error);
   __Pyx_INCREF(__pyx_mstate_global->__pyx_int_3);
   __Pyx_GIVEREF(__pyx_mstate_global->__pyx_int_3);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_mstate_global->__pyx_int_3) != (0)) __PYX_ERR(0, 72, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_mstate_global->__pyx_int_3) != (0)) __PYX_ERR(0, 66, __pyx_L1_error);
   __pyx_t_8 = 1;
   #if CYTHON_UNPACK_METHODS
   if (unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -3424,13 +3315,13 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3FSE_fse_pulsetrain(CYTHON_UNUSED
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 72, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 66, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __pyx_v_out = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "UM_MRF/sim_blocks/FSE.py":75
+  /* "UM_MRF/sim_blocks/FSE.py":69
  * 
  *     # This will be one RF pulse
  *     block_len = int(np.ceil(ESP / dt))             # <<<<<<<<<<<<<<
@@ -3438,12 +3329,12 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3FSE_fse_pulsetrain(CYTHON_UNUSED
  *     p_len = int(np.ceil(PW / dt))
 */
   __pyx_t_2 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 75, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 69, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_ceil); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 75, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_ceil); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 69, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyNumber_Divide(__pyx_v_ESP, __pyx_v_dt); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 75, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyNumber_Divide(__pyx_v_ESP, __pyx_v_dt); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 69, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_8 = 1;
   #if CYTHON_UNPACK_METHODS
@@ -3463,16 +3354,16 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3FSE_fse_pulsetrain(CYTHON_UNUSED
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 75, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 69, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
-  __pyx_t_4 = __Pyx_PyNumber_Int(__pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 75, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyNumber_Int(__pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 69, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_block_len = ((PyObject*)__pyx_t_4);
   __pyx_t_4 = 0;
 
-  /* "UM_MRF/sim_blocks/FSE.py":76
+  /* "UM_MRF/sim_blocks/FSE.py":70
  *     # This will be one RF pulse
  *     block_len = int(np.ceil(ESP / dt))
  *     block = np.zeros(block_len)             # <<<<<<<<<<<<<<
@@ -3480,9 +3371,9 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3FSE_fse_pulsetrain(CYTHON_UNUSED
  * 
 */
   __pyx_t_1 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 76, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 70, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 76, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 70, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_8 = 1;
@@ -3502,13 +3393,13 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3FSE_fse_pulsetrain(CYTHON_UNUSED
     __pyx_t_4 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+__pyx_t_8, (2-__pyx_t_8) | (__pyx_t_8*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 76, __pyx_L1_error)
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 70, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
   }
   __pyx_v_block = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "UM_MRF/sim_blocks/FSE.py":77
+  /* "UM_MRF/sim_blocks/FSE.py":71
  *     block_len = int(np.ceil(ESP / dt))
  *     block = np.zeros(block_len)
  *     p_len = int(np.ceil(PW / dt))             # <<<<<<<<<<<<<<
@@ -3516,12 +3407,12 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3FSE_fse_pulsetrain(CYTHON_UNUSED
  *     scale = pi / (180 * gam * p_len * dt)
 */
   __pyx_t_2 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 77, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 71, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_ceil); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 77, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_ceil); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 71, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyNumber_Divide(__pyx_v_PW, __pyx_v_dt); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 77, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyNumber_Divide(__pyx_v_PW, __pyx_v_dt); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 71, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_8 = 1;
   #if CYTHON_UNPACK_METHODS
@@ -3541,65 +3432,65 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3FSE_fse_pulsetrain(CYTHON_UNUSED
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 77, __pyx_L1_error)
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 71, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
   }
-  __pyx_t_3 = __Pyx_PyNumber_Int(__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 77, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyNumber_Int(__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 71, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_p_len = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "UM_MRF/sim_blocks/FSE.py":79
+  /* "UM_MRF/sim_blocks/FSE.py":73
  *     p_len = int(np.ceil(PW / dt))
  * 
  *     scale = pi / (180 * gam * p_len * dt)             # <<<<<<<<<<<<<<
  * 
  *     # The first pulse is diferent than the rest
 */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_pi); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 79, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_pi); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 73, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_gam); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 79, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_gam); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 73, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_1 = __Pyx_PyLong_MultiplyCObj(__pyx_mstate_global->__pyx_int_180, __pyx_t_4, 0xB4, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 79, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyLong_MultiplyCObj(__pyx_mstate_global->__pyx_int_180, __pyx_t_4, 0xB4, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 73, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = PyNumber_Multiply(__pyx_t_1, __pyx_v_p_len); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 79, __pyx_L1_error)
+  __pyx_t_4 = PyNumber_Multiply(__pyx_t_1, __pyx_v_p_len); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 73, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyNumber_Multiply(__pyx_t_4, __pyx_v_dt); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 79, __pyx_L1_error)
+  __pyx_t_1 = PyNumber_Multiply(__pyx_t_4, __pyx_v_dt); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 73, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyNumber_Divide(__pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 79, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyNumber_Divide(__pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 73, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_scale = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "UM_MRF/sim_blocks/FSE.py":82
+  /* "UM_MRF/sim_blocks/FSE.py":76
  * 
  *     # The first pulse is diferent than the rest
  *     out[np.int64(p_len / 2) : np.int64(3 * p_len / 2) , x] = flips[0] * scale             # <<<<<<<<<<<<<<
  *     cur = block_len
  * 
 */
-  __pyx_t_4 = __Pyx_GetItemInt(__pyx_v_flips, 0, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_GetItemInt(__pyx_v_flips, 0, long, 1, __Pyx_PyLong_From_long, 0, 0, 1, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 76, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_1 = PyNumber_Multiply(__pyx_t_4, __pyx_v_scale); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_t_1 = PyNumber_Multiply(__pyx_t_4, __pyx_v_scale); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 76, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_t_3 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 76, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_int64); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_int64); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 76, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyLong_TrueDivideObjC(__pyx_v_p_len, __pyx_mstate_global->__pyx_int_2, 2, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyLong_TrueDivideObjC(__pyx_v_p_len, __pyx_mstate_global->__pyx_int_2, 2, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 76, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_9 = __Pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_9 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_9 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 76, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 76, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_8 = 1;
   #if CYTHON_UNPACK_METHODS
@@ -3619,23 +3510,23 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3FSE_fse_pulsetrain(CYTHON_UNUSED
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 82, __pyx_L1_error)
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 76, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
   }
   __pyx_t_2 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 76, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_int64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_int64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 76, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyLong_MultiplyCObj(__pyx_mstate_global->__pyx_int_3, __pyx_v_p_len, 3, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyLong_MultiplyCObj(__pyx_mstate_global->__pyx_int_3, __pyx_v_p_len, 3, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 76, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_5 = __Pyx_PyLong_TrueDivideObjC(__pyx_t_3, __pyx_mstate_global->__pyx_int_2, 2, 0, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyLong_TrueDivideObjC(__pyx_t_3, __pyx_mstate_global->__pyx_int_2, 2, 0, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 76, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_9 = __Pyx_PyFloat_AsDouble(__pyx_t_5); if (unlikely((__pyx_t_9 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyFloat_AsDouble(__pyx_t_5); if (unlikely((__pyx_t_9 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 76, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = PyFloat_FromDouble(__pyx_t_9); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_t_5 = PyFloat_FromDouble(__pyx_t_9); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 76, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_8 = 1;
   #if CYTHON_UNPACK_METHODS
@@ -3655,28 +3546,28 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3FSE_fse_pulsetrain(CYTHON_UNUSED
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 82, __pyx_L1_error)
+    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 76, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
   }
-  __pyx_t_6 = PySlice_New(__pyx_t_4, __pyx_t_7, Py_None); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_t_6 = PySlice_New(__pyx_t_4, __pyx_t_7, Py_None); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 76, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_mstate_global->__pyx_n_u_x); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_mstate_global->__pyx_n_u_x); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 76, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 76, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_6);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_6) != (0)) __PYX_ERR(0, 82, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_6) != (0)) __PYX_ERR(0, 76, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_7);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_7) != (0)) __PYX_ERR(0, 82, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_7) != (0)) __PYX_ERR(0, 76, __pyx_L1_error);
   __pyx_t_6 = 0;
   __pyx_t_7 = 0;
-  if (unlikely((PyObject_SetItem(__pyx_v_out, __pyx_t_4, __pyx_t_1) < 0))) __PYX_ERR(0, 82, __pyx_L1_error)
+  if (unlikely((PyObject_SetItem(__pyx_v_out, __pyx_t_4, __pyx_t_1) < 0))) __PYX_ERR(0, 76, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "UM_MRF/sim_blocks/FSE.py":83
+  /* "UM_MRF/sim_blocks/FSE.py":77
  *     # The first pulse is diferent than the rest
  *     out[np.int64(p_len / 2) : np.int64(3 * p_len / 2) , x] = flips[0] * scale
  *     cur = block_len             # <<<<<<<<<<<<<<
@@ -3686,24 +3577,24 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3FSE_fse_pulsetrain(CYTHON_UNUSED
   __Pyx_INCREF(__pyx_v_block_len);
   __Pyx_DECREF_SET(__pyx_v_cur, __pyx_v_block_len);
 
-  /* "UM_MRF/sim_blocks/FSE.py":86
+  /* "UM_MRF/sim_blocks/FSE.py":80
  * 
  *     # This is our pulse shape for one pulse. We are using hanning
  *     for flip in flips[1:len(flips)]:             # <<<<<<<<<<<<<<
  *         block[0:p_len] = flip * scale
  *         if (cur + block_len) >= ntime:
 */
-  __pyx_t_10 = PyObject_Length(__pyx_v_flips); if (unlikely(__pyx_t_10 == ((Py_ssize_t)-1))) __PYX_ERR(0, 86, __pyx_L1_error)
-  __pyx_t_1 = __Pyx_PyObject_GetSlice(__pyx_v_flips, 1, __pyx_t_10, NULL, NULL, NULL, 1, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 86, __pyx_L1_error)
+  __pyx_t_10 = PyObject_Length(__pyx_v_flips); if (unlikely(__pyx_t_10 == ((Py_ssize_t)-1))) __PYX_ERR(0, 80, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetSlice(__pyx_v_flips, 1, __pyx_t_10, NULL, NULL, NULL, 1, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 80, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
     __pyx_t_4 = __pyx_t_1; __Pyx_INCREF(__pyx_t_4);
     __pyx_t_10 = 0;
     __pyx_t_11 = NULL;
   } else {
-    __pyx_t_10 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 86, __pyx_L1_error)
+    __pyx_t_10 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 80, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_11 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_4); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 86, __pyx_L1_error)
+    __pyx_t_11 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_4); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 80, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   for (;;) {
@@ -3712,7 +3603,7 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3FSE_fse_pulsetrain(CYTHON_UNUSED
         {
           Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_4);
           #if !CYTHON_ASSUME_SAFE_SIZE
-          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 86, __pyx_L1_error)
+          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 80, __pyx_L1_error)
           #endif
           if (__pyx_t_10 >= __pyx_temp) break;
         }
@@ -3722,7 +3613,7 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3FSE_fse_pulsetrain(CYTHON_UNUSED
         {
           Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_4);
           #if !CYTHON_ASSUME_SAFE_SIZE
-          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 86, __pyx_L1_error)
+          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 80, __pyx_L1_error)
           #endif
           if (__pyx_t_10 >= __pyx_temp) break;
         }
@@ -3733,13 +3624,13 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3FSE_fse_pulsetrain(CYTHON_UNUSED
         #endif
         ++__pyx_t_10;
       }
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 86, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 80, __pyx_L1_error)
     } else {
       __pyx_t_1 = __pyx_t_11(__pyx_t_4);
       if (unlikely(!__pyx_t_1)) {
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
-          if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 86, __pyx_L1_error)
+          if (unlikely(!__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) __PYX_ERR(0, 80, __pyx_L1_error)
           PyErr_Clear();
         }
         break;
@@ -3749,62 +3640,62 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3FSE_fse_pulsetrain(CYTHON_UNUSED
     __Pyx_XDECREF_SET(__pyx_v_flip, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "UM_MRF/sim_blocks/FSE.py":87
+    /* "UM_MRF/sim_blocks/FSE.py":81
  *     # This is our pulse shape for one pulse. We are using hanning
  *     for flip in flips[1:len(flips)]:
  *         block[0:p_len] = flip * scale             # <<<<<<<<<<<<<<
  *         if (cur + block_len) >= ntime:
  *             out[cur : ntime, y] = block[0 : ntime - cur]
 */
-    __pyx_t_1 = PyNumber_Multiply(__pyx_v_flip, __pyx_v_scale); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 87, __pyx_L1_error)
+    __pyx_t_1 = PyNumber_Multiply(__pyx_v_flip, __pyx_v_scale); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 81, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    if (__Pyx_PyObject_SetSlice(__pyx_v_block, __pyx_t_1, 0, 0, NULL, &__pyx_v_p_len, NULL, 1, 0, 1) < 0) __PYX_ERR(0, 87, __pyx_L1_error)
+    if (__Pyx_PyObject_SetSlice(__pyx_v_block, __pyx_t_1, 0, 0, NULL, &__pyx_v_p_len, NULL, 1, 0, 1) < 0) __PYX_ERR(0, 81, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "UM_MRF/sim_blocks/FSE.py":88
+    /* "UM_MRF/sim_blocks/FSE.py":82
  *     for flip in flips[1:len(flips)]:
  *         block[0:p_len] = flip * scale
  *         if (cur + block_len) >= ntime:             # <<<<<<<<<<<<<<
  *             out[cur : ntime, y] = block[0 : ntime - cur]
  *             return out
 */
-    __pyx_t_1 = PyNumber_Add(__pyx_v_cur, __pyx_v_block_len); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 88, __pyx_L1_error)
+    __pyx_t_1 = PyNumber_Add(__pyx_v_cur, __pyx_v_block_len); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 82, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_7 = PyObject_RichCompare(__pyx_t_1, __pyx_v_ntime, Py_GE); __Pyx_XGOTREF(__pyx_t_7); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 88, __pyx_L1_error)
+    __pyx_t_7 = PyObject_RichCompare(__pyx_t_1, __pyx_v_ntime, Py_GE); __Pyx_XGOTREF(__pyx_t_7); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 82, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_t_7); if (unlikely((__pyx_t_12 < 0))) __PYX_ERR(0, 88, __pyx_L1_error)
+    __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_t_7); if (unlikely((__pyx_t_12 < 0))) __PYX_ERR(0, 82, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     if (__pyx_t_12) {
 
-      /* "UM_MRF/sim_blocks/FSE.py":89
+      /* "UM_MRF/sim_blocks/FSE.py":83
  *         block[0:p_len] = flip * scale
  *         if (cur + block_len) >= ntime:
  *             out[cur : ntime, y] = block[0 : ntime - cur]             # <<<<<<<<<<<<<<
  *             return out
  *         else:
 */
-      __pyx_t_7 = PyNumber_Subtract(__pyx_v_ntime, __pyx_v_cur); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 89, __pyx_L1_error)
+      __pyx_t_7 = PyNumber_Subtract(__pyx_v_ntime, __pyx_v_cur); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 83, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
-      __pyx_t_1 = __Pyx_PyObject_GetSlice(__pyx_v_block, 0, 0, NULL, &__pyx_t_7, NULL, 1, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetSlice(__pyx_v_block, 0, 0, NULL, &__pyx_t_7, NULL, 1, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 83, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-      __pyx_t_7 = PySlice_New(__pyx_v_cur, __pyx_v_ntime, Py_None); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 89, __pyx_L1_error)
+      __pyx_t_7 = PySlice_New(__pyx_v_cur, __pyx_v_ntime, Py_None); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 83, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
-      __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_y); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 89, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_y); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 83, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 89, __pyx_L1_error)
+      __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 83, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_GIVEREF(__pyx_t_7);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_7) != (0)) __PYX_ERR(0, 89, __pyx_L1_error);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_7) != (0)) __PYX_ERR(0, 83, __pyx_L1_error);
       __Pyx_GIVEREF(__pyx_t_6);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_6) != (0)) __PYX_ERR(0, 89, __pyx_L1_error);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_6) != (0)) __PYX_ERR(0, 83, __pyx_L1_error);
       __pyx_t_7 = 0;
       __pyx_t_6 = 0;
-      if (unlikely((PyObject_SetItem(__pyx_v_out, __pyx_t_5, __pyx_t_1) < 0))) __PYX_ERR(0, 89, __pyx_L1_error)
+      if (unlikely((PyObject_SetItem(__pyx_v_out, __pyx_t_5, __pyx_t_1) < 0))) __PYX_ERR(0, 83, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "UM_MRF/sim_blocks/FSE.py":90
+      /* "UM_MRF/sim_blocks/FSE.py":84
  *         if (cur + block_len) >= ntime:
  *             out[cur : ntime, y] = block[0 : ntime - cur]
  *             return out             # <<<<<<<<<<<<<<
@@ -3817,7 +3708,7 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3FSE_fse_pulsetrain(CYTHON_UNUSED
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       goto __pyx_L0;
 
-      /* "UM_MRF/sim_blocks/FSE.py":88
+      /* "UM_MRF/sim_blocks/FSE.py":82
  *     for flip in flips[1:len(flips)]:
  *         block[0:p_len] = flip * scale
  *         if (cur + block_len) >= ntime:             # <<<<<<<<<<<<<<
@@ -3826,7 +3717,7 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3FSE_fse_pulsetrain(CYTHON_UNUSED
 */
     }
 
-    /* "UM_MRF/sim_blocks/FSE.py":92
+    /* "UM_MRF/sim_blocks/FSE.py":86
  *             return out
  *         else:
  *             out[cur : cur + block_len, y] = block             # <<<<<<<<<<<<<<
@@ -3834,38 +3725,38 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3FSE_fse_pulsetrain(CYTHON_UNUSED
  * 
 */
     /*else*/ {
-      __pyx_t_1 = PyNumber_Add(__pyx_v_cur, __pyx_v_block_len); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 92, __pyx_L1_error)
+      __pyx_t_1 = PyNumber_Add(__pyx_v_cur, __pyx_v_block_len); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 86, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_5 = PySlice_New(__pyx_v_cur, __pyx_t_1, Py_None); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 92, __pyx_L1_error)
+      __pyx_t_5 = PySlice_New(__pyx_v_cur, __pyx_t_1, Py_None); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 86, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_y); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 92, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_y); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 86, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 92, __pyx_L1_error)
+      __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 86, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_GIVEREF(__pyx_t_5);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_5) != (0)) __PYX_ERR(0, 92, __pyx_L1_error);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_5) != (0)) __PYX_ERR(0, 86, __pyx_L1_error);
       __Pyx_GIVEREF(__pyx_t_1);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_t_1) != (0)) __PYX_ERR(0, 92, __pyx_L1_error);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_t_1) != (0)) __PYX_ERR(0, 86, __pyx_L1_error);
       __pyx_t_5 = 0;
       __pyx_t_1 = 0;
-      if (unlikely((PyObject_SetItem(__pyx_v_out, __pyx_t_6, __pyx_v_block) < 0))) __PYX_ERR(0, 92, __pyx_L1_error)
+      if (unlikely((PyObject_SetItem(__pyx_v_out, __pyx_t_6, __pyx_v_block) < 0))) __PYX_ERR(0, 86, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-      /* "UM_MRF/sim_blocks/FSE.py":93
+      /* "UM_MRF/sim_blocks/FSE.py":87
  *         else:
  *             out[cur : cur + block_len, y] = block
  *             cur = cur + block_len             # <<<<<<<<<<<<<<
  * 
  *     # If we get here, the loop didn't end early due to the ps filling up
 */
-      __pyx_t_6 = PyNumber_Add(__pyx_v_cur, __pyx_v_block_len); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 93, __pyx_L1_error)
+      __pyx_t_6 = PyNumber_Add(__pyx_v_cur, __pyx_v_block_len); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 87, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF_SET(__pyx_v_cur, ((PyObject*)__pyx_t_6));
       __pyx_t_6 = 0;
     }
 
-    /* "UM_MRF/sim_blocks/FSE.py":86
+    /* "UM_MRF/sim_blocks/FSE.py":80
  * 
  *     # This is our pulse shape for one pulse. We are using hanning
  *     for flip in flips[1:len(flips)]:             # <<<<<<<<<<<<<<
@@ -3875,7 +3766,7 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3FSE_fse_pulsetrain(CYTHON_UNUSED
   }
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "UM_MRF/sim_blocks/FSE.py":97
+  /* "UM_MRF/sim_blocks/FSE.py":91
  *     # If we get here, the loop didn't end early due to the ps filling up
  *     # If we need to fill then we do it here:
  *     while fill & ((cur + block_len) < ntime):             # <<<<<<<<<<<<<<
@@ -3883,56 +3774,56 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3FSE_fse_pulsetrain(CYTHON_UNUSED
  *         cur = cur + block_len
 */
   while (1) {
-    __pyx_t_4 = PyNumber_Add(__pyx_v_cur, __pyx_v_block_len); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 97, __pyx_L1_error)
+    __pyx_t_4 = PyNumber_Add(__pyx_v_cur, __pyx_v_block_len); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 91, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_6 = PyObject_RichCompare(__pyx_t_4, __pyx_v_ntime, Py_LT); __Pyx_XGOTREF(__pyx_t_6); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 97, __pyx_L1_error)
+    __pyx_t_6 = PyObject_RichCompare(__pyx_t_4, __pyx_v_ntime, Py_LT); __Pyx_XGOTREF(__pyx_t_6); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 91, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = PyNumber_And(__pyx_v_fill, __pyx_t_6); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 97, __pyx_L1_error)
+    __pyx_t_4 = PyNumber_And(__pyx_v_fill, __pyx_t_6); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 91, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely((__pyx_t_12 < 0))) __PYX_ERR(0, 97, __pyx_L1_error)
+    __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely((__pyx_t_12 < 0))) __PYX_ERR(0, 91, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     if (!__pyx_t_12) break;
 
-    /* "UM_MRF/sim_blocks/FSE.py":98
+    /* "UM_MRF/sim_blocks/FSE.py":92
  *     # If we need to fill then we do it here:
  *     while fill & ((cur + block_len) < ntime):
  *         out[cur : cur + block_len, y] = block             # <<<<<<<<<<<<<<
  *         cur = cur + block_len
  * 
 */
-    __pyx_t_4 = PyNumber_Add(__pyx_v_cur, __pyx_v_block_len); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 98, __pyx_L1_error)
+    __pyx_t_4 = PyNumber_Add(__pyx_v_cur, __pyx_v_block_len); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 92, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_6 = PySlice_New(__pyx_v_cur, __pyx_t_4, Py_None); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 98, __pyx_L1_error)
+    __pyx_t_6 = PySlice_New(__pyx_v_cur, __pyx_t_4, Py_None); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 92, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_y); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 98, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_y); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 92, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 98, __pyx_L1_error)
+    __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 92, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_GIVEREF(__pyx_t_6);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_6) != (0)) __PYX_ERR(0, 98, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_6) != (0)) __PYX_ERR(0, 92, __pyx_L1_error);
     __Pyx_GIVEREF(__pyx_t_4);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_4) != (0)) __PYX_ERR(0, 98, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_4) != (0)) __PYX_ERR(0, 92, __pyx_L1_error);
     __pyx_t_6 = 0;
     __pyx_t_4 = 0;
-    if (unlikely((PyObject_SetItem(__pyx_v_out, __pyx_t_1, __pyx_v_block) < 0))) __PYX_ERR(0, 98, __pyx_L1_error)
+    if (unlikely((PyObject_SetItem(__pyx_v_out, __pyx_t_1, __pyx_v_block) < 0))) __PYX_ERR(0, 92, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "UM_MRF/sim_blocks/FSE.py":99
+    /* "UM_MRF/sim_blocks/FSE.py":93
  *     while fill & ((cur + block_len) < ntime):
  *         out[cur : cur + block_len, y] = block
  *         cur = cur + block_len             # <<<<<<<<<<<<<<
  * 
  *     return out
 */
-    __pyx_t_1 = PyNumber_Add(__pyx_v_cur, __pyx_v_block_len); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 99, __pyx_L1_error)
+    __pyx_t_1 = PyNumber_Add(__pyx_v_cur, __pyx_v_block_len); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 93, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF_SET(__pyx_v_cur, ((PyObject*)__pyx_t_1));
     __pyx_t_1 = 0;
   }
 
-  /* "UM_MRF/sim_blocks/FSE.py":101
+  /* "UM_MRF/sim_blocks/FSE.py":95
  *         cur = cur + block_len
  * 
  *     return out             # <<<<<<<<<<<<<<
@@ -3942,7 +3833,7 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3FSE_fse_pulsetrain(CYTHON_UNUSED
   __pyx_r = __pyx_v_out;
   goto __pyx_L0;
 
-  /* "UM_MRF/sim_blocks/FSE.py":69
+  /* "UM_MRF/sim_blocks/FSE.py":63
  * #default_flips = [90, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180]
  * # 117 mG * 1 ms = 180 degree flip
  * def fse_pulsetrain(PW, ESP, T, dt, flips=default_flips, fill=True):             # <<<<<<<<<<<<<<
@@ -4179,15 +4070,15 @@ static int __Pyx_modinit_type_init_code(__pyx_mstatetype *__pyx_mstate) {
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_init_code", 0);
   /*--- Type init code ---*/
   #if CYTHON_USE_TYPE_SPECS
-  __pyx_mstate->__pyx_ptype_6UM_MRF_10sim_blocks_3FSE___pyx_defaults = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_6UM_MRF_10sim_blocks_3FSE___pyx_defaults_spec, NULL); if (unlikely(!__pyx_mstate->__pyx_ptype_6UM_MRF_10sim_blocks_3FSE___pyx_defaults)) __PYX_ERR(0, 69, __pyx_L1_error)
-  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_6UM_MRF_10sim_blocks_3FSE___pyx_defaults_spec, __pyx_mstate->__pyx_ptype_6UM_MRF_10sim_blocks_3FSE___pyx_defaults) < 0) __PYX_ERR(0, 69, __pyx_L1_error)
+  __pyx_mstate->__pyx_ptype_6UM_MRF_10sim_blocks_3FSE___pyx_defaults = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_6UM_MRF_10sim_blocks_3FSE___pyx_defaults_spec, NULL); if (unlikely(!__pyx_mstate->__pyx_ptype_6UM_MRF_10sim_blocks_3FSE___pyx_defaults)) __PYX_ERR(0, 63, __pyx_L1_error)
+  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_6UM_MRF_10sim_blocks_3FSE___pyx_defaults_spec, __pyx_mstate->__pyx_ptype_6UM_MRF_10sim_blocks_3FSE___pyx_defaults) < 0) __PYX_ERR(0, 63, __pyx_L1_error)
   #else
   __pyx_mstate->__pyx_ptype_6UM_MRF_10sim_blocks_3FSE___pyx_defaults = &__pyx_type_6UM_MRF_10sim_blocks_3FSE___pyx_defaults;
   #endif
   #if !CYTHON_COMPILING_IN_LIMITED_API
   #endif
   #if !CYTHON_USE_TYPE_SPECS
-  if (__Pyx_PyType_Ready(__pyx_mstate->__pyx_ptype_6UM_MRF_10sim_blocks_3FSE___pyx_defaults) < 0) __PYX_ERR(0, 69, __pyx_L1_error)
+  if (__Pyx_PyType_Ready(__pyx_mstate->__pyx_ptype_6UM_MRF_10sim_blocks_3FSE___pyx_defaults) < 0) __PYX_ERR(0, 63, __pyx_L1_error)
   #endif
   #if !CYTHON_COMPILING_IN_LIMITED_API
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_mstate->__pyx_ptype_6UM_MRF_10sim_blocks_3FSE___pyx_defaults->tp_dictoffset && __pyx_mstate->__pyx_ptype_6UM_MRF_10sim_blocks_3FSE___pyx_defaults->tp_getattro == PyObject_GenericGetAttr)) {
@@ -4651,16 +4542,16 @@ __Pyx_RefNannySetupContext("PyInit_FSE", 0);
   if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_set_rf, __pyx_t_6) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "UM_MRF/sim_blocks/FSE.py":53
+  /* "UM_MRF/sim_blocks/FSE.py":47
  * 
  * 
  *     def set_gradients(self):             # <<<<<<<<<<<<<<
  *         """
  *         This method overrides SimObj's definition of set_gradients(). At the moment
 */
-  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_6UM_MRF_10sim_blocks_3FSE_3FSE_3set_gradients, 0, __pyx_mstate_global->__pyx_n_u_FSE_set_gradients, NULL, __pyx_mstate_global->__pyx_n_u_UM_MRF_sim_blocks_FSE, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[1])); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 53, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_CyFunction_New(&__pyx_mdef_6UM_MRF_10sim_blocks_3FSE_3FSE_3set_gradients, 0, __pyx_mstate_global->__pyx_n_u_FSE_set_gradients, NULL, __pyx_mstate_global->__pyx_n_u_UM_MRF_sim_blocks_FSE, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[1])); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_set_gradients, __pyx_t_6) < 0) __PYX_ERR(0, 53, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_set_gradients, __pyx_t_6) < 0) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
   /* "UM_MRF/sim_blocks/FSE.py":19
@@ -4680,35 +4571,35 @@ __Pyx_RefNannySetupContext("PyInit_FSE", 0);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "UM_MRF/sim_blocks/FSE.py":66
+  /* "UM_MRF/sim_blocks/FSE.py":60
  * 
  * 
  * default_flips = [90, 120, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180]             # <<<<<<<<<<<<<<
  * #default_flips = [90, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180]
  * # 117 mG * 1 ms = 180 degree flip
 */
-  __pyx_t_2 = __Pyx_PyList_Pack(17, __pyx_mstate_global->__pyx_int_90, __pyx_mstate_global->__pyx_int_120, __pyx_mstate_global->__pyx_int_40, __pyx_mstate_global->__pyx_int_50, __pyx_mstate_global->__pyx_int_60, __pyx_mstate_global->__pyx_int_70, __pyx_mstate_global->__pyx_int_80, __pyx_mstate_global->__pyx_int_90, __pyx_mstate_global->__pyx_int_100, __pyx_mstate_global->__pyx_int_110, __pyx_mstate_global->__pyx_int_120, __pyx_mstate_global->__pyx_int_130, __pyx_mstate_global->__pyx_int_140, __pyx_mstate_global->__pyx_int_150, __pyx_mstate_global->__pyx_int_160, __pyx_mstate_global->__pyx_int_170, __pyx_mstate_global->__pyx_int_180); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 66, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyList_Pack(17, __pyx_mstate_global->__pyx_int_90, __pyx_mstate_global->__pyx_int_120, __pyx_mstate_global->__pyx_int_40, __pyx_mstate_global->__pyx_int_50, __pyx_mstate_global->__pyx_int_60, __pyx_mstate_global->__pyx_int_70, __pyx_mstate_global->__pyx_int_80, __pyx_mstate_global->__pyx_int_90, __pyx_mstate_global->__pyx_int_100, __pyx_mstate_global->__pyx_int_110, __pyx_mstate_global->__pyx_int_120, __pyx_mstate_global->__pyx_int_130, __pyx_mstate_global->__pyx_int_140, __pyx_mstate_global->__pyx_int_150, __pyx_mstate_global->__pyx_int_160, __pyx_mstate_global->__pyx_int_170, __pyx_mstate_global->__pyx_int_180); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_default_flips, __pyx_t_2) < 0) __PYX_ERR(0, 66, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_default_flips, __pyx_t_2) < 0) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "UM_MRF/sim_blocks/FSE.py":69
+  /* "UM_MRF/sim_blocks/FSE.py":63
  * #default_flips = [90, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180]
  * # 117 mG * 1 ms = 180 degree flip
  * def fse_pulsetrain(PW, ESP, T, dt, flips=default_flips, fill=True):             # <<<<<<<<<<<<<<
  *     cur = 0
  *     ntime = np.int64(np.ceil(T / dt))
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6UM_MRF_10sim_blocks_3FSE_1fse_pulsetrain, 0, __pyx_mstate_global->__pyx_n_u_fse_pulsetrain, NULL, __pyx_mstate_global->__pyx_n_u_UM_MRF_sim_blocks_FSE, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[2])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 69, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_6UM_MRF_10sim_blocks_3FSE_1fse_pulsetrain, 0, __pyx_mstate_global->__pyx_n_u_fse_pulsetrain, NULL, __pyx_mstate_global->__pyx_n_u_UM_MRF_sim_blocks_FSE, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[2])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 63, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (!__Pyx_CyFunction_InitDefaults(__pyx_t_2, __pyx_mstate_global->__pyx_ptype_6UM_MRF_10sim_blocks_3FSE___pyx_defaults)) __PYX_ERR(0, 69, __pyx_L1_error)
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_default_flips); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 69, __pyx_L1_error)
+  if (!__Pyx_CyFunction_InitDefaults(__pyx_t_2, __pyx_mstate_global->__pyx_ptype_6UM_MRF_10sim_blocks_3FSE___pyx_defaults)) __PYX_ERR(0, 63, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_default_flips); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 63, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_CyFunction_Defaults(struct __pyx_defaults, __pyx_t_2)->arg0 = __pyx_t_4;
   __Pyx_GIVEREF(__pyx_t_4);
   __pyx_t_4 = 0;
   __Pyx_CyFunction_SetDefaultsGetter(__pyx_t_2, __pyx_pf_6UM_MRF_10sim_blocks_3FSE_2__defaults__);
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_fse_pulsetrain, __pyx_t_2) < 0) __PYX_ERR(0, 69, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_fse_pulsetrain, __pyx_t_2) < 0) __PYX_ERR(0, 63, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "UM_MRF/sim_blocks/FSE.py":1
@@ -4790,14 +4681,11 @@ static const __Pyx_StringTabEntry __pyx_string_tab[] = {
   {__pyx_k_FSE_set_gradients, sizeof(__pyx_k_FSE_set_gradients), 0, 1, 1}, /* PyObject cname: __pyx_n_u_FSE_set_gradients */
   {__pyx_k_FSE_set_rf, sizeof(__pyx_k_FSE_set_rf), 0, 1, 1}, /* PyObject cname: __pyx_n_u_FSE_set_rf */
   {__pyx_k_PW, sizeof(__pyx_k_PW), 0, 1, 1}, /* PyObject cname: __pyx_n_u_PW */
-  {__pyx_k_RO_samples, sizeof(__pyx_k_RO_samples), 0, 1, 1}, /* PyObject cname: __pyx_n_u_RO_samples */
   {__pyx_k_SimObj, sizeof(__pyx_k_SimObj), 0, 1, 1}, /* PyObject cname: __pyx_n_u_SimObj */
   {__pyx_k_T, sizeof(__pyx_k_T), 0, 1, 1}, /* PyObject cname: __pyx_n_u_T */
   {__pyx_k_UM_MRF_sim_blocks_FSE, sizeof(__pyx_k_UM_MRF_sim_blocks_FSE), 0, 1, 1}, /* PyObject cname: __pyx_n_u_UM_MRF_sim_blocks_FSE */
   {__pyx_k__2, sizeof(__pyx_k__2), 0, 1, 0}, /* PyObject cname: __pyx_kp_u__2 */
   {__pyx_k_absorption, sizeof(__pyx_k_absorption), 0, 1, 1}, /* PyObject cname: __pyx_n_u_absorption */
-  {__pyx_k_append, sizeof(__pyx_k_append), 0, 1, 1}, /* PyObject cname: __pyx_n_u_append */
-  {__pyx_k_array, sizeof(__pyx_k_array), 0, 1, 1}, /* PyObject cname: __pyx_n_u_array */
   {__pyx_k_asyncio_coroutines, sizeof(__pyx_k_asyncio_coroutines), 0, 1, 1}, /* PyObject cname: __pyx_n_u_asyncio_coroutines */
   {__pyx_k_block, sizeof(__pyx_k_block), 0, 1, 1}, /* PyObject cname: __pyx_n_u_block */
   {__pyx_k_block_len, sizeof(__pyx_k_block_len), 0, 1, 1}, /* PyObject cname: __pyx_n_u_block_len */
@@ -4837,7 +4725,6 @@ static const __Pyx_StringTabEntry __pyx_string_tab[] = {
   {__pyx_k_prepare, sizeof(__pyx_k_prepare), 0, 1, 1}, /* PyObject cname: __pyx_n_u_prepare */
   {__pyx_k_qualname, sizeof(__pyx_k_qualname), 0, 1, 1}, /* PyObject cname: __pyx_n_u_qualname */
   {__pyx_k_rf, sizeof(__pyx_k_rf), 0, 1, 1}, /* PyObject cname: __pyx_n_u_rf */
-  {__pyx_k_sample_times, sizeof(__pyx_k_sample_times), 0, 1, 1}, /* PyObject cname: __pyx_n_u_sample_times */
   {__pyx_k_scale, sizeof(__pyx_k_scale), 0, 1, 1}, /* PyObject cname: __pyx_n_u_scale */
   {__pyx_k_self, sizeof(__pyx_k_self), 0, 1, 1}, /* PyObject cname: __pyx_n_u_self */
   {__pyx_k_set_gradients, sizeof(__pyx_k_set_gradients), 0, 1, 1}, /* PyObject cname: __pyx_n_u_set_gradients */
@@ -4859,7 +4746,7 @@ static int __Pyx_InitStrings(__Pyx_StringTabEntry const *t, PyObject **target, c
 
 static int __Pyx_InitCachedBuiltins(__pyx_mstatetype *__pyx_mstate) {
   CYTHON_UNUSED_VAR(__pyx_mstate);
-  __pyx_builtin_super = __Pyx_GetBuiltinName(__pyx_mstate->__pyx_n_u_super); if (!__pyx_builtin_super) __PYX_ERR(0, 50, __pyx_L1_error)
+  __pyx_builtin_super = __Pyx_GetBuiltinName(__pyx_mstate->__pyx_n_u_super); if (!__pyx_builtin_super) __PYX_ERR(0, 44, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -4914,7 +4801,7 @@ static int __Pyx_InitConstants(__pyx_mstatetype *__pyx_mstate) {
             unsigned int num_kwonly_args : 1;
             unsigned int nlocals : 4;
             unsigned int flags : 10;
-            unsigned int first_line : 7;
+            unsigned int first_line : 6;
             unsigned int line_table_length : 13;
         } __Pyx_PyCode_New_function_description;
 /* NewCodeObj.proto */
@@ -4932,17 +4819,17 @@ static int __Pyx_CreateCodeObjects(__pyx_mstatetype *__pyx_mstate) {
   PyObject* tuple_dedup_map = PyDict_New();
   if (unlikely(!tuple_dedup_map)) return -1;
   {
-    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 4, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 33, 77};
-    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_params, __pyx_mstate->__pyx_n_u_rf, __pyx_mstate->__pyx_n_u_RO_samples};
-    __pyx_mstate_global->__pyx_codeobj_tab[0] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_UM_MRF_sim_blocks_FSE_py, __pyx_mstate->__pyx_n_u_set_rf, __pyx_k_A_1D_T_t4t1_RvQat1_BgQd_Rwaq, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[0])) goto bad;
+    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 3, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 33, 40};
+    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_params, __pyx_mstate->__pyx_n_u_rf};
+    __pyx_mstate_global->__pyx_codeobj_tab[0] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_UM_MRF_sim_blocks_FSE_py, __pyx_mstate->__pyx_n_u_set_rf, __pyx_k_A_1D_T_t4t1_Rwaq, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[0])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 1, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 53, 2};
+    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 1, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 47, 2};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self};
     __pyx_mstate_global->__pyx_codeobj_tab[1] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_UM_MRF_sim_blocks_FSE_py, __pyx_mstate->__pyx_n_u_set_gradients, __pyx_k_A, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[1])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {6, 0, 0, 14, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 69, 321};
+    const __Pyx_PyCode_New_function_description descr = {6, 0, 0, 14, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 63, 321};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_PW, __pyx_mstate->__pyx_n_u_ESP, __pyx_mstate->__pyx_n_u_T, __pyx_mstate->__pyx_n_u_dt, __pyx_mstate->__pyx_n_u_flips, __pyx_mstate->__pyx_n_u_fill, __pyx_mstate->__pyx_n_u_cur, __pyx_mstate->__pyx_n_u_ntime, __pyx_mstate->__pyx_n_u_out, __pyx_mstate->__pyx_n_u_block_len, __pyx_mstate->__pyx_n_u_block, __pyx_mstate->__pyx_n_u_p_len, __pyx_mstate->__pyx_n_u_scale, __pyx_mstate->__pyx_n_u_flip};
     __pyx_mstate_global->__pyx_codeobj_tab[2] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_UM_MRF_sim_blocks_FSE_py, __pyx_mstate->__pyx_n_u_fse_pulsetrain, __pyx_k_BfARuARr_F_G1_1Be1D_BfAQ_Cq_q_2, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[2])) goto bad;
   }
@@ -6254,16 +6141,6 @@ static CYTHON_INLINE PyObject *__Pyx__GetModuleGlobalName(PyObject *name)
 #endif
     return __Pyx_GetBuiltinName(name);
 }
-
-/* PyObjectSetAttrStr */
-#if CYTHON_USE_TYPE_SLOTS
-static CYTHON_INLINE int __Pyx_PyObject_SetAttrStr(PyObject* obj, PyObject* attr_name, PyObject* value) {
-    PyTypeObject* tp = Py_TYPE(obj);
-    if (likely(tp->tp_setattro))
-        return tp->tp_setattro(obj, attr_name, value);
-    return PyObject_SetAttr(obj, attr_name, value);
-}
-#endif
 
 /* PyObjectFastCallMethod */
 #if !CYTHON_VECTORCALL || PY_VERSION_HEX < 0x03090000

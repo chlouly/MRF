@@ -6,6 +6,7 @@
 ##########################################################################
 
 from .SimObj import SimObj
+import numpy as np
 
 # No Pulse Playing
 class DeadAir(SimObj):
@@ -17,7 +18,7 @@ class DeadAir(SimObj):
     """
 
 
-    def __init__(self, T, dt, dynamic_time=False):
+    def __init__(self, T, dt, dynamic_time=False, crusher_times=np.array([]), sample_times=np.array([]), avg_samples=True):
         """
         Creates an instance of the DeadAir class - DeadAir(SimObj)
 
@@ -25,7 +26,7 @@ class DeadAir(SimObj):
             params:     Instance of Params object
             dt:         Timestep [ms]
         """
-        super().__init__(T, 0, 0, 0, 0, dt, dynamic_time=dynamic_time)
+        super().__init__(T, 0, 0, 0, 0, dt, dynamic_time=dynamic_time, crusher_times=crusher_times, sample_times=sample_times, avg_samples=avg_samples)
 
 
     def set_rf(self, params):

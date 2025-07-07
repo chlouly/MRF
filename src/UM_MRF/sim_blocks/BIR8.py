@@ -14,7 +14,7 @@ class BIR8(SimObj):
     crush_length = 750 
 
 
-    def __init__(self, T, dt, dynamic_time=False):
+    def __init__(self, T, dt, dynamic_time=False, crusher_times=np.array([]), sample_times=np.array([]), avg_samples=True):
         """
         Creates an instance of the DeadAir class - DeadAir(SimObj)
 

@@ -39,12 +39,6 @@ class FSE(SimObj):
         # Get an array of the x and y components of the RF pulsetrain
         rf = fse_pulsetrain(self.PW, self.ESP, self.T, self.dt)
 
-        # We will sample after the first 90y
-        RO_samples = np.array([self.ESP])
-
-        # Append the ReadOut sample times to the sample times array
-        self.sample_times = np.append(self.sample_times, RO_samples)
-
         # Call the parent class' definition of set_rf() to add the pulse to
         # the objects effective B field.
         super().set_rf(rf)

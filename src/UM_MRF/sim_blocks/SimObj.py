@@ -61,7 +61,7 @@ class SimObj:
         return super().__new__(cls)
 
 
-    def __init__(self, T, PW, ETL, delay, ESP, dt, dynamic_time=False, crusher_times=np.array([]), sample_times=np.array([])):
+    def __init__(self, T, PW, ETL, delay, ESP, dt, dynamic_time=False, crusher_times=np.array([]), sample_times=np.array([]), avg_samples=True):
         """
         Method that instantiates the SimObj class.
 
@@ -80,6 +80,7 @@ class SimObj:
                             block [0, T) ms. They will be rounded down to the nearest 
                             time value that is simulated.
         """
+        # Initialize all of the parameters for this block
         self.T = T                                  # Simulation durration [ms]
         self.ESP = ESP                              # Simulation Echo Spacing [ms]
         self.ETL = ETL                              # Simulation Echo Train Length
@@ -89,6 +90,7 @@ class SimObj:
         self.ntime = int(np.ceil(T / self.dt))      # Number of time samples
         self.time = np.arange(self.ntime) * self.dt        # Vector of Timepoints [ms]
 
+        # Initialize B(t) and s(t) arrays
         self.B = np.zeros((self.ntime, 3))          # (ntime, 3) array of B vectors [T] (initally set to 0s)
         self.s = np.zeros((self.ntime, ))           # (ntime, ) array of arterial magnetization values (initially set to 0s)
 
@@ -98,11 +100,25 @@ class SimObj:
         if np.any((crusher_times >= self.T) | (crusher_times < 0.0)):
             raise ValueError("ERROR: Crusher times must be within the length of the block [0.0, ", self.T, ") ms.")
 
+        # We recalculate sample and crusher times to convert them into multiples of dt
         self.sample_inds = np.clip(np.ceil(sample_times / self.dt).astype(int), 0, self.ntime - 1)
         self.sample_times = self.sample_inds * self.dt     # Get the times as a multiple of dt
         self.crusher_inds = np.clip(np.ceil(crusher_times / self.dt).astype(int), 0, self.ntime - 1)
         self.crusher_times = self.crusher_inds * self.dt   # Get the times as a multiple of dt
         self.dynamic_time = dynamic_time
+
+        # We save the value of the avg_samples flag.
+        # We also set the number of samples accordingly.
+        self.avg_samples = avg_samples
+        if len(self.sample_times) == 0:
+            # We are not sampling in this block
+            self.num_samples = 0
+        elif self.avg_samples:
+            # If we are averaging the samples, we only keep one number
+            self.num_samples = 1
+        else:
+            # We arent averaging any samples
+            self.num_samples = len(self.sample_times)
 
 
     def set_gradients(self, grads, params):
@@ -271,9 +287,17 @@ class SimObj:
         if not hasattr(self, "sample_inds"):
             self.sample_inds = np.int32(np.floor(self.sample_times / self.dt))
 
+        # Collect the sample values from M(t)
+        sample_array = np.linalg.norm(self.M[self.sample_inds, 0:2], axis=1) * (1 - CBV) \
+                    + self.s[self.sample_inds] * CBV
+
         # Now we return an array of the actual samples.
-        return np.linalg.norm(self.M[self.sample_inds, 0:2], axis=1) * (1 - CBV) \
-                + self.s[self.sample_inds] * CBV
+        if self.avg_samples:
+            # Here we average together all samples from this block
+            return np.array([np.mean(sample_array)])
+        else:
+            # Don't average, return the samples themselves.
+            return sample_array
     
 
     def optimize_time(self):

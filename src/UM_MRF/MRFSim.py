@@ -108,16 +108,41 @@ class MRFSim:
         time_queue = []
 
         T = 0.0
+        self.num_samples = 0
 
         for sim in self.sims:
+            # Compute and store gradients (Integrate them into B(t))
             sim.set_gradients()
+
+            # Compute and store the RF pulses (Integrate them into B(t))
             sim.set_rf(self.params)
+
+            # Store the sample times (w.r. to the whole pulse sequence)
             if np.size(sim.sample_times) != 0:
-                self.sample_times = np.append(self.sample_times, sim.sample_times + T)
+                if sim.avg_samples:
+                    # In this case, the sim block will return one number for the
+                    # average of all samples in the block. In that case we just
+                    # choose the first sample time as a representation of when the samples
+                    # started.
+                    #                                                                 |
+                    #                                                    Hence the [0]V
+                    self.sample_times = np.append(self.sample_times, sim.sample_times[0] + T)
+                else:
+                    # Here we keep all of the samples.
+                    self.sample_times = np.append(self.sample_times, sim.sample_times + T)
+
+            # We add an entry to the time queue (if there is one)
             time_queue = sim.set_s_shape(time_queue, self.params.BAT)
+
+            # Scale the s(t) function based on our furrent parameters M0, BAT, T1_b, F, lambda, alpha
             sim.scale_s(self.params.F, self.params.lam, self.params.alpha, self.params.M0_f, self.params.BAT, self.params.T1_b)
+
+            # Reoptimize the simulated timepoints
             sim.optimize_time()
+
+            # Add to simulation constants
             T += sim.T
+            self.num_samples += sim.num_samples
 
 
     def compute_s(self):
@@ -157,6 +182,19 @@ class MRFSim:
         # All schedules are found in a mrf_schedule.txt file
         sched_dir = sched_dir + "/mrf_schedule.txt"
 
+        dyn_time = True
+
+        # RO vals
+        ETL = 20
+        ESP = 40
+        PW = 2.5
+        delay = 8
+        crush_off = 3.5
+
+        sample_times = (np.arange(ETL) * ESP) + PW + 1 + delay
+
+        crush_times = np.arange(ETL) * ESP + (delay - crush_off)
+
         with open(sched_dir, "r") as sched:
             for line in sched:
                 # Get Values for one line
@@ -166,34 +204,34 @@ class MRFSim:
                 # We use miliseconds).
 
                 # First Delay
-                self.add_sim(DeadAir(vals[0] * 1000, 100))
+                self.add_sim(DeadAir(vals[0] * 1000, 0.1, dynamic_time=dyn_time))
 
                 # pCASL Section
                 if int(vals[1] == -1):
                     # pCASL code of -1 means do nothing
-                    self.add_sim(DeadAir(vals[2] * 1000, 300))
+                    self.add_sim(DeadAir(vals[2] * 1000, 0.1, dynamic_time=dyn_time))
                 else:
                     # Otherwise we do something
                     # Label == 1, Control == 0
-                    self.add_sim(pCASL(vals[2] * 1000, 300, control= not int(vals[1])))
+                    self.add_sim(pCASL(vals[2] * 1000, 0.1, control= not int(vals[1]), dynamic_time=dyn_time))
                 
                 # pCASL PLD
-                self.add_sim(DeadAir(vals[3] * 1000, 300))
+                self.add_sim(DeadAir(vals[3] * 1000, 0.1, dynamic_time=dyn_time))
 
                 # Prep Pulse 1
                 self.add_sim(self.add_presat_sim(vals[4]))
 
                 # Prep 1 PLD
-                self.add_sim(DeadAir(vals[5] * 1000, 300))
+                self.add_sim(DeadAir(vals[5] * 1000, 0.1))
 
                 # Prep Pulse 2
                 self.add_sim(self.add_presat_sim(vals[6]))
 
                 # Prep 1 PLD
-                self.add_sim(DeadAir(vals[7] * 1000, 300))
+                self.add_sim(DeadAir(vals[7] * 1000, 0.1, dynamic_time=dyn_time))
 
                 # Finally We add a readout
-                self.add_sim(GRE(2.5, 20, 8, 40, 2.5))
+                self.add_sim(GRE(2.5, 20, 8, 40, 0.1, dynamic_time=dyn_time, crusher_times=crush_times, sample_times=sample_times, avg_samples=True))
 
 
     def add_presat_sim(self, prep_pulse_code):
@@ -207,7 +245,7 @@ class MRFSim:
         elif code == 6800:
             raise ValueError("Error: The prep pulse with ID 06800 has not yet been added to the MRF Simulator")
         elif code == 6850:  # BIR8
-            return BIR8(6850 * 0.004, 0.004)
+            return BIR8(6850 * 0.004, 0.004, dynamic_time=True)
         elif code == 17268:
             raise ValueError("Error: The prep pulse with ID 17268 has not yet been added to the MRF Simulator")
         elif code == 17536:
@@ -272,7 +310,7 @@ class MRFSim:
         # Create Progress Bar
         create_pb()
 
-        # Time re-op lag
+        # Time re-op flag
         reoptimize_time = True
 
         # Do the actual looping now
@@ -473,4 +511,3 @@ class MRFSim:
         plt.ylabel("Sample Intensity")
         plt.title("Samples")
         plt.show()
-

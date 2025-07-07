@@ -1,6 +1,9 @@
 __pycache__
 __pycache__/*
-UM_Blochsim
-UM_Blochsim/*
 *.vscode
 *.env
+*.c
+build
+dist
+*.egg-info*
+

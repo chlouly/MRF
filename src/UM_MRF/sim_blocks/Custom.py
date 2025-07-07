@@ -7,6 +7,8 @@
 
 from .SimObj import SimObj
 from numpy import size, shape
+import numpy as np
+
 
 class Custom(SimObj):
     """
@@ -29,7 +31,7 @@ class Custom(SimObj):
         return super().__new__(cls, T)
         
 
-    def __init__(self, B, s, dt, dynamic_time=False):  
+    def __init__(self, B, s, dt, dynamic_time=False, crusher_times=np.array([]), sample_times=np.array([]), avg_samples=True):  
         """
         Creates an instance of the Custom class - Custom(SimObj)
 
@@ -42,7 +44,7 @@ class Custom(SimObj):
         ntime = len(s)
         T = ntime * dt
 
-        super().__init__(T, 0, 0, 0, 0, dt, dynamic_time=dynamic_time)
+        super().__init__(T, 0, 0, 0, 0, dt, dynamic_time=dynamic_time, crusher_times=crusher_times, sample_times=sample_times, avg_samples=avg_samples)
 
         self.B = B
         self.s = s

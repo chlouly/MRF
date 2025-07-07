@@ -33,7 +33,7 @@ class pCASL(SimObj):
     saturation = 1000
 
 
-    def __init__(self, T, dt, sample_times=np.array([]), control=0, dynamic_time=False):
+    def __init__(self, T, dt, control=False, dynamic_time=False, crusher_times=np.array([]), sample_times=np.array([]), avg_samples=True):
         """
         Creates an instance of the DeadAir class - DeadAir(SimObj)
 
@@ -44,7 +44,7 @@ class pCASL(SimObj):
             control:    Bool for label vs control pulse. (default = 0)
         """
         self.control = control
-        super().__init__(T, 0, 0, 0, 0, dt, sample_times=sample_times, dynamic_time=dynamic_time)
+        super().__init__(T, 0, 0, 0, 0, dt, dynamic_time=dynamic_time, crusher_times=crusher_times, sample_times=sample_times, avg_samples=avg_samples)
 
 
     def set_rf(self, params):

@@ -1509,13 +1509,14 @@ struct __pyx_defaults;
 /* "UM_MRF/sim_blocks/GRE.py":35
  * 
  * 
- *     def  __init__(self, PW, ETL, delay, ESP, dt, sample_times=np.array([]), dynamic_time=False):             # <<<<<<<<<<<<<<
+ *     def  __init__(self, PW, ETL, delay, ESP, dt, dynamic_time=False, crusher_times=np.array([]), sample_times=np.array([]), avg_samples=True):             # <<<<<<<<<<<<<<
  *         # This is the time of the block
  *         T = delay + (ETL * ESP)
 */
 struct __pyx_defaults {
   PyObject_HEAD
   PyObject *arg0;
+  PyObject *arg1;
 };
 
 /* #### Code section: utility_code_proto ### */
@@ -1899,6 +1900,13 @@ static PyObject *__Pyx__GetModuleGlobalName(PyObject *name, PY_UINT64_T *dict_ve
 static CYTHON_INLINE PyObject *__Pyx__GetModuleGlobalName(PyObject *name);
 #endif
 
+/* PyObjectFastCallMethod.proto */
+#if CYTHON_VECTORCALL && PY_VERSION_HEX >= 0x03090000
+#define __Pyx_PyObject_FastCallMethod(name, args, nargsf) PyObject_VectorcallMethod(name, args, nargsf, NULL)
+#else
+static PyObject *__Pyx_PyObject_FastCallMethod(PyObject *name, PyObject *const *args, size_t nargsf);
+#endif
+
 /* PyObjectDelAttr.proto */
 #if CYTHON_COMPILING_IN_LIMITED_API && __PYX_LIMITED_VERSION_HEX < 0x030d0000
 #define __Pyx_PyObject_DelAttr(o, n) PyObject_SetAttr(o, n, NULL)
@@ -1913,13 +1921,6 @@ static CYTHON_INLINE int __Pyx_PyObject_SetAttrStr(PyObject* obj, PyObject* attr
 #else
 #define __Pyx_PyObject_DelAttrStr(o,n)   __Pyx_PyObject_DelAttr(o,n)
 #define __Pyx_PyObject_SetAttrStr(o,n,v) PyObject_SetAttr(o,n,v)
-#endif
-
-/* PyObjectFastCallMethod.proto */
-#if CYTHON_VECTORCALL && PY_VERSION_HEX >= 0x03090000
-#define __Pyx_PyObject_FastCallMethod(name, args, nargsf) PyObject_VectorcallMethod(name, args, nargsf, NULL)
-#else
-static PyObject *__Pyx_PyObject_FastCallMethod(PyObject *name, PyObject *const *args, size_t nargsf);
 #endif
 
 /* PyLongBinop.proto */
@@ -2370,7 +2371,6 @@ static const char __pyx_k_super[] = "super";
 static const char __pyx_k_zeros[] = "zeros";
 static const char __pyx_k_SimObj[] = "SimObj";
 static const char __pyx_k_append[] = "append";
-static const char __pyx_k_arange[] = "arange";
 static const char __pyx_k_enable[] = "enable";
 static const char __pyx_k_gambar[] = "gambar";
 static const char __pyx_k_module[] = "__module__";
@@ -2386,17 +2386,17 @@ static const char __pyx_k_isenabled[] = "isenabled";
 static const char __pyx_k_metaclass[] = "__metaclass__";
 static const char __pyx_k_GRE___init[] = "GRE.__init__";
 static const char __pyx_k_GRE_set_rf[] = "GRE.set_rf";
-static const char __pyx_k_RO_samples[] = "RO_samples";
 static const char __pyx_k_ValueError[] = "ValueError";
 static const char __pyx_k_absorption[] = "absorption";
+static const char __pyx_k_avg_samples[] = "avg_samples";
 static const char __pyx_k_cur_out_len[] = "cur_out_len";
 static const char __pyx_k_mro_entries[] = "__mro_entries__";
 static const char __pyx_k_GRE_set_flip[] = "GRE.set_flip";
-static const char __pyx_k_crusher_inds[] = "crusher_inds";
 static const char __pyx_k_dynamic_time[] = "dynamic_time";
 static const char __pyx_k_initializing[] = "_initializing";
 static const char __pyx_k_is_coroutine[] = "_is_coroutine";
 static const char __pyx_k_sample_times[] = "sample_times";
+static const char __pyx_k_crusher_times[] = "crusher_times";
 static const char __pyx_k_set_gradients[] = "set_gradients";
 static const char __pyx_k_crusher_offset[] = "crusher_offset";
 static const char __pyx_k_gre_pulsetrain[] = "gre_pulsetrain";
@@ -2405,17 +2405,17 @@ static const char __pyx_k_GRE_set_gradients[] = "GRE.set_gradients";
 static const char __pyx_k_asyncio_coroutines[] = "asyncio.coroutines";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_UM_MRF_sim_blocks_GRE[] = "UM_MRF.sim_blocks.GRE";
+static const char __pyx_k_A_1D_T_t6_XT_TQVV_Rwaq[] = "\200A\360\016\000\t\016\210^\2301\230D\240\005\240T\250\026\250t\2606\270\024\270X\300T\310\024\310T\320QV\320V\\\320\\]\360\034\000\t\016\210R\210w\220a\220q";
 static const char __pyx_k_src_UM_MRF_sim_blocks_GRE_py[] = "src/UM_MRF/sim_blocks/GRE.py";
 static const char __pyx_k_GRE_SimObj_This_child_class_of[] = "\n    GRE(SimObj)\n\n    This child class of SimObj represents a block in which we play\n    a gradient echo.\n\n    Inside of our ROI (the brain), the gradient echo readout is on resonance,\n    therefor we set the semisolid absorption coefficient to 1.0 to represent\n    perfect absorption.\n    ";
-static const char __pyx_k_b_auA_F_T_1_Cr_AQ_1_AQ_Ry_D_WE[] = "\320\004>\270b\300\006\300a\300u\310A\340\010\014\210F\220#\220T\230\022\2301\340\010\014\210C\210r\220\021\330\014\022\220*\230A\230Q\330\016\020\220\003\2201\330\014\022\220*\230A\230Q\340\010\r\210R\210y\230\001\230\023\230D\240\005\240W\250E\260\024\260]\300.\320P]\320]^";
+static const char __pyx_k_11SSUU_nnppvvww_F_T_1_Cr_AQ_1_A[] = "\320\0041\3201S\320SU\320U[\320[\\\320\\n\320np\320pv\320vw\320w|\320|}\340\010\014\210F\220#\220T\230\022\2301\340\010\014\210C\210r\220\021\330\014\022\220*\230A\230Q\330\016\020\220\003\2201\330\014\022\220*\230A\230Q\340\010\r\210R\210y\230\001\230\023\230D\240\005\240W\250E\260\024\260]\300.\320P^\320^m\320mz\360\000\000{\001I\002\360\000\000I\002U\002\360\000\000U\002V\002";
 static const char __pyx_k_5Q_BfARuARr_BfARuAS_BfARuAV2Q_b[] = "\320\0005\260Q\330\004\014\210B\210f\220A\220R\220u\230A\230R\230r\240\021\340\004\014\210B\210f\220A\220R\220u\230A\230S\240\002\240!\330\004\014\210B\210f\220A\220R\220u\230A\230V\2402\240Q\330\004\016\210b\220\006\220a\220r\230\025\230a\230t\2402\240Q\360\006\000\005\r\210B\210f\220B\220i\230q\340\004\014\210E\220\022\2202\220T\230\023\230D\240\002\240$\240b\250\006\250b\260\001\330\004\t\210\021\210\"\210G\2205\230\006\230b\240\002\240$\240a\240q\330\004\t\210\021\210\"\210G\2205\230\006\230b\240\002\240$\240a\240q\360\006\000\005\013\210\"\210E\220\021\220(\230%\230q\360\006\000\005\010\200v\210R\210q\330\010\016\210b\220\007\220q\230\002\230&\240\002\240'\250\025\250e\2605\270\001\360\006\000\005\023\220\"\220F\230!\2304\230q\240\001\340\004\007\200|\2202\220Q\340\010\016\210b\220\007\220q\230\005\230R\230v\240R\240v\250R\250}\270E\300\025\300a\330\t\025\220R\220q\340\010\016\210j\230\001\230\021\340\004\013\2101";
-static const char __pyx_k_A_1D_T_t6_XT_TQVV_RvQat7_D_Bd_A[] = "\200A\360\016\000\t\016\210^\2301\230D\240\005\240T\250\026\250t\2606\270\024\270X\300T\310\024\310T\320QV\320V\\\320\\]\360\006\000\t\026\220R\220v\230Q\230a\230t\2407\250\"\250D\260\004\260B\260d\270!\360\010\000\t\r\320\014\034\230A\360\006\000\t\r\320\014\034\230B\230f\240B\240b\250\007\250q\260\004\260F\270\"\270B\270e\3001\300D\310\005\310R\310t\320SY\320Y[\320[]\320]b\320bd\320dh\320ho\320oq\360\000\000r\001B\002\360\000\000B\002D\002\360\000\000D\002H\002\360\000\000H\002I\002\360\010\000\t\016\210R\210w\220a\220q";
 static const char __pyx_k_Error_Pulse_width_must_be_Echo_S[] = "Error: Pulse width must be <= Echo Spacing ";
 static const char __pyx_k_Error_The_given_parameters_gener[] = "Error: The given parameters generated an RF pulsetrain that does not fit in the aloughted block time.";
 static const char __pyx_k_Error_The_provided_timing_parame[] = "Error: The provided timing parameters created a block with 0 or negative time.";
 /* #### Code section: decls ### */
 static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3GRE_2__defaults__(CYTHON_UNUSED PyObject *__pyx_self); /* proto */
-static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3GRE_3GRE___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_PW, PyObject *__pyx_v_ETL, PyObject *__pyx_v_delay, PyObject *__pyx_v_ESP, PyObject *__pyx_v_dt, PyObject *__pyx_v_sample_times, PyObject *__pyx_v_dynamic_time); /* proto */
+static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3GRE_3GRE___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_PW, PyObject *__pyx_v_ETL, PyObject *__pyx_v_delay, PyObject *__pyx_v_ESP, PyObject *__pyx_v_dt, PyObject *__pyx_v_dynamic_time, PyObject *__pyx_v_crusher_times, PyObject *__pyx_v_sample_times, PyObject *__pyx_v_avg_samples); /* proto */
 static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3GRE_3GRE_2set_rf(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_params); /* proto */
 static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3GRE_3GRE_4set_gradients(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3GRE_3GRE_6set_flip(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_params); /* proto */
@@ -2464,7 +2464,7 @@ typedef struct {
   __Pyx_CachedCFunction __pyx_umethod_PyDict_Type_pop;
   PyObject *__pyx_tuple[1];
   PyObject *__pyx_codeobj_tab[5];
-  PyObject *__pyx_string_tab[86];
+  PyObject *__pyx_string_tab[85];
   PyObject *__pyx_float_1_0;
   PyObject *__pyx_float_3_5;
   PyObject *__pyx_float_3_14159;
@@ -2525,78 +2525,77 @@ static __pyx_mstatetype * const __pyx_mstate_global = &__pyx_mstate_global_stati
 #define __pyx_n_u_GRE_set_gradients __pyx_string_tab[11]
 #define __pyx_n_u_GRE_set_rf __pyx_string_tab[12]
 #define __pyx_n_u_PW __pyx_string_tab[13]
-#define __pyx_n_u_RO_samples __pyx_string_tab[14]
-#define __pyx_n_u_SimObj __pyx_string_tab[15]
-#define __pyx_n_u_T __pyx_string_tab[16]
-#define __pyx_n_u_UM_MRF_sim_blocks_GRE __pyx_string_tab[17]
-#define __pyx_n_u_ValueError __pyx_string_tab[18]
-#define __pyx_kp_u__2 __pyx_string_tab[19]
-#define __pyx_n_u_absorption __pyx_string_tab[20]
-#define __pyx_n_u_append __pyx_string_tab[21]
-#define __pyx_n_u_arange __pyx_string_tab[22]
-#define __pyx_n_u_array __pyx_string_tab[23]
-#define __pyx_n_u_asyncio_coroutines __pyx_string_tab[24]
-#define __pyx_n_u_axis __pyx_string_tab[25]
-#define __pyx_n_u_block __pyx_string_tab[26]
-#define __pyx_n_u_ceil __pyx_string_tab[27]
-#define __pyx_n_u_cline_in_traceback __pyx_string_tab[28]
-#define __pyx_n_u_cos __pyx_string_tab[29]
-#define __pyx_n_u_crusher_inds __pyx_string_tab[30]
-#define __pyx_n_u_crusher_offset __pyx_string_tab[31]
-#define __pyx_n_u_cur_out_len __pyx_string_tab[32]
-#define __pyx_n_u_d_len __pyx_string_tab[33]
-#define __pyx_n_u_delay __pyx_string_tab[34]
-#define __pyx_kp_u_disable __pyx_string_tab[35]
-#define __pyx_n_u_doc __pyx_string_tab[36]
-#define __pyx_n_u_dt __pyx_string_tab[37]
-#define __pyx_n_u_dynamic_time __pyx_string_tab[38]
-#define __pyx_kp_u_enable __pyx_string_tab[39]
-#define __pyx_n_u_esp_len __pyx_string_tab[40]
-#define __pyx_n_u_flip __pyx_string_tab[41]
-#define __pyx_n_u_func __pyx_string_tab[42]
-#define __pyx_n_u_gam __pyx_string_tab[43]
-#define __pyx_n_u_gambar __pyx_string_tab[44]
-#define __pyx_kp_u_gc __pyx_string_tab[45]
-#define __pyx_n_u_gre_pulsetrain __pyx_string_tab[46]
-#define __pyx_n_u_init __pyx_string_tab[47]
-#define __pyx_n_u_initializing __pyx_string_tab[48]
-#define __pyx_n_u_int32 __pyx_string_tab[49]
-#define __pyx_n_u_is_coroutine __pyx_string_tab[50]
-#define __pyx_kp_u_isenabled __pyx_string_tab[51]
-#define __pyx_n_u_main __pyx_string_tab[52]
-#define __pyx_n_u_metaclass __pyx_string_tab[53]
-#define __pyx_n_u_module __pyx_string_tab[54]
-#define __pyx_n_u_mro_entries __pyx_string_tab[55]
-#define __pyx_n_u_name __pyx_string_tab[56]
-#define __pyx_n_u_np __pyx_string_tab[57]
-#define __pyx_n_u_ntime __pyx_string_tab[58]
-#define __pyx_n_u_numpy __pyx_string_tab[59]
-#define __pyx_n_u_out __pyx_string_tab[60]
-#define __pyx_n_u_p_len __pyx_string_tab[61]
-#define __pyx_n_u_params __pyx_string_tab[62]
-#define __pyx_n_u_phase __pyx_string_tab[63]
-#define __pyx_n_u_pi __pyx_string_tab[64]
-#define __pyx_n_u_pop __pyx_string_tab[65]
-#define __pyx_n_u_prepare __pyx_string_tab[66]
-#define __pyx_n_u_qualname __pyx_string_tab[67]
-#define __pyx_n_u_rf __pyx_string_tab[68]
-#define __pyx_n_u_sample_times __pyx_string_tab[69]
-#define __pyx_n_u_scale __pyx_string_tab[70]
-#define __pyx_n_u_self __pyx_string_tab[71]
-#define __pyx_n_u_set_flip __pyx_string_tab[72]
-#define __pyx_n_u_set_gradients __pyx_string_tab[73]
-#define __pyx_n_u_set_name __pyx_string_tab[74]
-#define __pyx_n_u_set_rf __pyx_string_tab[75]
-#define __pyx_n_u_shape __pyx_string_tab[76]
-#define __pyx_n_u_sin __pyx_string_tab[77]
-#define __pyx_n_u_spec __pyx_string_tab[78]
-#define __pyx_kp_u_src_UM_MRF_sim_blocks_GRE_py __pyx_string_tab[79]
-#define __pyx_n_u_super __pyx_string_tab[80]
-#define __pyx_n_u_test __pyx_string_tab[81]
-#define __pyx_n_u_tile __pyx_string_tab[82]
-#define __pyx_n_u_x __pyx_string_tab[83]
-#define __pyx_n_u_y __pyx_string_tab[84]
-#define __pyx_n_u_zeros __pyx_string_tab[85]
+#define __pyx_n_u_SimObj __pyx_string_tab[14]
+#define __pyx_n_u_T __pyx_string_tab[15]
+#define __pyx_n_u_UM_MRF_sim_blocks_GRE __pyx_string_tab[16]
+#define __pyx_n_u_ValueError __pyx_string_tab[17]
+#define __pyx_kp_u__2 __pyx_string_tab[18]
+#define __pyx_n_u_absorption __pyx_string_tab[19]
+#define __pyx_n_u_append __pyx_string_tab[20]
+#define __pyx_n_u_array __pyx_string_tab[21]
+#define __pyx_n_u_asyncio_coroutines __pyx_string_tab[22]
+#define __pyx_n_u_avg_samples __pyx_string_tab[23]
+#define __pyx_n_u_axis __pyx_string_tab[24]
+#define __pyx_n_u_block __pyx_string_tab[25]
+#define __pyx_n_u_ceil __pyx_string_tab[26]
+#define __pyx_n_u_cline_in_traceback __pyx_string_tab[27]
+#define __pyx_n_u_cos __pyx_string_tab[28]
+#define __pyx_n_u_crusher_offset __pyx_string_tab[29]
+#define __pyx_n_u_crusher_times __pyx_string_tab[30]
+#define __pyx_n_u_cur_out_len __pyx_string_tab[31]
+#define __pyx_n_u_d_len __pyx_string_tab[32]
+#define __pyx_n_u_delay __pyx_string_tab[33]
+#define __pyx_kp_u_disable __pyx_string_tab[34]
+#define __pyx_n_u_doc __pyx_string_tab[35]
+#define __pyx_n_u_dt __pyx_string_tab[36]
+#define __pyx_n_u_dynamic_time __pyx_string_tab[37]
+#define __pyx_kp_u_enable __pyx_string_tab[38]
+#define __pyx_n_u_esp_len __pyx_string_tab[39]
+#define __pyx_n_u_flip __pyx_string_tab[40]
+#define __pyx_n_u_func __pyx_string_tab[41]
+#define __pyx_n_u_gam __pyx_string_tab[42]
+#define __pyx_n_u_gambar __pyx_string_tab[43]
+#define __pyx_kp_u_gc __pyx_string_tab[44]
+#define __pyx_n_u_gre_pulsetrain __pyx_string_tab[45]
+#define __pyx_n_u_init __pyx_string_tab[46]
+#define __pyx_n_u_initializing __pyx_string_tab[47]
+#define __pyx_n_u_int32 __pyx_string_tab[48]
+#define __pyx_n_u_is_coroutine __pyx_string_tab[49]
+#define __pyx_kp_u_isenabled __pyx_string_tab[50]
+#define __pyx_n_u_main __pyx_string_tab[51]
+#define __pyx_n_u_metaclass __pyx_string_tab[52]
+#define __pyx_n_u_module __pyx_string_tab[53]
+#define __pyx_n_u_mro_entries __pyx_string_tab[54]
+#define __pyx_n_u_name __pyx_string_tab[55]
+#define __pyx_n_u_np __pyx_string_tab[56]
+#define __pyx_n_u_ntime __pyx_string_tab[57]
+#define __pyx_n_u_numpy __pyx_string_tab[58]
+#define __pyx_n_u_out __pyx_string_tab[59]
+#define __pyx_n_u_p_len __pyx_string_tab[60]
+#define __pyx_n_u_params __pyx_string_tab[61]
+#define __pyx_n_u_phase __pyx_string_tab[62]
+#define __pyx_n_u_pi __pyx_string_tab[63]
+#define __pyx_n_u_pop __pyx_string_tab[64]
+#define __pyx_n_u_prepare __pyx_string_tab[65]
+#define __pyx_n_u_qualname __pyx_string_tab[66]
+#define __pyx_n_u_rf __pyx_string_tab[67]
+#define __pyx_n_u_sample_times __pyx_string_tab[68]
+#define __pyx_n_u_scale __pyx_string_tab[69]
+#define __pyx_n_u_self __pyx_string_tab[70]
+#define __pyx_n_u_set_flip __pyx_string_tab[71]
+#define __pyx_n_u_set_gradients __pyx_string_tab[72]
+#define __pyx_n_u_set_name __pyx_string_tab[73]
+#define __pyx_n_u_set_rf __pyx_string_tab[74]
+#define __pyx_n_u_shape __pyx_string_tab[75]
+#define __pyx_n_u_sin __pyx_string_tab[76]
+#define __pyx_n_u_spec __pyx_string_tab[77]
+#define __pyx_kp_u_src_UM_MRF_sim_blocks_GRE_py __pyx_string_tab[78]
+#define __pyx_n_u_super __pyx_string_tab[79]
+#define __pyx_n_u_test __pyx_string_tab[80]
+#define __pyx_n_u_tile __pyx_string_tab[81]
+#define __pyx_n_u_x __pyx_string_tab[82]
+#define __pyx_n_u_y __pyx_string_tab[83]
+#define __pyx_n_u_zeros __pyx_string_tab[84]
 /* #### Code section: module_state_clear ### */
 #if CYTHON_USE_MODULE_STATE
 static CYTHON_SMALL_CODE int __pyx_m_clear(PyObject *m) {
@@ -2621,7 +2620,7 @@ static CYTHON_SMALL_CODE int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_type_6UM_MRF_10sim_blocks_3GRE___pyx_defaults);
   for (int i=0; i<1; ++i) { Py_CLEAR(clear_module_state->__pyx_tuple[i]); }
   for (int i=0; i<5; ++i) { Py_CLEAR(clear_module_state->__pyx_codeobj_tab[i]); }
-  for (int i=0; i<86; ++i) { Py_CLEAR(clear_module_state->__pyx_string_tab[i]); }
+  for (int i=0; i<85; ++i) { Py_CLEAR(clear_module_state->__pyx_string_tab[i]); }
   Py_CLEAR(clear_module_state->__pyx_float_1_0);
   Py_CLEAR(clear_module_state->__pyx_float_3_5);
   Py_CLEAR(clear_module_state->__pyx_float_3_14159);
@@ -2655,7 +2654,7 @@ static CYTHON_SMALL_CODE int __pyx_m_traverse(PyObject *m, visitproc visit, void
   Py_VISIT(traverse_module_state->__pyx_type_6UM_MRF_10sim_blocks_3GRE___pyx_defaults);
   for (int i=0; i<1; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_tuple[i]); }
   for (int i=0; i<5; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_codeobj_tab[i]); }
-  for (int i=0; i<86; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_string_tab[i]); }
+  for (int i=0; i<85; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_string_tab[i]); }
   __Pyx_VISIT_CONST(traverse_module_state->__pyx_float_1_0);
   __Pyx_VISIT_CONST(traverse_module_state->__pyx_float_3_5);
   __Pyx_VISIT_CONST(traverse_module_state->__pyx_float_3_14159);
@@ -2673,7 +2672,7 @@ static CYTHON_SMALL_CODE int __pyx_m_traverse(PyObject *m, visitproc visit, void
 /* "UM_MRF/sim_blocks/GRE.py":35
  * 
  * 
- *     def  __init__(self, PW, ETL, delay, ESP, dt, sample_times=np.array([]), dynamic_time=False):             # <<<<<<<<<<<<<<
+ *     def  __init__(self, PW, ETL, delay, ESP, dt, dynamic_time=False, crusher_times=np.array([]), sample_times=np.array([]), avg_samples=True):             # <<<<<<<<<<<<<<
  *         # This is the time of the block
  *         T = delay + (ETL * ESP)
 */
@@ -2688,14 +2687,20 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3GRE_2__defaults__(CYTHON_UNUSED 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__defaults__", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_INCREF(__Pyx_CyFunction_Defaults(struct __pyx_defaults, __pyx_self)->arg0);
-  __Pyx_GIVEREF(__Pyx_CyFunction_Defaults(struct __pyx_defaults, __pyx_self)->arg0);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __Pyx_CyFunction_Defaults(struct __pyx_defaults, __pyx_self)->arg0) != (0)) __PYX_ERR(0, 35, __pyx_L1_error);
   __Pyx_INCREF(((PyObject*)Py_False));
   __Pyx_GIVEREF(((PyObject*)Py_False));
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, ((PyObject*)Py_False)) != (0)) __PYX_ERR(0, 35, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject*)Py_False)) != (0)) __PYX_ERR(0, 35, __pyx_L1_error);
+  __Pyx_INCREF(__Pyx_CyFunction_Defaults(struct __pyx_defaults, __pyx_self)->arg0);
+  __Pyx_GIVEREF(__Pyx_CyFunction_Defaults(struct __pyx_defaults, __pyx_self)->arg0);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, __Pyx_CyFunction_Defaults(struct __pyx_defaults, __pyx_self)->arg0) != (0)) __PYX_ERR(0, 35, __pyx_L1_error);
+  __Pyx_INCREF(__Pyx_CyFunction_Defaults(struct __pyx_defaults, __pyx_self)->arg1);
+  __Pyx_GIVEREF(__Pyx_CyFunction_Defaults(struct __pyx_defaults, __pyx_self)->arg1);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 2, __Pyx_CyFunction_Defaults(struct __pyx_defaults, __pyx_self)->arg1) != (0)) __PYX_ERR(0, 35, __pyx_L1_error);
+  __Pyx_INCREF(((PyObject*)Py_True));
+  __Pyx_GIVEREF(((PyObject*)Py_True));
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 3, ((PyObject*)Py_True)) != (0)) __PYX_ERR(0, 35, __pyx_L1_error);
   __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_1);
@@ -2742,13 +2747,15 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   PyObject *__pyx_v_delay = 0;
   PyObject *__pyx_v_ESP = 0;
   PyObject *__pyx_v_dt = 0;
-  PyObject *__pyx_v_sample_times = 0;
   PyObject *__pyx_v_dynamic_time = 0;
+  PyObject *__pyx_v_crusher_times = 0;
+  PyObject *__pyx_v_sample_times = 0;
+  PyObject *__pyx_v_avg_samples = 0;
   #if !CYTHON_METH_FASTCALL
   CYTHON_UNUSED Py_ssize_t __pyx_nargs;
   #endif
   CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
-  PyObject* values[8] = {0,0,0,0,0,0,0,0};
+  PyObject* values[10] = {0,0,0,0,0,0,0,0,0,0};
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -2764,12 +2771,20 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   #endif
   __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
   {
-    PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_self,&__pyx_mstate_global->__pyx_n_u_PW,&__pyx_mstate_global->__pyx_n_u_ETL,&__pyx_mstate_global->__pyx_n_u_delay,&__pyx_mstate_global->__pyx_n_u_ESP,&__pyx_mstate_global->__pyx_n_u_dt,&__pyx_mstate_global->__pyx_n_u_sample_times,&__pyx_mstate_global->__pyx_n_u_dynamic_time,0};
+    PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_self,&__pyx_mstate_global->__pyx_n_u_PW,&__pyx_mstate_global->__pyx_n_u_ETL,&__pyx_mstate_global->__pyx_n_u_delay,&__pyx_mstate_global->__pyx_n_u_ESP,&__pyx_mstate_global->__pyx_n_u_dt,&__pyx_mstate_global->__pyx_n_u_dynamic_time,&__pyx_mstate_global->__pyx_n_u_crusher_times,&__pyx_mstate_global->__pyx_n_u_sample_times,&__pyx_mstate_global->__pyx_n_u_avg_samples,0};
     struct __pyx_defaults *__pyx_dynamic_args = __Pyx_CyFunction_Defaults(struct __pyx_defaults, __pyx_self);
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
     if (unlikely(__pyx_kwds_len) < 0) __PYX_ERR(0, 35, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
+        case 10:
+        values[9] = __Pyx_ArgRef_FASTCALL(__pyx_args, 9);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[9])) __PYX_ERR(0, 35, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  9:
+        values[8] = __Pyx_ArgRef_FASTCALL(__pyx_args, 8);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[8])) __PYX_ERR(0, 35, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
         case  8:
         values[7] = __Pyx_ArgRef_FASTCALL(__pyx_args, 7);
         if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 35, __pyx_L3_error)
@@ -2807,13 +2822,23 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
       if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "__init__", 0) < 0) __PYX_ERR(0, 35, __pyx_L3_error)
-      if (!values[6]) values[6] = __Pyx_NewRef(__pyx_dynamic_args->arg0);
-      if (!values[7]) values[7] = __Pyx_NewRef(((PyObject *)((PyObject*)Py_False)));
+      if (!values[6]) values[6] = __Pyx_NewRef(((PyObject *)((PyObject*)Py_False)));
+      if (!values[7]) values[7] = __Pyx_NewRef(__pyx_dynamic_args->arg0);
+      if (!values[8]) values[8] = __Pyx_NewRef(__pyx_dynamic_args->arg1);
+      if (!values[9]) values[9] = __Pyx_NewRef(((PyObject *)((PyObject*)Py_True)));
       for (Py_ssize_t i = __pyx_nargs; i < 6; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("__init__", 0, 6, 8, i); __PYX_ERR(0, 35, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("__init__", 0, 6, 10, i); __PYX_ERR(0, 35, __pyx_L3_error) }
       }
     } else {
       switch (__pyx_nargs) {
+        case 10:
+        values[9] = __Pyx_ArgRef_FASTCALL(__pyx_args, 9);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[9])) __PYX_ERR(0, 35, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  9:
+        values[8] = __Pyx_ArgRef_FASTCALL(__pyx_args, 8);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[8])) __PYX_ERR(0, 35, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
         case  8:
         values[7] = __Pyx_ArgRef_FASTCALL(__pyx_args, 7);
         if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[7])) __PYX_ERR(0, 35, __pyx_L3_error)
@@ -2838,8 +2863,10 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
         break;
         default: goto __pyx_L5_argtuple_error;
       }
-      if (!values[6]) values[6] = __Pyx_NewRef(__pyx_dynamic_args->arg0);
-      if (!values[7]) values[7] = __Pyx_NewRef(((PyObject *)((PyObject*)Py_False)));
+      if (!values[6]) values[6] = __Pyx_NewRef(((PyObject *)((PyObject*)Py_False)));
+      if (!values[7]) values[7] = __Pyx_NewRef(__pyx_dynamic_args->arg0);
+      if (!values[8]) values[8] = __Pyx_NewRef(__pyx_dynamic_args->arg1);
+      if (!values[9]) values[9] = __Pyx_NewRef(((PyObject *)((PyObject*)Py_True)));
     }
     __pyx_v_self = values[0];
     __pyx_v_PW = values[1];
@@ -2847,12 +2874,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
     __pyx_v_delay = values[3];
     __pyx_v_ESP = values[4];
     __pyx_v_dt = values[5];
-    __pyx_v_sample_times = values[6];
-    __pyx_v_dynamic_time = values[7];
+    __pyx_v_dynamic_time = values[6];
+    __pyx_v_crusher_times = values[7];
+    __pyx_v_sample_times = values[8];
+    __pyx_v_avg_samples = values[9];
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 0, 6, 8, __pyx_nargs); __PYX_ERR(0, 35, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 0, 6, 10, __pyx_nargs); __PYX_ERR(0, 35, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -2863,7 +2892,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_6UM_MRF_10sim_blocks_3GRE_3GRE___init__(__pyx_self, __pyx_v_self, __pyx_v_PW, __pyx_v_ETL, __pyx_v_delay, __pyx_v_ESP, __pyx_v_dt, __pyx_v_sample_times, __pyx_v_dynamic_time);
+  __pyx_r = __pyx_pf_6UM_MRF_10sim_blocks_3GRE_3GRE___init__(__pyx_self, __pyx_v_self, __pyx_v_PW, __pyx_v_ETL, __pyx_v_delay, __pyx_v_ESP, __pyx_v_dt, __pyx_v_dynamic_time, __pyx_v_crusher_times, __pyx_v_sample_times, __pyx_v_avg_samples);
 
   /* function exit code */
   for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
@@ -2873,7 +2902,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3GRE_3GRE___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_PW, PyObject *__pyx_v_ETL, PyObject *__pyx_v_delay, PyObject *__pyx_v_ESP, PyObject *__pyx_v_dt, PyObject *__pyx_v_sample_times, PyObject *__pyx_v_dynamic_time) {
+static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3GRE_3GRE___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_PW, PyObject *__pyx_v_ETL, PyObject *__pyx_v_delay, PyObject *__pyx_v_ESP, PyObject *__pyx_v_dt, PyObject *__pyx_v_dynamic_time, PyObject *__pyx_v_crusher_times, PyObject *__pyx_v_sample_times, PyObject *__pyx_v_avg_samples) {
   PyObject *__pyx_v_T = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -2891,7 +2920,7 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3GRE_3GRE___init__(CYTHON_UNUSED 
   __Pyx_RefNannySetupContext("__init__", 0);
 
   /* "UM_MRF/sim_blocks/GRE.py":37
- *     def  __init__(self, PW, ETL, delay, ESP, dt, sample_times=np.array([]), dynamic_time=False):
+ *     def  __init__(self, PW, ETL, delay, ESP, dt, dynamic_time=False, crusher_times=np.array([]), sample_times=np.array([]), avg_samples=True):
  *         # This is the time of the block
  *         T = delay + (ETL * ESP)             # <<<<<<<<<<<<<<
  * 
@@ -2966,7 +2995,7 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3GRE_3GRE___init__(CYTHON_UNUSED 
  *         elif (T <= 0):
  *             raise ValueError("Error: The provided timing parameters created a block with 0 or negative time.")             # <<<<<<<<<<<<<<
  * 
- *         super().__init__(T, PW, ETL, delay, ESP, dt, sample_times=sample_times, dynamic_time=dynamic_time)
+ *         super().__init__(T, PW, ETL, delay, ESP, dt, dynamic_time=dynamic_time, crusher_times=crusher_times, sample_times=sample_times, avg_samples=avg_samples)
 */
     __pyx_t_4 = NULL;
     __Pyx_INCREF(__pyx_builtin_ValueError);
@@ -2996,7 +3025,7 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3GRE_3GRE___init__(CYTHON_UNUSED 
   /* "UM_MRF/sim_blocks/GRE.py":44
  *             raise ValueError("Error: The provided timing parameters created a block with 0 or negative time.")
  * 
- *         super().__init__(T, PW, ETL, delay, ESP, dt, sample_times=sample_times, dynamic_time=dynamic_time)             # <<<<<<<<<<<<<<
+ *         super().__init__(T, PW, ETL, delay, ESP, dt, dynamic_time=dynamic_time, crusher_times=crusher_times, sample_times=sample_times, avg_samples=avg_samples)             # <<<<<<<<<<<<<<
  * 
  * 
 */
@@ -3020,11 +3049,13 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3GRE_3GRE___init__(CYTHON_UNUSED 
   __Pyx_INCREF(__pyx_t_1);
   __pyx_t_5 = 0;
   {
-    PyObject *__pyx_callargs[7 + ((CYTHON_VECTORCALL) ? 2 : 0)] = {__pyx_t_1, __pyx_v_T, __pyx_v_PW, __pyx_v_ETL, __pyx_v_delay, __pyx_v_ESP, __pyx_v_dt};
-    __pyx_t_7 = __Pyx_MakeVectorcallBuilderKwds(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 44, __pyx_L1_error)
+    PyObject *__pyx_callargs[7 + ((CYTHON_VECTORCALL) ? 4 : 0)] = {__pyx_t_1, __pyx_v_T, __pyx_v_PW, __pyx_v_ETL, __pyx_v_delay, __pyx_v_ESP, __pyx_v_dt};
+    __pyx_t_7 = __Pyx_MakeVectorcallBuilderKwds(4); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 44, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_sample_times, __pyx_v_sample_times, __pyx_t_7, __pyx_callargs+7, 0) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
-    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dynamic_time, __pyx_v_dynamic_time, __pyx_t_7, __pyx_callargs+7, 1) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dynamic_time, __pyx_v_dynamic_time, __pyx_t_7, __pyx_callargs+7, 0) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_crusher_times, __pyx_v_crusher_times, __pyx_t_7, __pyx_callargs+7, 1) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_sample_times, __pyx_v_sample_times, __pyx_t_7, __pyx_callargs+7, 2) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_avg_samples, __pyx_v_avg_samples, __pyx_t_7, __pyx_callargs+7, 3) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
     __pyx_t_2 = __Pyx_Object_VectorcallMethod_CallFromBuilder(__pyx_mstate_global->__pyx_n_u_init, __pyx_callargs+__pyx_t_5, (7-__pyx_t_5) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_7);
     __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
@@ -3037,7 +3068,7 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3GRE_3GRE___init__(CYTHON_UNUSED 
   /* "UM_MRF/sim_blocks/GRE.py":35
  * 
  * 
- *     def  __init__(self, PW, ETL, delay, ESP, dt, sample_times=np.array([]), dynamic_time=False):             # <<<<<<<<<<<<<<
+ *     def  __init__(self, PW, ETL, delay, ESP, dt, dynamic_time=False, crusher_times=np.array([]), sample_times=np.array([]), avg_samples=True):             # <<<<<<<<<<<<<<
  *         # This is the time of the block
  *         T = delay + (ETL * ESP)
 */
@@ -3165,7 +3196,6 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
 
 static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3GRE_3GRE_2set_rf(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_params) {
   PyObject *__pyx_v_rf = NULL;
-  PyObject *__pyx_v_RO_samples = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -3189,7 +3219,7 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3GRE_3GRE_2set_rf(CYTHON_UNUSED P
  *         # Get an array of the x and y components of the RF pulsetrain
  *         rf = gre_pulsetrain(self.PW, self.ESP, self.ETL, self.delay, self.T, self.dt, params.flip)             # <<<<<<<<<<<<<<
  * 
- *         # We will sample after the first echo for the center of k space
+ *         # # We will sample after the first echo for the center of k space
 */
   __pyx_t_2 = NULL;
   __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_gre_pulsetrain); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 54, __pyx_L1_error)
@@ -3238,221 +3268,6 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3GRE_3GRE_2set_rf(CYTHON_UNUSED P
   __pyx_v_rf = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "UM_MRF/sim_blocks/GRE.py":57
- * 
- *         # We will sample after the first echo for the center of k space
- *         RO_samples = np.array([self.delay + self.PW + self.dt])             # <<<<<<<<<<<<<<
- * 
- *         # Append the ReadOut sample times to the sample times array
-*/
-  __pyx_t_3 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_10, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 57, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_10);
-  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_mstate_global->__pyx_n_u_array); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 57, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_9);
-  __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_mstate_global->__pyx_n_u_delay); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 57, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_10);
-  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_mstate_global->__pyx_n_u_PW); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 57, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_7 = PyNumber_Add(__pyx_t_10, __pyx_t_8); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 57, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_mstate_global->__pyx_n_u_dt); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 57, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_10 = PyNumber_Add(__pyx_t_7, __pyx_t_8); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 57, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_10);
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_8 = PyList_New(1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 57, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_8);
-  __Pyx_GIVEREF(__pyx_t_10);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_8, 0, __pyx_t_10) != (0)) __PYX_ERR(0, 57, __pyx_L1_error);
-  __pyx_t_10 = 0;
-  __pyx_t_11 = 1;
-  #if CYTHON_UNPACK_METHODS
-  if (unlikely(PyMethod_Check(__pyx_t_9))) {
-    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_9);
-    assert(__pyx_t_3);
-    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_9);
-    __Pyx_INCREF(__pyx_t_3);
-    __Pyx_INCREF(__pyx__function);
-    __Pyx_DECREF_SET(__pyx_t_9, __pyx__function);
-    __pyx_t_11 = 0;
-  }
-  #endif
-  {
-    PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_t_8};
-    __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_9, __pyx_callargs+__pyx_t_11, (2-__pyx_t_11) | (__pyx_t_11*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
-    __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-    __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 57, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-  }
-  __pyx_v_RO_samples = __pyx_t_1;
-  __pyx_t_1 = 0;
-
-  /* "UM_MRF/sim_blocks/GRE.py":61
- *         # Append the ReadOut sample times to the sample times array
- *         #self.sample_times = np.append(self.sample_times, RO_samples)
- *         self.sample_times = RO_samples             # <<<<<<<<<<<<<<
- * 
- *         # Add Crushers
-*/
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_mstate_global->__pyx_n_u_sample_times, __pyx_v_RO_samples) < 0) __PYX_ERR(0, 61, __pyx_L1_error)
-
-  /* "UM_MRF/sim_blocks/GRE.py":64
- * 
- *         # Add Crushers
- *         self.crusher_inds = np.int32((np.arange(self.ETL) * np.ceil(self.ESP / self.dt)) + np.ceil((self.delay - crusher_offset) / self.dt))             # <<<<<<<<<<<<<<
- * 
- *         # Call the parent class' definition of set_rf() to add the pulse to
-*/
-  __pyx_t_9 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 64, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_mstate_global->__pyx_n_u_int32); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 64, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_10 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 64, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_mstate_global->__pyx_n_u_arange); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 64, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_mstate_global->__pyx_n_u_ETL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 64, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_11 = 1;
-  #if CYTHON_UNPACK_METHODS
-  if (unlikely(PyMethod_Check(__pyx_t_6))) {
-    __pyx_t_10 = PyMethod_GET_SELF(__pyx_t_6);
-    assert(__pyx_t_10);
-    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_6);
-    __Pyx_INCREF(__pyx_t_10);
-    __Pyx_INCREF(__pyx__function);
-    __Pyx_DECREF_SET(__pyx_t_6, __pyx__function);
-    __pyx_t_11 = 0;
-  }
-  #endif
-  {
-    PyObject *__pyx_callargs[2] = {__pyx_t_10, __pyx_t_7};
-    __pyx_t_8 = __Pyx_PyObject_FastCall(__pyx_t_6, __pyx_callargs+__pyx_t_11, (2-__pyx_t_11) | (__pyx_t_11*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
-    __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
-    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 64, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_8);
-  }
-  __pyx_t_7 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_10, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 64, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_10);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_mstate_global->__pyx_n_u_ceil); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 64, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_mstate_global->__pyx_n_u_ESP); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 64, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_10);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_mstate_global->__pyx_n_u_dt); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 64, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_2 = __Pyx_PyNumber_Divide(__pyx_t_10, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 64, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_11 = 1;
-  #if CYTHON_UNPACK_METHODS
-  if (unlikely(PyMethod_Check(__pyx_t_5))) {
-    __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_5);
-    assert(__pyx_t_7);
-    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_5);
-    __Pyx_INCREF(__pyx_t_7);
-    __Pyx_INCREF(__pyx__function);
-    __Pyx_DECREF_SET(__pyx_t_5, __pyx__function);
-    __pyx_t_11 = 0;
-  }
-  #endif
-  {
-    PyObject *__pyx_callargs[2] = {__pyx_t_7, __pyx_t_2};
-    __pyx_t_6 = __Pyx_PyObject_FastCall(__pyx_t_5, __pyx_callargs+__pyx_t_11, (2-__pyx_t_11) | (__pyx_t_11*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
-    __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 64, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-  }
-  __pyx_t_5 = PyNumber_Multiply(__pyx_t_8, __pyx_t_6); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 64, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_8 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 64, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_ceil); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 64, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_mstate_global->__pyx_n_u_delay); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 64, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_crusher_offset); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 64, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_10 = PyNumber_Subtract(__pyx_t_2, __pyx_t_4); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 64, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_10);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_mstate_global->__pyx_n_u_dt); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 64, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_2 = __Pyx_PyNumber_Divide(__pyx_t_10, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 64, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_11 = 1;
-  #if CYTHON_UNPACK_METHODS
-  if (unlikely(PyMethod_Check(__pyx_t_7))) {
-    __pyx_t_8 = PyMethod_GET_SELF(__pyx_t_7);
-    assert(__pyx_t_8);
-    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_7);
-    __Pyx_INCREF(__pyx_t_8);
-    __Pyx_INCREF(__pyx__function);
-    __Pyx_DECREF_SET(__pyx_t_7, __pyx__function);
-    __pyx_t_11 = 0;
-  }
-  #endif
-  {
-    PyObject *__pyx_callargs[2] = {__pyx_t_8, __pyx_t_2};
-    __pyx_t_6 = __Pyx_PyObject_FastCall(__pyx_t_7, __pyx_callargs+__pyx_t_11, (2-__pyx_t_11) | (__pyx_t_11*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
-    __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 64, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-  }
-  __pyx_t_7 = PyNumber_Add(__pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 64, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_11 = 1;
-  #if CYTHON_UNPACK_METHODS
-  if (unlikely(PyMethod_Check(__pyx_t_3))) {
-    __pyx_t_9 = PyMethod_GET_SELF(__pyx_t_3);
-    assert(__pyx_t_9);
-    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_3);
-    __Pyx_INCREF(__pyx_t_9);
-    __Pyx_INCREF(__pyx__function);
-    __Pyx_DECREF_SET(__pyx_t_3, __pyx__function);
-    __pyx_t_11 = 0;
-  }
-  #endif
-  {
-    PyObject *__pyx_callargs[2] = {__pyx_t_9, __pyx_t_7};
-    __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+__pyx_t_11, (2-__pyx_t_11) | (__pyx_t_11*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
-    __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
-    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 64, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-  }
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_mstate_global->__pyx_n_u_crusher_inds, __pyx_t_1) < 0) __PYX_ERR(0, 64, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
   /* "UM_MRF/sim_blocks/GRE.py":68
  *         # Call the parent class' definition of set_rf() to add the pulse to
  *         # the objects effective B field.
@@ -3462,28 +3277,28 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3GRE_3GRE_2set_rf(CYTHON_UNUSED P
 */
   __pyx_t_9 = NULL;
   __Pyx_INCREF(__pyx_builtin_super);
-  __pyx_t_6 = __pyx_builtin_super; 
-  __pyx_t_5 = __Pyx_CyFunction_GetClassObj(__pyx_self);
-  if (!__pyx_t_5) { PyErr_SetString(PyExc_RuntimeError, "super(): empty __class__ cell"); __PYX_ERR(0, 68, __pyx_L1_error) }
-  __Pyx_INCREF(__pyx_t_5);
+  __pyx_t_8 = __pyx_builtin_super; 
+  __pyx_t_7 = __Pyx_CyFunction_GetClassObj(__pyx_self);
+  if (!__pyx_t_7) { PyErr_SetString(PyExc_RuntimeError, "super(): empty __class__ cell"); __PYX_ERR(0, 68, __pyx_L1_error) }
+  __Pyx_INCREF(__pyx_t_7);
   __pyx_t_11 = 1;
   {
-    PyObject *__pyx_callargs[3] = {__pyx_t_9, __pyx_t_5, __pyx_v_self};
-    __pyx_t_7 = __Pyx_PyObject_FastCall(__pyx_t_6, __pyx_callargs+__pyx_t_11, (3-__pyx_t_11) | (__pyx_t_11*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+    PyObject *__pyx_callargs[3] = {__pyx_t_9, __pyx_t_7, __pyx_v_self};
+    __pyx_t_10 = __Pyx_PyObject_FastCall(__pyx_t_8, __pyx_callargs+__pyx_t_11, (3-__pyx_t_11) | (__pyx_t_11*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
-    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 68, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_7);
+    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+    __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+    if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 68, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_10);
   }
-  __pyx_t_3 = __pyx_t_7;
+  __pyx_t_3 = __pyx_t_10;
   __Pyx_INCREF(__pyx_t_3);
   __pyx_t_11 = 0;
   {
     PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_v_rf};
     __pyx_t_1 = __Pyx_PyObject_FastCallMethod(__pyx_mstate_global->__pyx_n_u_set_rf, __pyx_callargs+__pyx_t_11, (2-__pyx_t_11) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+    __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
     if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 68, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
@@ -3515,7 +3330,6 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_3GRE_3GRE_2set_rf(CYTHON_UNUSED P
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_rf);
-  __Pyx_XDECREF(__pyx_v_RO_samples);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
@@ -4871,6 +4685,7 @@ static void __pyx_tp_dealloc_6UM_MRF_10sim_blocks_3GRE___pyx_defaults(PyObject *
   #endif
   PyObject_GC_UnTrack(o);
   Py_CLEAR(p->arg0);
+  Py_CLEAR(p->arg1);
   #if CYTHON_USE_TYPE_SLOTS
   (*Py_TYPE(o)->tp_free)(o);
   #else
@@ -4891,6 +4706,9 @@ static int __pyx_tp_traverse_6UM_MRF_10sim_blocks_3GRE___pyx_defaults(PyObject *
   if (p->arg0) {
     e = (*v)(p->arg0, a); if (e) return e;
   }
+  if (p->arg1) {
+    e = (*v)(p->arg1, a); if (e) return e;
+  }
   return 0;
 }
 
@@ -4899,6 +4717,9 @@ static int __pyx_tp_clear_6UM_MRF_10sim_blocks_3GRE___pyx_defaults(PyObject *o) 
   struct __pyx_defaults *p = (struct __pyx_defaults *)o;
   tmp = ((PyObject*)p->arg0);
   p->arg0 = Py_None; Py_INCREF(Py_None);
+  Py_XDECREF(tmp);
+  tmp = ((PyObject*)p->arg1);
+  p->arg1 = Py_None; Py_INCREF(Py_None);
   Py_XDECREF(tmp);
   return 0;
 }
@@ -5527,7 +5348,7 @@ __Pyx_RefNannySetupContext("PyInit_GRE", 0);
   /* "UM_MRF/sim_blocks/GRE.py":35
  * 
  * 
- *     def  __init__(self, PW, ETL, delay, ESP, dt, sample_times=np.array([]), dynamic_time=False):             # <<<<<<<<<<<<<<
+ *     def  __init__(self, PW, ETL, delay, ESP, dt, dynamic_time=False, crusher_times=np.array([]), sample_times=np.array([]), avg_samples=True):             # <<<<<<<<<<<<<<
  *         # This is the time of the block
  *         T = delay + (ETL * ESP)
 */
@@ -5554,6 +5375,27 @@ __Pyx_RefNannySetupContext("PyInit_GRE", 0);
     __Pyx_GOTREF(__pyx_t_7);
   }
   __Pyx_CyFunction_Defaults(struct __pyx_defaults, __pyx_t_6)->arg0 = __pyx_t_7;
+  __Pyx_GIVEREF(__pyx_t_7);
+  __pyx_t_7 = 0;
+  __pyx_t_10 = NULL;
+  __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_9);
+  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_mstate_global->__pyx_n_u_array); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_8);
+  __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+  __pyx_t_9 = PyList_New(0); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_9);
+  __pyx_t_11 = 1;
+  {
+    PyObject *__pyx_callargs[2] = {__pyx_t_10, __pyx_t_9};
+    __pyx_t_7 = __Pyx_PyObject_FastCall(__pyx_t_8, __pyx_callargs+__pyx_t_11, (2-__pyx_t_11) | (__pyx_t_11*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+    __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
+    __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+    __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+    if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 35, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_7);
+  }
+  __Pyx_CyFunction_Defaults(struct __pyx_defaults, __pyx_t_6)->arg1 = __pyx_t_7;
   __Pyx_GIVEREF(__pyx_t_7);
   __pyx_t_7 = 0;
   __Pyx_CyFunction_SetDefaultsGetter(__pyx_t_6, __pyx_pf_6UM_MRF_10sim_blocks_3GRE_2__defaults__);
@@ -5717,7 +5559,6 @@ static const __Pyx_StringTabEntry __pyx_string_tab[] = {
   {__pyx_k_GRE_set_gradients, sizeof(__pyx_k_GRE_set_gradients), 0, 1, 1}, /* PyObject cname: __pyx_n_u_GRE_set_gradients */
   {__pyx_k_GRE_set_rf, sizeof(__pyx_k_GRE_set_rf), 0, 1, 1}, /* PyObject cname: __pyx_n_u_GRE_set_rf */
   {__pyx_k_PW, sizeof(__pyx_k_PW), 0, 1, 1}, /* PyObject cname: __pyx_n_u_PW */
-  {__pyx_k_RO_samples, sizeof(__pyx_k_RO_samples), 0, 1, 1}, /* PyObject cname: __pyx_n_u_RO_samples */
   {__pyx_k_SimObj, sizeof(__pyx_k_SimObj), 0, 1, 1}, /* PyObject cname: __pyx_n_u_SimObj */
   {__pyx_k_T, sizeof(__pyx_k_T), 0, 1, 1}, /* PyObject cname: __pyx_n_u_T */
   {__pyx_k_UM_MRF_sim_blocks_GRE, sizeof(__pyx_k_UM_MRF_sim_blocks_GRE), 0, 1, 1}, /* PyObject cname: __pyx_n_u_UM_MRF_sim_blocks_GRE */
@@ -5725,16 +5566,16 @@ static const __Pyx_StringTabEntry __pyx_string_tab[] = {
   {__pyx_k__2, sizeof(__pyx_k__2), 0, 1, 0}, /* PyObject cname: __pyx_kp_u__2 */
   {__pyx_k_absorption, sizeof(__pyx_k_absorption), 0, 1, 1}, /* PyObject cname: __pyx_n_u_absorption */
   {__pyx_k_append, sizeof(__pyx_k_append), 0, 1, 1}, /* PyObject cname: __pyx_n_u_append */
-  {__pyx_k_arange, sizeof(__pyx_k_arange), 0, 1, 1}, /* PyObject cname: __pyx_n_u_arange */
   {__pyx_k_array, sizeof(__pyx_k_array), 0, 1, 1}, /* PyObject cname: __pyx_n_u_array */
   {__pyx_k_asyncio_coroutines, sizeof(__pyx_k_asyncio_coroutines), 0, 1, 1}, /* PyObject cname: __pyx_n_u_asyncio_coroutines */
+  {__pyx_k_avg_samples, sizeof(__pyx_k_avg_samples), 0, 1, 1}, /* PyObject cname: __pyx_n_u_avg_samples */
   {__pyx_k_axis, sizeof(__pyx_k_axis), 0, 1, 1}, /* PyObject cname: __pyx_n_u_axis */
   {__pyx_k_block, sizeof(__pyx_k_block), 0, 1, 1}, /* PyObject cname: __pyx_n_u_block */
   {__pyx_k_ceil, sizeof(__pyx_k_ceil), 0, 1, 1}, /* PyObject cname: __pyx_n_u_ceil */
   {__pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 1, 1}, /* PyObject cname: __pyx_n_u_cline_in_traceback */
   {__pyx_k_cos, sizeof(__pyx_k_cos), 0, 1, 1}, /* PyObject cname: __pyx_n_u_cos */
-  {__pyx_k_crusher_inds, sizeof(__pyx_k_crusher_inds), 0, 1, 1}, /* PyObject cname: __pyx_n_u_crusher_inds */
   {__pyx_k_crusher_offset, sizeof(__pyx_k_crusher_offset), 0, 1, 1}, /* PyObject cname: __pyx_n_u_crusher_offset */
+  {__pyx_k_crusher_times, sizeof(__pyx_k_crusher_times), 0, 1, 1}, /* PyObject cname: __pyx_n_u_crusher_times */
   {__pyx_k_cur_out_len, sizeof(__pyx_k_cur_out_len), 0, 1, 1}, /* PyObject cname: __pyx_n_u_cur_out_len */
   {__pyx_k_d_len, sizeof(__pyx_k_d_len), 0, 1, 1}, /* PyObject cname: __pyx_n_u_d_len */
   {__pyx_k_delay, sizeof(__pyx_k_delay), 0, 1, 1}, /* PyObject cname: __pyx_n_u_delay */
@@ -5873,14 +5714,14 @@ static int __Pyx_CreateCodeObjects(__pyx_mstatetype *__pyx_mstate) {
   PyObject* tuple_dedup_map = PyDict_New();
   if (unlikely(!tuple_dedup_map)) return -1;
   {
-    const __Pyx_PyCode_New_function_description descr = {8, 0, 0, 9, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 35, 91};
-    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_PW, __pyx_mstate->__pyx_n_u_ETL, __pyx_mstate->__pyx_n_u_delay, __pyx_mstate->__pyx_n_u_ESP, __pyx_mstate->__pyx_n_u_dt, __pyx_mstate->__pyx_n_u_sample_times, __pyx_mstate->__pyx_n_u_dynamic_time, __pyx_mstate->__pyx_n_u_T};
-    __pyx_mstate_global->__pyx_codeobj_tab[0] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_UM_MRF_sim_blocks_GRE_py, __pyx_mstate->__pyx_n_u_init, __pyx_k_b_auA_F_T_1_Cr_AQ_1_AQ_Ry_D_WE, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[0])) goto bad;
+    const __Pyx_PyCode_New_function_description descr = {10, 0, 0, 11, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 35, 135};
+    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_PW, __pyx_mstate->__pyx_n_u_ETL, __pyx_mstate->__pyx_n_u_delay, __pyx_mstate->__pyx_n_u_ESP, __pyx_mstate->__pyx_n_u_dt, __pyx_mstate->__pyx_n_u_dynamic_time, __pyx_mstate->__pyx_n_u_crusher_times, __pyx_mstate->__pyx_n_u_sample_times, __pyx_mstate->__pyx_n_u_avg_samples, __pyx_mstate->__pyx_n_u_T};
+    __pyx_mstate_global->__pyx_codeobj_tab[0] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_UM_MRF_sim_blocks_GRE_py, __pyx_mstate->__pyx_n_u_init, __pyx_k_11SSUU_nnppvvww_F_T_1_Cr_AQ_1_A, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[0])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 4, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 47, 186};
-    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_params, __pyx_mstate->__pyx_n_u_rf, __pyx_mstate->__pyx_n_u_RO_samples};
-    __pyx_mstate_global->__pyx_codeobj_tab[1] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_UM_MRF_sim_blocks_GRE_py, __pyx_mstate->__pyx_n_u_set_rf, __pyx_k_A_1D_T_t6_XT_TQVV_RvQat7_D_Bd_A, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[1])) goto bad;
+    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 3, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 47, 55};
+    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_params, __pyx_mstate->__pyx_n_u_rf};
+    __pyx_mstate_global->__pyx_codeobj_tab[1] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_UM_MRF_sim_blocks_GRE_py, __pyx_mstate->__pyx_n_u_set_rf, __pyx_k_A_1D_T_t6_XT_TQVV_Rwaq, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[1])) goto bad;
   }
   {
     const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 1, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 71, 2};
@@ -7359,16 +7200,6 @@ static CYTHON_INLINE PyObject *__Pyx__GetModuleGlobalName(PyObject *name)
     return __Pyx_GetBuiltinName(name);
 }
 
-/* PyObjectSetAttrStr */
-#if CYTHON_USE_TYPE_SLOTS
-static CYTHON_INLINE int __Pyx_PyObject_SetAttrStr(PyObject* obj, PyObject* attr_name, PyObject* value) {
-    PyTypeObject* tp = Py_TYPE(obj);
-    if (likely(tp->tp_setattro))
-        return tp->tp_setattro(obj, attr_name, value);
-    return PyObject_SetAttr(obj, attr_name, value);
-}
-#endif
-
 /* PyObjectFastCallMethod */
 #if !CYTHON_VECTORCALL || PY_VERSION_HEX < 0x03090000
 static PyObject *__Pyx_PyObject_FastCallMethod(PyObject *name, PyObject *const *args, size_t nargsf) {
@@ -7379,6 +7210,16 @@ static PyObject *__Pyx_PyObject_FastCallMethod(PyObject *name, PyObject *const *
     result = __Pyx_PyObject_FastCall(attr, args+1, nargsf - 1);
     Py_DECREF(attr);
     return result;
+}
+#endif
+
+/* PyObjectSetAttrStr */
+#if CYTHON_USE_TYPE_SLOTS
+static CYTHON_INLINE int __Pyx_PyObject_SetAttrStr(PyObject* obj, PyObject* attr_name, PyObject* value) {
+    PyTypeObject* tp = Py_TYPE(obj);
+    if (likely(tp->tp_setattro))
+        return tp->tp_setattro(obj, attr_name, value);
+    return PyObject_SetAttr(obj, attr_name, value);
 }
 #endif
 
