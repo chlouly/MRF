@@ -30,7 +30,7 @@ class pCASL(SimObj):
     magnetization. This choice of constant is arbitrary.
     """
     absorption = 0.25
-    saturation = 1000
+    saturation = 100000000.0
 
 
     def __init__(self, T, dt, control=False, dynamic_time=False, crusher_times=np.array([]), sample_times=np.array([]), avg_samples=True):

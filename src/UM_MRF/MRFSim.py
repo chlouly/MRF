@@ -8,7 +8,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from .dict_manip import *
 from .sim_blocks import *
-from .pb import create_pb, refresh_pb
+from .pb import create_pb, refresh_pb, finish_pb
+from copy import deepcopy
 
 M_init = np.array([0.0, 0.0, 1.0, 1.0])
 
@@ -175,14 +176,13 @@ class MRFSim:
         """
         for sim in self.sims:
             sim.set_flip(self.params)
-            sim.optimize_time
 
     
-    def read_sched(self, sched_dir: str):
+    def read_sched(self, sched_dir: str, ro_block, dyn_time=False):
         # All schedules are found in a mrf_schedule.txt file
         sched_dir = sched_dir + "/mrf_schedule.txt"
 
-        dyn_time = True
+        dt_dead = 40
 
         # RO vals
         ETL = 20
@@ -192,7 +192,6 @@ class MRFSim:
         crush_off = 3.5
 
         sample_times = (np.arange(ETL) * ESP) + PW + 1 + delay
-
         crush_times = np.arange(ETL) * ESP + (delay - crush_off)
 
         with open(sched_dir, "r") as sched:
@@ -204,34 +203,34 @@ class MRFSim:
                 # We use miliseconds).
 
                 # First Delay
-                self.add_sim(DeadAir(vals[0] * 1000, 0.1, dynamic_time=dyn_time))
+                self.add_sim(DeadAir(vals[0] * 1000, dt_dead, dynamic_time=dyn_time))
 
                 # pCASL Section
                 if int(vals[1] == -1):
                     # pCASL code of -1 means do nothing
-                    self.add_sim(DeadAir(vals[2] * 1000, 0.1, dynamic_time=dyn_time))
+                    self.add_sim(DeadAir(vals[2] * 1000, dt_dead, dynamic_time=dyn_time))
                 else:
                     # Otherwise we do something
                     # Label == 1, Control == 0
-                    self.add_sim(pCASL(vals[2] * 1000, 0.1, control= not int(vals[1]), dynamic_time=dyn_time))
+                    self.add_sim(pCASL(vals[2] * 1000, dt_dead, control= not int(vals[1]), dynamic_time=dyn_time))
                 
                 # pCASL PLD
-                self.add_sim(DeadAir(vals[3] * 1000, 0.1, dynamic_time=dyn_time))
+                self.add_sim(DeadAir(vals[3] * 1000, dt_dead, dynamic_time=dyn_time))
 
                 # Prep Pulse 1
                 self.add_sim(self.add_presat_sim(vals[4]))
 
                 # Prep 1 PLD
-                self.add_sim(DeadAir(vals[5] * 1000, 0.1))
+                self.add_sim(DeadAir(vals[5] * 1000, dt_dead))
 
                 # Prep Pulse 2
                 self.add_sim(self.add_presat_sim(vals[6]))
 
                 # Prep 1 PLD
-                self.add_sim(DeadAir(vals[7] * 1000, 0.1, dynamic_time=dyn_time))
+                self.add_sim(DeadAir(vals[7] * 1000, dt_dead, dynamic_time=dyn_time))
 
                 # Finally We add a readout
-                self.add_sim(GRE(2.5, 20, 8, 40, 0.1, dynamic_time=dyn_time, crusher_times=crush_times, sample_times=sample_times, avg_samples=True))
+                self.add_sim(deepcopy(ro_block))
 
 
     def add_presat_sim(self, prep_pulse_code):
@@ -245,7 +244,7 @@ class MRFSim:
         elif code == 6800:
             raise ValueError("Error: The prep pulse with ID 06800 has not yet been added to the MRF Simulator")
         elif code == 6850:  # BIR8
-            return BIR8(6850 * 0.004, 0.004, dynamic_time=True)
+            return BIR8(6850 * 0.004, 0.004, dynamic_time=False)
         elif code == 17268:
             raise ValueError("Error: The prep pulse with ID 17268 has not yet been added to the MRF Simulator")
         elif code == 17536:
@@ -296,9 +295,12 @@ class MRFSim:
 
     def optimize_time(self):
         for sim in self.sims:
-            sim.optimize_time
-        
+            sim.optimize_time()
 
+    def reset_time(self):
+        for sim in self.sims:
+            sim.reset_fields()
+        
     # FOR NEXT COMMIT
     def generate_dict(self, dict_filename):
         # Initialize params so that we can iterate over it
@@ -317,16 +319,22 @@ class MRFSim:
         try:
             while True:
                 # Modify s(t) if needed
-                if self.params.recompute_s:
+                if self.params.recompute_s or self.params.recompute_B:
+                    self.reset_time()
+                    self.modify_flips()
                     self.compute_s()
                     reoptimize_time = True
+
+                # if self.params.recompute_s:
+                #     self.compute_s()
+                #     reoptimize_time = True
 
                 elif self.params.rescale_s:
                     self.scale_s()
 
-                if self.params.recompute_B:
-                    self.modify_flips()
-                    reoptimize_time = True
+                # if self.params.recompute_B:
+                #     self.modify_flips()
+                #     reoptimize_time = True
 
                 if reoptimize_time:
                     self.optimize_time()
@@ -348,6 +356,7 @@ class MRFSim:
                 next(self.params)
 
         except StopIteration:
+            finish_pb()
             print("Dictionary Generation Complete!!")
 
 

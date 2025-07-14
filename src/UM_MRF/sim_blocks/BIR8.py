@@ -48,6 +48,11 @@ class BIR8(SimObj):
 
     
     def run_ljn(self, p, M_start=...):
+        # NOTE: THIS IS TEMPORARY...
+        #       ALTHOUGH THIS WILL NOT FAIL WHEN FITTING ASL PARAMS,
+        #       IT WILL NOT ACURATELY SIMULATE THE EFFECTS OF A BOLUS
+
+        
         self.M = np.zeros((self.ntime, 4))
 
         # T2 decay
@@ -56,7 +61,7 @@ class BIR8(SimObj):
         # Crush
         self.M[:, 0:2] = 0.0
 
-        # T1 decay curing crusher
+        # T1 decay during crusher
         self.M[:, 2] *= -np.exp(-self.crush_length / p.T1_f)
         self.M[:, 2] += 1
 

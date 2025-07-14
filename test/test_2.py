@@ -1,11 +1,10 @@
-from pathlib import Path
-import sys
-
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-
+import numpy as np
 from test_globals import *
-from src import *
 import matplotlib.pyplot as plt
+
+from UM_MRF import *
+import UM_MRF
+print(UM_MRF.__file__)
 from copy import deepcopy
 
 

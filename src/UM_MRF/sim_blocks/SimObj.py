@@ -86,7 +86,7 @@ class SimObj:
         self.ETL = ETL                              # Simulation Echo Train Length
         self.PW = PW                                # Simulation Pulse Width [ms]
         self.delay = delay                          # Delay before any pulses play 
-        self.dt = dt                                # Simulation timestep [ms]
+        self.dt = float(dt)                         # Simulation timestep [ms]
         self.ntime = int(np.ceil(T / self.dt))      # Number of time samples
         self.time = np.arange(self.ntime) * self.dt        # Vector of Timepoints [ms]
 
@@ -256,6 +256,16 @@ class SimObj:
 
         #self.M = np_blochsim_ljn(self.B, self.s, params, self.dt, self.ntime, M_start, crusher_inds=crusher_inds, absorption=self.absorption, s_sat=self.saturation, timer=False)
 
+
+    def reset_fields(self):
+        # Reset time arrays and values to non-optimized
+        self.ntime = int(np.ceil(self.T / self.dt))      # Number of time samples
+        self.time = np.arange(self.ntime) * self.dt      # Vector of Timepoints [ms]
+
+        # Initialize B(t) and s(t) arrays
+        self.B = np.zeros((self.ntime, 3))          # (ntime, 3) array of B vectors [T] (initally set to 0s)
+        self.s = np.zeros((self.ntime, ))           # (ntime, ) array of arterial magnetization values (initially set to 0s)
+
     
     def sample(self, CBV):
         """
@@ -313,18 +323,12 @@ class SimObj:
         B_change_arr = isnapprox(self.B[1:, :], self.B[0:-1, :])
         s_change_arr = isnapprox(self.s[1:], self.s[0:-1])
 
-        print(B_change_arr.shape)
-        print(s_change_arr.shape)
-
         # Get crusher and sample points
         crush_arr = np.zeros((self.ntime - 1, ), dtype=bool)
         crush_arr[np.ceil(self.crusher_times[1:] / self.dt).astype(int)] = True
 
         sample_arr = np.zeros((self.ntime - 1, ), dtype=bool)
         sample_arr[np.ceil(self.sample_times[1:] / self.dt).astype(int)] = True
-
-        print(crush_arr.shape)
-        print(sample_arr.shape)
 
         # Boolean array of change indices
         change_arr = np.zeros((self.ntime, ), dtype=bool)

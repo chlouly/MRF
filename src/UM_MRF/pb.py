@@ -27,6 +27,16 @@ def clear_pb():
     stdout.write('\r' + " " * 50 + '\r')
     stdout.flush()
 
+def finish_pb():
+    clear_pb()
+    num_eq = int(20)
+    stdout.write("\033[36mProgress: ")
+    stdout.write("\033[31m<\033[32m")
+    stdout.write(num_eq * "=")
+    stdout.write("\033[31m> ")
+    stdout.write(f"\033[32mComplete!!!\033[0m\n")
+    stdout.flush()
+
 
 def write_pb(percent):
     num_eq = int(20 * percent)
@@ -51,4 +61,4 @@ if __name__ == "__main__":
         refresh_pb(i / 200)
         sleep(0.05)
     
-    print()
+    finish_pb()

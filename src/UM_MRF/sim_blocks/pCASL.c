@@ -2483,12 +2483,12 @@ typedef struct {
   PyObject *__pyx_string_tab[83];
   PyObject *__pyx_float_0_25;
   PyObject *__pyx_float_3_14159;
+  PyObject *__pyx_float_100000000_0;
   PyObject *__pyx_int_0;
   PyObject *__pyx_int_1;
   PyObject *__pyx_int_2;
   PyObject *__pyx_int_3;
   PyObject *__pyx_int_180;
-  PyObject *__pyx_int_1000;
   PyObject *__pyx_int_42570;
 /* #### Code section: module_state_contents ### */
 /* CommonTypesMetaclass.module_state_decls */
@@ -2638,12 +2638,12 @@ static CYTHON_SMALL_CODE int __pyx_m_clear(PyObject *m) {
   for (int i=0; i<83; ++i) { Py_CLEAR(clear_module_state->__pyx_string_tab[i]); }
   Py_CLEAR(clear_module_state->__pyx_float_0_25);
   Py_CLEAR(clear_module_state->__pyx_float_3_14159);
+  Py_CLEAR(clear_module_state->__pyx_float_100000000_0);
   Py_CLEAR(clear_module_state->__pyx_int_0);
   Py_CLEAR(clear_module_state->__pyx_int_1);
   Py_CLEAR(clear_module_state->__pyx_int_2);
   Py_CLEAR(clear_module_state->__pyx_int_3);
   Py_CLEAR(clear_module_state->__pyx_int_180);
-  Py_CLEAR(clear_module_state->__pyx_int_1000);
   Py_CLEAR(clear_module_state->__pyx_int_42570);
   return 0;
 }
@@ -2673,12 +2673,12 @@ static CYTHON_SMALL_CODE int __pyx_m_traverse(PyObject *m, visitproc visit, void
   for (int i=0; i<83; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_string_tab[i]); }
   __Pyx_VISIT_CONST(traverse_module_state->__pyx_float_0_25);
   __Pyx_VISIT_CONST(traverse_module_state->__pyx_float_3_14159);
+  __Pyx_VISIT_CONST(traverse_module_state->__pyx_float_100000000_0);
   __Pyx_VISIT_CONST(traverse_module_state->__pyx_int_0);
   __Pyx_VISIT_CONST(traverse_module_state->__pyx_int_1);
   __Pyx_VISIT_CONST(traverse_module_state->__pyx_int_2);
   __Pyx_VISIT_CONST(traverse_module_state->__pyx_int_3);
   __Pyx_VISIT_CONST(traverse_module_state->__pyx_int_180);
-  __Pyx_VISIT_CONST(traverse_module_state->__pyx_int_1000);
   __Pyx_VISIT_CONST(traverse_module_state->__pyx_int_42570);
   return 0;
 }
@@ -5042,7 +5042,7 @@ __Pyx_RefNannySetupContext("PyInit_pCASL", 0);
  *     magnetization. This choice of constant is arbitrary.
  *     """
  *     absorption = 0.25             # <<<<<<<<<<<<<<
- *     saturation = 1000
+ *     saturation = 100000000.0
  * 
 */
   if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_absorption, __pyx_mstate_global->__pyx_float_0_25) < 0) __PYX_ERR(0, 32, __pyx_L1_error)
@@ -5050,11 +5050,11 @@ __Pyx_RefNannySetupContext("PyInit_pCASL", 0);
   /* "UM_MRF/sim_blocks/pCASL.py":33
  *     """
  *     absorption = 0.25
- *     saturation = 1000             # <<<<<<<<<<<<<<
+ *     saturation = 100000000.0             # <<<<<<<<<<<<<<
  * 
  * 
 */
-  if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_saturation, __pyx_mstate_global->__pyx_int_1000) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_saturation, __pyx_mstate_global->__pyx_float_100000000_0) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
 
   /* "UM_MRF/sim_blocks/pCASL.py":36
  * 
@@ -5397,12 +5397,12 @@ static int __Pyx_InitConstants(__pyx_mstatetype *__pyx_mstate) {
   if (__Pyx_InitStrings(__pyx_string_tab, __pyx_mstate->__pyx_string_tab, __pyx_string_tab_encodings) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
   __pyx_mstate->__pyx_float_0_25 = PyFloat_FromDouble(0.25); if (unlikely(!__pyx_mstate->__pyx_float_0_25)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_mstate->__pyx_float_3_14159 = PyFloat_FromDouble(3.14159); if (unlikely(!__pyx_mstate->__pyx_float_3_14159)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_mstate->__pyx_float_100000000_0 = PyFloat_FromDouble(100000000.0); if (unlikely(!__pyx_mstate->__pyx_float_100000000_0)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_mstate->__pyx_int_0 = PyLong_FromLong(0); if (unlikely(!__pyx_mstate->__pyx_int_0)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_mstate->__pyx_int_1 = PyLong_FromLong(1); if (unlikely(!__pyx_mstate->__pyx_int_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_mstate->__pyx_int_2 = PyLong_FromLong(2); if (unlikely(!__pyx_mstate->__pyx_int_2)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_mstate->__pyx_int_3 = PyLong_FromLong(3); if (unlikely(!__pyx_mstate->__pyx_int_3)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_mstate->__pyx_int_180 = PyLong_FromLong(180); if (unlikely(!__pyx_mstate->__pyx_int_180)) __PYX_ERR(0, 1, __pyx_L1_error)
-  __pyx_mstate->__pyx_int_1000 = PyLong_FromLong(1000); if (unlikely(!__pyx_mstate->__pyx_int_1000)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_mstate->__pyx_int_42570 = PyLong_FromLong(42570L); if (unlikely(!__pyx_mstate->__pyx_int_42570)) __PYX_ERR(0, 1, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
