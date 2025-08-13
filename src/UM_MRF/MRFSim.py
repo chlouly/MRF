@@ -97,6 +97,36 @@ class MRFSim:
         for sim in self.sims:
             sim.control = 0
 
+    def concatenate_deadtimes(self):
+        """
+        Combines adjacent deadtimes into larger deadtimes. This is an optimization that
+        should be run before any of the setup methods are called. Ideally right after the
+        MRFSim object has been populated with SimBlock objects.
+        """
+
+        i = 0
+        while i < self.num_sim:
+            if isinstance(self.sims[i], DeadAir):
+                while (i + 1 < self.num_sim) and (isinstance(self.sims[i + 1], DeadAir)):
+                    # New Total Time
+                    T_new = self.sims[i].T + self.sims[i + 1].T
+
+                    # New Timestep is the minimum of the two deadtimes
+                    dt_new = min(self.sims[i].dt, self.sims[i + 1].dt)
+
+                    # If either is dynamic time, the new one will be
+                    dyntime_new = self.sims[i] or self.sims[i + 1]
+
+                    # New sample and crusher times
+                    sample_times_new = np.append(self.sims[i].sample_times, self.sims[i + 1].sample_times + self.sims[i + 1].T)
+                    crusher_times_new = np.append(self.sims[i].crusher_times, self.sims[i + 1].crusher_times + self.sims[i + 1].T)
+
+                    self.sims[i] = DeadAir(T_new, dt_new, dynamic_time=dyntime_new, crusher_times=crusher_times_new, sample_times=sample_times_new)
+                    self.sims.pop(i + 1)
+                    self.num_sim -= 1
+            
+            i += 1
+
 
     def setup(self):
         """
@@ -112,11 +142,13 @@ class MRFSim:
         self.num_samples = 0
 
         for sim in self.sims:
+            # Compute and store the RF pulses (Integrate them into B(t))
+            sim.clear_rf()
+            sim.set_flip(self.params.flip)
+            sim.set_rf()
+
             # Compute and store gradients (Integrate them into B(t))
             sim.set_gradients()
-
-            # Compute and store the RF pulses (Integrate them into B(t))
-            sim.set_rf(self.params)
 
             # Store the sample times (w.r. to the whole pulse sequence)
             if np.size(sim.sample_times) != 0:
@@ -175,14 +207,14 @@ class MRFSim:
             - phase:    RF Pulse Phase, in degrees.
         """
         for sim in self.sims:
-            sim.set_flip(self.params)
+            sim.set_flip(self.params.flip)
 
     
-    def read_sched(self, sched_dir: str, ro_block, dyn_time=False):
+    def read_sched(self, sched_dir: str, ro_block, prep1_block, prep2_block, dyn_time=False):
         # All schedules are found in a mrf_schedule.txt file
         sched_dir = sched_dir + "/mrf_schedule.txt"
 
-        dt_dead = 40
+        dt_dead = 0.1
 
         # RO vals
         ETL = 20
@@ -218,13 +250,17 @@ class MRFSim:
                 self.add_sim(DeadAir(vals[3] * 1000, dt_dead, dynamic_time=dyn_time))
 
                 # Prep Pulse 1
-                self.add_sim(self.add_presat_sim(vals[4]))
+                #self.add_sim(self.add_presat_sim(vals[4]))
+                if vals[4] != 0:
+                    self.add_sim(deepcopy(prep1_block))
 
                 # Prep 1 PLD
                 self.add_sim(DeadAir(vals[5] * 1000, dt_dead))
 
                 # Prep Pulse 2
-                self.add_sim(self.add_presat_sim(vals[6]))
+                #self.add_sim(self.add_presat_sim(vals[6]))
+                if vals[6] != 0:
+                    self.add_sim(deepcopy(prep2_block))
 
                 # Prep 1 PLD
                 self.add_sim(DeadAir(vals[7] * 1000, dt_dead, dynamic_time=dyn_time))
@@ -297,6 +333,10 @@ class MRFSim:
         for sim in self.sims:
             sim.optimize_time()
 
+    def deoptimize_time(self):
+        for sim in self.sims:
+            sim.deoptimize_time()
+
     def reset_time(self):
         for sim in self.sims:
             sim.reset_fields()
@@ -312,34 +352,27 @@ class MRFSim:
         # Create Progress Bar
         create_pb()
 
-        # Time re-op flag
-        reoptimize_time = True
+        # # Do this to make sure the first flip angle is correct
+        # self.modify_flips()
 
         # Do the actual looping now
         try:
             while True:
-                # Modify s(t) if needed
-                if self.params.recompute_s or self.params.recompute_B:
-                    self.reset_time()
-                    self.modify_flips()
+                # If se need to recompute s(t), then we must reoptimize time
+                if self.params.recompute_s:
+                    self.deoptimize_time()
                     self.compute_s()
-                    reoptimize_time = True
+                    self.optimize_time()
 
-                # if self.params.recompute_s:
-                #     self.compute_s()
-                #     reoptimize_time = True
-
-                elif self.params.rescale_s:
+                # Now we can scale s(t) if it is needed
+                if self.params.rescale_s:
                     self.scale_s()
 
-                # if self.params.recompute_B:
-                #     self.modify_flips()
-                #     reoptimize_time = True
+                # We can also rescale B(t) if we need to modify the flip angle
+                if self.params.recompute_B:
+                    self.modify_flips()
 
-                if reoptimize_time:
-                    self.optimize_time()
-                    reoptimize_time = False
-
+            
                 # Run simulations for the entire pulse sequence
                 self.run_all_np()
 

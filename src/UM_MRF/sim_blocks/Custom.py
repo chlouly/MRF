@@ -20,15 +20,15 @@ class Custom(SimObj):
     """
 
 
-    def __new__(cls, B, s, dt):
-        if (shape(B)[1] != 3) | (len(shape(B)) > 2):
-            raise ValueError("Error: B(t) must have 3 spatial dimensions (Must be of shape (n, 3))")
-        if shape(s)[0] != shape(B)[0]:
-            raise ValueError("Error: s(t) and B(t) must have the same number of timepoints")
+    # def __new__(cls, B, s, dt, dynamic_time=False, crusher_times=np.array([]), sample_times=np.array([]), avg_samples=True):
+    #     if (shape(B)[1] != 3) | (len(shape(B)) > 2):
+    #         raise ValueError("Error: B(t) must have 3 spatial dimensions (Must be of shape (n, 3))")
+    #     if shape(s)[0] != shape(B)[0]:
+    #         raise ValueError("Error: s(t) and B(t) must have the same number of timepoints")
         
-        T = len(s) * dt
+    #     T = len(s) * dt
 
-        return super().__new__(cls, T)
+    #     return super().__new__(cls, T)
         
 
     def __init__(self, B, s, dt, dynamic_time=False, crusher_times=np.array([]), sample_times=np.array([]), avg_samples=True):  
@@ -50,7 +50,7 @@ class Custom(SimObj):
         self.s = s
 
 
-    def set_rf(self, params):
+    def set_rf(self):
         """
         This method overrides SimObj's definition of set_rf(). The RF pulses should already be
         incorporated into this object's B field array, therefor there is nothing to do.
@@ -67,6 +67,18 @@ class Custom(SimObj):
 
         This method essentially does nothing.
         """
+        pass
+
+
+    def load_rf(self, r_path: str, theta_path: str):
+        """
+        This method takes the excitation waveform stored in r_path and applies the phase stored in
+        theta_path and applies it to this simulation block. Both of these variables 
+
+        The values stored at the file at directory theta_path must be in radians, and those in r_path
+        must be in Tesla
+        """
+    # TODO: implement this you dummy
         pass
 
     

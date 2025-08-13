@@ -14,7 +14,7 @@ class BIR8(SimObj):
     crush_length = 750 
 
 
-    def __init__(self, T, dt, dynamic_time=False, crusher_times=np.array([]), sample_times=np.array([]), avg_samples=True):
+    def __init__(self, T, dt=0.004, dynamic_time=False, crusher_times=np.array([]), sample_times=np.array([]), avg_samples=True):
         """
         Creates an instance of the DeadAir class - DeadAir(SimObj)
 
@@ -25,7 +25,7 @@ class BIR8(SimObj):
         super().__init__(T, 0, 0, 0, 0, dt, dynamic_time=dynamic_time)
 
 
-    def set_rf(self, params):
+    def set_rf(self):
         """
         This method overrides SimObj's definition of set_rf(). There should be no
         RF pulses in a DeadAir block, therefor we want no modification to this
@@ -70,4 +70,8 @@ class BIR8(SimObj):
 
         return self.M
 
+
+def gen_BIR8_RF(pID, T, dt):
+    # if pID == 6850:
+    pass
 

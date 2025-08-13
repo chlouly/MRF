@@ -1509,7 +1509,7 @@ struct __pyx_defaults;
 /* "UM_MRF/sim_blocks/BIR8.py":17
  * 
  * 
- *     def __init__(self, T, dt, dynamic_time=False, crusher_times=np.array([]), sample_times=np.array([]), avg_samples=True):             # <<<<<<<<<<<<<<
+ *     def __init__(self, T, dt=0.004, dynamic_time=False, crusher_times=np.array([]), sample_times=np.array([]), avg_samples=True):             # <<<<<<<<<<<<<<
  *         """
  *         Creates an instance of the DeadAir class - DeadAir(SimObj)
 */
@@ -2317,12 +2317,14 @@ static const char __pyx_k_M[] = "M";
 static const char __pyx_k_T[] = "T";
 static const char __pyx_k_p[] = "p";
 static const char __pyx_k__2[] = "?";
+static const char __pyx_k__3[] = "\200\001";
 static const char __pyx_k_dt[] = "dt";
 static const char __pyx_k_gc[] = "gc";
 static const char __pyx_k_np[] = "np";
 static const char __pyx_k_doc[] = "__doc__";
 static const char __pyx_k_eTE[] = "eTE";
 static const char __pyx_k_exp[] = "exp";
+static const char __pyx_k_pID[] = "pID";
 static const char __pyx_k_pop[] = "pop";
 static const char __pyx_k_BIR8[] = "BIR8";
 static const char __pyx_k_T1_f[] = "T1_f";
@@ -2355,6 +2357,7 @@ static const char __pyx_k_metaclass[] = "__metaclass__";
 static const char __pyx_k_BIR8___init[] = "BIR8.__init__";
 static const char __pyx_k_BIR8_set_rf[] = "BIR8.set_rf";
 static const char __pyx_k_avg_samples[] = "avg_samples";
+static const char __pyx_k_gen_BIR8_RF[] = "gen_BIR8_RF";
 static const char __pyx_k_mro_entries[] = "__mro_entries__";
 static const char __pyx_k_BIR8_run_ljn[] = "BIR8.run_ljn";
 static const char __pyx_k_crush_length[] = "crush_length";
@@ -2368,17 +2371,18 @@ static const char __pyx_k_set_gradients[] = "set_gradients";
 static const char __pyx_k_BIR8_set_gradients[] = "BIR8.set_gradients";
 static const char __pyx_k_asyncio_coroutines[] = "asyncio.coroutines";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
-static const char __pyx_k_I_ccddiij_Ry_Cs_S_M[] = "\320\004\036\320\036@\300\002\300&\310\001\320I[\320[]\320]c\320cd\320di\320ij\360\020\000\t\016\210R\210y\230\001\230\023\230C\230s\240#\240S\250\004\250M\270\021";
 static const char __pyx_k_UM_MRF_sim_blocks_BIR8[] = "UM_MRF.sim_blocks.BIR8";
+static const char __pyx_k_Fb_aOaacciijjoop_Ry_Cs_S_M[] = "\320\004\032\230*\320$F\300b\310\006\310a\320Oa\320ac\320ci\320ij\320jo\320op\360\020\000\t\016\210R\210y\230\001\230\023\230C\230s\240#\240S\250\004\250M\270\021";
 static const char __pyx_k_src_UM_MRF_sim_blocks_BIR8_py[] = "src/UM_MRF/sim_blocks/BIR8.py";
 static const char __pyx_k_BIR8_SimObj_This_child_class_of[] = "\n    BIR8(SimObj)\n\n    This child class of SimObj represents a block where the scanner is not\n    playing any RF excitations or gradients. \n    ";
 static const char __pyx_k_E_6_4xq_Bd_was_Bd_1D_Rq_Bd_E_Bd[] = "\320\004\031\230\021\360\014\000\t\r\210E\220\022\2206\230\022\2304\230x\240q\360\006\000\t\r\210B\210d\220%\220w\230a\230s\240\"\240B\240d\250!\2501\250D\260\005\260R\260q\270\001\360\006\000\t\r\210B\210d\220\"\220E\230\021\360\006\000\t\r\210B\210d\220&\230\001\230\022\2304\230q\240\001\240\024\240^\2602\260Q\260a\330\010\014\210B\210d\220&\230\001\360\006\000\t\r\210B\210d\220%\220q\340\010\017\210t\2201";
 /* #### Code section: decls ### */
-static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_4BIR8___defaults__(CYTHON_UNUSED PyObject *__pyx_self); /* proto */
+static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_4BIR8_2__defaults__(CYTHON_UNUSED PyObject *__pyx_self); /* proto */
 static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_4BIR8_4BIR8___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_T, PyObject *__pyx_v_dt, PyObject *__pyx_v_dynamic_time, CYTHON_UNUSED PyObject *__pyx_v_crusher_times, CYTHON_UNUSED PyObject *__pyx_v_sample_times, CYTHON_UNUSED PyObject *__pyx_v_avg_samples); /* proto */
 static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_4BIR8_4BIR8_2set_rf(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_params); /* proto */
 static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_4BIR8_4BIR8_4set_gradients(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_4BIR8_4BIR8_6run_ljn(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_p, PyObject *__pyx_v_M_start); /* proto */
+static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_4BIR8_gen_BIR8_RF(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_pID, CYTHON_UNUSED PyObject *__pyx_v_T, CYTHON_UNUSED PyObject *__pyx_v_dt); /* proto */
 static PyObject *__pyx_tp_new_6UM_MRF_10sim_blocks_4BIR8___pyx_defaults(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 /* #### Code section: late_includes ### */
 /* #### Code section: module_state ### */
@@ -2423,9 +2427,10 @@ typedef struct {
   __Pyx_CachedCFunction __pyx_umethod_PyDict_Type_pop;
   PyObject *__pyx_slice[2];
   PyObject *__pyx_tuple[4];
-  PyObject *__pyx_codeobj_tab[4];
-  PyObject *__pyx_string_tab[59];
+  PyObject *__pyx_codeobj_tab[5];
+  PyObject *__pyx_string_tab[61];
   PyObject *__pyx_float_0_0;
+  PyObject *__pyx_float_0_004;
   PyObject *__pyx_int_0;
   PyObject *__pyx_int_1;
   PyObject *__pyx_int_2;
@@ -2501,34 +2506,36 @@ static __pyx_mstatetype * const __pyx_mstate_global = &__pyx_mstate_global_stati
 #define __pyx_n_u_exp __pyx_string_tab[28]
 #define __pyx_n_u_func __pyx_string_tab[29]
 #define __pyx_kp_u_gc __pyx_string_tab[30]
-#define __pyx_n_u_init __pyx_string_tab[31]
-#define __pyx_n_u_initializing __pyx_string_tab[32]
-#define __pyx_n_u_is_coroutine __pyx_string_tab[33]
-#define __pyx_kp_u_isenabled __pyx_string_tab[34]
-#define __pyx_n_u_main __pyx_string_tab[35]
-#define __pyx_n_u_metaclass __pyx_string_tab[36]
-#define __pyx_n_u_module __pyx_string_tab[37]
-#define __pyx_n_u_mro_entries __pyx_string_tab[38]
-#define __pyx_n_u_name __pyx_string_tab[39]
-#define __pyx_n_u_np __pyx_string_tab[40]
-#define __pyx_n_u_ntime __pyx_string_tab[41]
-#define __pyx_n_u_numpy __pyx_string_tab[42]
-#define __pyx_n_u_p __pyx_string_tab[43]
-#define __pyx_n_u_params __pyx_string_tab[44]
-#define __pyx_n_u_pop __pyx_string_tab[45]
-#define __pyx_n_u_prepare __pyx_string_tab[46]
-#define __pyx_n_u_qualname __pyx_string_tab[47]
-#define __pyx_n_u_run_ljn __pyx_string_tab[48]
-#define __pyx_n_u_sample_times __pyx_string_tab[49]
-#define __pyx_n_u_self __pyx_string_tab[50]
-#define __pyx_n_u_set_gradients __pyx_string_tab[51]
-#define __pyx_n_u_set_name __pyx_string_tab[52]
-#define __pyx_n_u_set_rf __pyx_string_tab[53]
-#define __pyx_n_u_spec __pyx_string_tab[54]
-#define __pyx_kp_u_src_UM_MRF_sim_blocks_BIR8_py __pyx_string_tab[55]
-#define __pyx_n_u_super __pyx_string_tab[56]
-#define __pyx_n_u_test __pyx_string_tab[57]
-#define __pyx_n_u_zeros __pyx_string_tab[58]
+#define __pyx_n_u_gen_BIR8_RF __pyx_string_tab[31]
+#define __pyx_n_u_init __pyx_string_tab[32]
+#define __pyx_n_u_initializing __pyx_string_tab[33]
+#define __pyx_n_u_is_coroutine __pyx_string_tab[34]
+#define __pyx_kp_u_isenabled __pyx_string_tab[35]
+#define __pyx_n_u_main __pyx_string_tab[36]
+#define __pyx_n_u_metaclass __pyx_string_tab[37]
+#define __pyx_n_u_module __pyx_string_tab[38]
+#define __pyx_n_u_mro_entries __pyx_string_tab[39]
+#define __pyx_n_u_name __pyx_string_tab[40]
+#define __pyx_n_u_np __pyx_string_tab[41]
+#define __pyx_n_u_ntime __pyx_string_tab[42]
+#define __pyx_n_u_numpy __pyx_string_tab[43]
+#define __pyx_n_u_p __pyx_string_tab[44]
+#define __pyx_n_u_pID __pyx_string_tab[45]
+#define __pyx_n_u_params __pyx_string_tab[46]
+#define __pyx_n_u_pop __pyx_string_tab[47]
+#define __pyx_n_u_prepare __pyx_string_tab[48]
+#define __pyx_n_u_qualname __pyx_string_tab[49]
+#define __pyx_n_u_run_ljn __pyx_string_tab[50]
+#define __pyx_n_u_sample_times __pyx_string_tab[51]
+#define __pyx_n_u_self __pyx_string_tab[52]
+#define __pyx_n_u_set_gradients __pyx_string_tab[53]
+#define __pyx_n_u_set_name __pyx_string_tab[54]
+#define __pyx_n_u_set_rf __pyx_string_tab[55]
+#define __pyx_n_u_spec __pyx_string_tab[56]
+#define __pyx_kp_u_src_UM_MRF_sim_blocks_BIR8_py __pyx_string_tab[57]
+#define __pyx_n_u_super __pyx_string_tab[58]
+#define __pyx_n_u_test __pyx_string_tab[59]
+#define __pyx_n_u_zeros __pyx_string_tab[60]
 /* #### Code section: module_state_clear ### */
 #if CYTHON_USE_MODULE_STATE
 static CYTHON_SMALL_CODE int __pyx_m_clear(PyObject *m) {
@@ -2553,9 +2560,10 @@ static CYTHON_SMALL_CODE int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_type_6UM_MRF_10sim_blocks_4BIR8___pyx_defaults);
   for (int i=0; i<2; ++i) { Py_CLEAR(clear_module_state->__pyx_slice[i]); }
   for (int i=0; i<4; ++i) { Py_CLEAR(clear_module_state->__pyx_tuple[i]); }
-  for (int i=0; i<4; ++i) { Py_CLEAR(clear_module_state->__pyx_codeobj_tab[i]); }
-  for (int i=0; i<59; ++i) { Py_CLEAR(clear_module_state->__pyx_string_tab[i]); }
+  for (int i=0; i<5; ++i) { Py_CLEAR(clear_module_state->__pyx_codeobj_tab[i]); }
+  for (int i=0; i<61; ++i) { Py_CLEAR(clear_module_state->__pyx_string_tab[i]); }
   Py_CLEAR(clear_module_state->__pyx_float_0_0);
+  Py_CLEAR(clear_module_state->__pyx_float_0_004);
   Py_CLEAR(clear_module_state->__pyx_int_0);
   Py_CLEAR(clear_module_state->__pyx_int_1);
   Py_CLEAR(clear_module_state->__pyx_int_2);
@@ -2587,9 +2595,10 @@ static CYTHON_SMALL_CODE int __pyx_m_traverse(PyObject *m, visitproc visit, void
   Py_VISIT(traverse_module_state->__pyx_type_6UM_MRF_10sim_blocks_4BIR8___pyx_defaults);
   for (int i=0; i<2; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_slice[i]); }
   for (int i=0; i<4; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_tuple[i]); }
-  for (int i=0; i<4; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_codeobj_tab[i]); }
-  for (int i=0; i<59; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_string_tab[i]); }
+  for (int i=0; i<5; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_codeobj_tab[i]); }
+  for (int i=0; i<61; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_string_tab[i]); }
   __Pyx_VISIT_CONST(traverse_module_state->__pyx_float_0_0);
+  __Pyx_VISIT_CONST(traverse_module_state->__pyx_float_0_004);
   __Pyx_VISIT_CONST(traverse_module_state->__pyx_int_0);
   __Pyx_VISIT_CONST(traverse_module_state->__pyx_int_1);
   __Pyx_VISIT_CONST(traverse_module_state->__pyx_int_2);
@@ -2605,12 +2614,12 @@ static CYTHON_SMALL_CODE int __pyx_m_traverse(PyObject *m, visitproc visit, void
 /* "UM_MRF/sim_blocks/BIR8.py":17
  * 
  * 
- *     def __init__(self, T, dt, dynamic_time=False, crusher_times=np.array([]), sample_times=np.array([]), avg_samples=True):             # <<<<<<<<<<<<<<
+ *     def __init__(self, T, dt=0.004, dynamic_time=False, crusher_times=np.array([]), sample_times=np.array([]), avg_samples=True):             # <<<<<<<<<<<<<<
  *         """
  *         Creates an instance of the DeadAir class - DeadAir(SimObj)
 */
 
-static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_4BIR8___defaults__(CYTHON_UNUSED PyObject *__pyx_self) {
+static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_4BIR8_2__defaults__(CYTHON_UNUSED PyObject *__pyx_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2620,20 +2629,23 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_4BIR8___defaults__(CYTHON_UNUSED 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__defaults__", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyTuple_New(4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 17, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_INCREF(((PyObject*)__pyx_mstate_global->__pyx_float_0_004));
+  __Pyx_GIVEREF(((PyObject*)__pyx_mstate_global->__pyx_float_0_004));
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject*)__pyx_mstate_global->__pyx_float_0_004)) != (0)) __PYX_ERR(0, 17, __pyx_L1_error);
   __Pyx_INCREF(((PyObject*)Py_False));
   __Pyx_GIVEREF(((PyObject*)Py_False));
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, ((PyObject*)Py_False)) != (0)) __PYX_ERR(0, 17, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, ((PyObject*)Py_False)) != (0)) __PYX_ERR(0, 17, __pyx_L1_error);
   __Pyx_INCREF(__Pyx_CyFunction_Defaults(struct __pyx_defaults, __pyx_self)->arg0);
   __Pyx_GIVEREF(__Pyx_CyFunction_Defaults(struct __pyx_defaults, __pyx_self)->arg0);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, __Pyx_CyFunction_Defaults(struct __pyx_defaults, __pyx_self)->arg0) != (0)) __PYX_ERR(0, 17, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 2, __Pyx_CyFunction_Defaults(struct __pyx_defaults, __pyx_self)->arg0) != (0)) __PYX_ERR(0, 17, __pyx_L1_error);
   __Pyx_INCREF(__Pyx_CyFunction_Defaults(struct __pyx_defaults, __pyx_self)->arg1);
   __Pyx_GIVEREF(__Pyx_CyFunction_Defaults(struct __pyx_defaults, __pyx_self)->arg1);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 2, __Pyx_CyFunction_Defaults(struct __pyx_defaults, __pyx_self)->arg1) != (0)) __PYX_ERR(0, 17, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 3, __Pyx_CyFunction_Defaults(struct __pyx_defaults, __pyx_self)->arg1) != (0)) __PYX_ERR(0, 17, __pyx_L1_error);
   __Pyx_INCREF(((PyObject*)Py_True));
   __Pyx_GIVEREF(((PyObject*)Py_True));
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 3, ((PyObject*)Py_True)) != (0)) __PYX_ERR(0, 17, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 4, ((PyObject*)Py_True)) != (0)) __PYX_ERR(0, 17, __pyx_L1_error);
   __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 17, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_1);
@@ -2741,12 +2753,13 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
       if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "__init__", 0) < 0) __PYX_ERR(0, 17, __pyx_L3_error)
+      if (!values[2]) values[2] = __Pyx_NewRef(((PyObject *)((PyObject*)__pyx_mstate_global->__pyx_float_0_004)));
       if (!values[3]) values[3] = __Pyx_NewRef(((PyObject *)((PyObject*)Py_False)));
       if (!values[4]) values[4] = __Pyx_NewRef(__pyx_dynamic_args->arg0);
       if (!values[5]) values[5] = __Pyx_NewRef(__pyx_dynamic_args->arg1);
       if (!values[6]) values[6] = __Pyx_NewRef(((PyObject *)((PyObject*)Py_True)));
-      for (Py_ssize_t i = __pyx_nargs; i < 3; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("__init__", 0, 3, 7, i); __PYX_ERR(0, 17, __pyx_L3_error) }
+      for (Py_ssize_t i = __pyx_nargs; i < 2; i++) {
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("__init__", 0, 2, 7, i); __PYX_ERR(0, 17, __pyx_L3_error) }
       }
     } else {
       switch (__pyx_nargs) {
@@ -2769,6 +2782,8 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
         case  3:
         values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
         if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 17, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
         if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 17, __pyx_L3_error)
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
@@ -2776,6 +2791,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
         break;
         default: goto __pyx_L5_argtuple_error;
       }
+      if (!values[2]) values[2] = __Pyx_NewRef(((PyObject *)((PyObject*)__pyx_mstate_global->__pyx_float_0_004)));
       if (!values[3]) values[3] = __Pyx_NewRef(((PyObject *)((PyObject*)Py_False)));
       if (!values[4]) values[4] = __Pyx_NewRef(__pyx_dynamic_args->arg0);
       if (!values[5]) values[5] = __Pyx_NewRef(__pyx_dynamic_args->arg1);
@@ -2791,7 +2807,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 0, 3, 7, __pyx_nargs); __PYX_ERR(0, 17, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 0, 2, 7, __pyx_nargs); __PYX_ERR(0, 17, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -2870,7 +2886,7 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_4BIR8_4BIR8___init__(CYTHON_UNUSE
   /* "UM_MRF/sim_blocks/BIR8.py":17
  * 
  * 
- *     def __init__(self, T, dt, dynamic_time=False, crusher_times=np.array([]), sample_times=np.array([]), avg_samples=True):             # <<<<<<<<<<<<<<
+ *     def __init__(self, T, dt=0.004, dynamic_time=False, crusher_times=np.array([]), sample_times=np.array([]), avg_samples=True):             # <<<<<<<<<<<<<<
  *         """
  *         Creates an instance of the DeadAir class - DeadAir(SimObj)
 */
@@ -3495,6 +3511,127 @@ static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_4BIR8_4BIR8_6run_ljn(CYTHON_UNUSE
   __Pyx_AddTraceback("UM_MRF.sim_blocks.BIR8.BIR8.run_ljn", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "UM_MRF/sim_blocks/BIR8.py":74
+ * 
+ * 
+ * def gen_BIR8_RF(pID, T, dt):             # <<<<<<<<<<<<<<
+ *     # if pID == 6850:
+ *     pass
+*/
+
+/* Python wrapper */
+static PyObject *__pyx_pw_6UM_MRF_10sim_blocks_4BIR8_1gen_BIR8_RF(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+); /*proto*/
+static PyMethodDef __pyx_mdef_6UM_MRF_10sim_blocks_4BIR8_1gen_BIR8_RF = {"gen_BIR8_RF", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6UM_MRF_10sim_blocks_4BIR8_1gen_BIR8_RF, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_6UM_MRF_10sim_blocks_4BIR8_1gen_BIR8_RF(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+) {
+  CYTHON_UNUSED PyObject *__pyx_v_pID = 0;
+  CYTHON_UNUSED PyObject *__pyx_v_T = 0;
+  CYTHON_UNUSED PyObject *__pyx_v_dt = 0;
+  #if !CYTHON_METH_FASTCALL
+  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
+  #endif
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  PyObject* values[3] = {0,0,0};
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("gen_BIR8_RF (wrapper)", 0);
+  #if !CYTHON_METH_FASTCALL
+  #if CYTHON_ASSUME_SAFE_SIZE
+  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
+  #else
+  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
+  #endif
+  #endif
+  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
+  {
+    PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_pID,&__pyx_mstate_global->__pyx_n_u_T,&__pyx_mstate_global->__pyx_n_u_dt,0};
+    const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
+    if (unlikely(__pyx_kwds_len) < 0) __PYX_ERR(0, 74, __pyx_L3_error)
+    if (__pyx_kwds_len > 0) {
+      switch (__pyx_nargs) {
+        case  3:
+        values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 74, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  2:
+        values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 74, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  1:
+        values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 74, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      const Py_ssize_t kwd_pos_args = __pyx_nargs;
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "gen_BIR8_RF", 0) < 0) __PYX_ERR(0, 74, __pyx_L3_error)
+      for (Py_ssize_t i = __pyx_nargs; i < 3; i++) {
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("gen_BIR8_RF", 1, 3, 3, i); __PYX_ERR(0, 74, __pyx_L3_error) }
+      }
+    } else if (unlikely(__pyx_nargs != 3)) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 74, __pyx_L3_error)
+      values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 74, __pyx_L3_error)
+      values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 74, __pyx_L3_error)
+    }
+    __pyx_v_pID = values[0];
+    __pyx_v_T = values[1];
+    __pyx_v_dt = values[2];
+  }
+  goto __pyx_L6_skip;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("gen_BIR8_RF", 1, 3, 3, __pyx_nargs); __PYX_ERR(0, 74, __pyx_L3_error)
+  __pyx_L6_skip:;
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+    Py_XDECREF(values[__pyx_temp]);
+  }
+  __Pyx_AddTraceback("UM_MRF.sim_blocks.BIR8.gen_BIR8_RF", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_6UM_MRF_10sim_blocks_4BIR8_gen_BIR8_RF(__pyx_self, __pyx_v_pID, __pyx_v_T, __pyx_v_dt);
+
+  /* function exit code */
+  for (Py_ssize_t __pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+    Py_XDECREF(values[__pyx_temp]);
+  }
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_6UM_MRF_10sim_blocks_4BIR8_gen_BIR8_RF(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_pID, CYTHON_UNUSED PyObject *__pyx_v_T, CYTHON_UNUSED PyObject *__pyx_v_dt) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("gen_BIR8_RF", 0);
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
@@ -4124,7 +4261,7 @@ __Pyx_RefNannySetupContext("PyInit_BIR8", 0);
   /* "UM_MRF/sim_blocks/BIR8.py":17
  * 
  * 
- *     def __init__(self, T, dt, dynamic_time=False, crusher_times=np.array([]), sample_times=np.array([]), avg_samples=True):             # <<<<<<<<<<<<<<
+ *     def __init__(self, T, dt=0.004, dynamic_time=False, crusher_times=np.array([]), sample_times=np.array([]), avg_samples=True):             # <<<<<<<<<<<<<<
  *         """
  *         Creates an instance of the DeadAir class - DeadAir(SimObj)
 */
@@ -4174,7 +4311,7 @@ __Pyx_RefNannySetupContext("PyInit_BIR8", 0);
   __Pyx_CyFunction_Defaults(struct __pyx_defaults, __pyx_t_6)->arg1 = __pyx_t_7;
   __Pyx_GIVEREF(__pyx_t_7);
   __pyx_t_7 = 0;
-  __Pyx_CyFunction_SetDefaultsGetter(__pyx_t_6, __pyx_pf_6UM_MRF_10sim_blocks_4BIR8___defaults__);
+  __Pyx_CyFunction_SetDefaultsGetter(__pyx_t_6, __pyx_pf_6UM_MRF_10sim_blocks_4BIR8_2__defaults__);
   if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_init, __pyx_t_6) < 0) __PYX_ERR(0, 17, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
@@ -4230,6 +4367,18 @@ __Pyx_RefNannySetupContext("PyInit_BIR8", 0);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "UM_MRF/sim_blocks/BIR8.py":74
+ * 
+ * 
+ * def gen_BIR8_RF(pID, T, dt):             # <<<<<<<<<<<<<<
+ *     # if pID == 6850:
+ *     pass
+*/
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_6UM_MRF_10sim_blocks_4BIR8_1gen_BIR8_RF, 0, __pyx_mstate_global->__pyx_n_u_gen_BIR8_RF, NULL, __pyx_mstate_global->__pyx_n_u_UM_MRF_sim_blocks_BIR8, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[4])); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 74, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_gen_BIR8_RF, __pyx_t_3) < 0) __PYX_ERR(0, 74, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "UM_MRF/sim_blocks/BIR8.py":1
@@ -4339,6 +4488,7 @@ static const __Pyx_StringTabEntry __pyx_string_tab[] = {
   {__pyx_k_exp, sizeof(__pyx_k_exp), 0, 1, 1}, /* PyObject cname: __pyx_n_u_exp */
   {__pyx_k_func, sizeof(__pyx_k_func), 0, 1, 1}, /* PyObject cname: __pyx_n_u_func */
   {__pyx_k_gc, sizeof(__pyx_k_gc), 0, 1, 0}, /* PyObject cname: __pyx_kp_u_gc */
+  {__pyx_k_gen_BIR8_RF, sizeof(__pyx_k_gen_BIR8_RF), 0, 1, 1}, /* PyObject cname: __pyx_n_u_gen_BIR8_RF */
   {__pyx_k_init, sizeof(__pyx_k_init), 0, 1, 1}, /* PyObject cname: __pyx_n_u_init */
   {__pyx_k_initializing, sizeof(__pyx_k_initializing), 0, 1, 1}, /* PyObject cname: __pyx_n_u_initializing */
   {__pyx_k_is_coroutine, sizeof(__pyx_k_is_coroutine), 0, 1, 1}, /* PyObject cname: __pyx_n_u_is_coroutine */
@@ -4352,6 +4502,7 @@ static const __Pyx_StringTabEntry __pyx_string_tab[] = {
   {__pyx_k_ntime, sizeof(__pyx_k_ntime), 0, 1, 1}, /* PyObject cname: __pyx_n_u_ntime */
   {__pyx_k_numpy, sizeof(__pyx_k_numpy), 0, 1, 1}, /* PyObject cname: __pyx_n_u_numpy */
   {__pyx_k_p, sizeof(__pyx_k_p), 0, 1, 1}, /* PyObject cname: __pyx_n_u_p */
+  {__pyx_k_pID, sizeof(__pyx_k_pID), 0, 1, 1}, /* PyObject cname: __pyx_n_u_pID */
   {__pyx_k_params, sizeof(__pyx_k_params), 0, 1, 1}, /* PyObject cname: __pyx_n_u_params */
   {__pyx_k_pop, sizeof(__pyx_k_pop), 0, 1, 1}, /* PyObject cname: __pyx_n_u_pop */
   {__pyx_k_prepare, sizeof(__pyx_k_prepare), 0, 1, 1}, /* PyObject cname: __pyx_n_u_prepare */
@@ -4451,6 +4602,7 @@ static int __Pyx_InitConstants(__pyx_mstatetype *__pyx_mstate) {
   __pyx_mstate->__pyx_umethod_PyDict_Type_pop.method_name = &__pyx_mstate->__pyx_n_u_pop;
   if (__Pyx_InitStrings(__pyx_string_tab, __pyx_mstate->__pyx_string_tab, __pyx_string_tab_encodings) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
   __pyx_mstate->__pyx_float_0_0 = PyFloat_FromDouble(0.0); if (unlikely(!__pyx_mstate->__pyx_float_0_0)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_mstate->__pyx_float_0_004 = PyFloat_FromDouble(0.004); if (unlikely(!__pyx_mstate->__pyx_float_0_004)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_mstate->__pyx_int_0 = PyLong_FromLong(0); if (unlikely(!__pyx_mstate->__pyx_int_0)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_mstate->__pyx_int_1 = PyLong_FromLong(1); if (unlikely(!__pyx_mstate->__pyx_int_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_mstate->__pyx_int_2 = PyLong_FromLong(2); if (unlikely(!__pyx_mstate->__pyx_int_2)) __PYX_ERR(0, 1, __pyx_L1_error)
@@ -4470,7 +4622,7 @@ static int __Pyx_InitConstants(__pyx_mstatetype *__pyx_mstate) {
             unsigned int num_kwonly_args : 1;
             unsigned int nlocals : 3;
             unsigned int flags : 10;
-            unsigned int first_line : 6;
+            unsigned int first_line : 7;
             unsigned int line_table_length : 12;
         } __Pyx_PyCode_New_function_description;
 /* NewCodeObj.proto */
@@ -4488,9 +4640,9 @@ static int __Pyx_CreateCodeObjects(__pyx_mstatetype *__pyx_mstate) {
   PyObject* tuple_dedup_map = PyDict_New();
   if (unlikely(!tuple_dedup_map)) return -1;
   {
-    const __Pyx_PyCode_New_function_description descr = {7, 0, 0, 7, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 17, 57};
+    const __Pyx_PyCode_New_function_description descr = {7, 0, 0, 7, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 17, 59};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_T, __pyx_mstate->__pyx_n_u_dt, __pyx_mstate->__pyx_n_u_dynamic_time, __pyx_mstate->__pyx_n_u_crusher_times, __pyx_mstate->__pyx_n_u_sample_times, __pyx_mstate->__pyx_n_u_avg_samples};
-    __pyx_mstate_global->__pyx_codeobj_tab[0] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_UM_MRF_sim_blocks_BIR8_py, __pyx_mstate->__pyx_n_u_init, __pyx_k_I_ccddiij_Ry_Cs_S_M, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[0])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[0] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_UM_MRF_sim_blocks_BIR8_py, __pyx_mstate->__pyx_n_u_init, __pyx_k_Fb_aOaacciijjoop_Ry_Cs_S_M, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[0])) goto bad;
   }
   {
     const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 28, 2};
@@ -4506,6 +4658,11 @@ static int __Pyx_CreateCodeObjects(__pyx_mstatetype *__pyx_mstate) {
     const __Pyx_PyCode_New_function_description descr = {3, 0, 0, 3, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 50, 138};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_p, __pyx_mstate->__pyx_n_u_M_start};
     __pyx_mstate_global->__pyx_codeobj_tab[3] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_UM_MRF_sim_blocks_BIR8_py, __pyx_mstate->__pyx_n_u_run_ljn, __pyx_k_E_6_4xq_Bd_was_Bd_1D_Rq_Bd_E_Bd, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[3])) goto bad;
+  }
+  {
+    const __Pyx_PyCode_New_function_description descr = {3, 0, 0, 3, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 74, 2};
+    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_pID, __pyx_mstate->__pyx_n_u_T, __pyx_mstate->__pyx_n_u_dt};
+    __pyx_mstate_global->__pyx_codeobj_tab[4] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_UM_MRF_sim_blocks_BIR8_py, __pyx_mstate->__pyx_n_u_gen_BIR8_RF, __pyx_k__3, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[4])) goto bad;
   }
   Py_DECREF(tuple_dedup_map);
   return 0;

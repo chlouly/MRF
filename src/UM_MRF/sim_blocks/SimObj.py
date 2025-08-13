@@ -107,6 +107,9 @@ class SimObj:
         self.crusher_times = self.crusher_inds * self.dt   # Get the times as a multiple of dt
         self.dynamic_time = dynamic_time
 
+        # Flag that says wether we're currently optimized or not
+        self.currently_optimized = False
+
         # We save the value of the avg_samples flag.
         # We also set the number of samples accordingly.
         self.avg_samples = avg_samples
@@ -149,6 +152,10 @@ class SimObj:
         self.B[:, 2] = self.B[:, 2] + (params.xpos * grads[:, 0]) + (params.ypos * grads[:, 1]) + (zpos * grads[:, 2])
 
 
+    def clear_rf(self):
+        self.B = np.zeros((self.ntime, 3))
+
+
     def set_rf(self, rf):
         """
         This incorporates the effects of the RF pulses into the total B field stored 
@@ -164,7 +171,7 @@ class SimObj:
         self.B = self.B + rf
 
 
-    def set_flip(self, params):
+    def set_flip(self, new_flip):
         """
         This is the default case for a child object's definition of set_flip. It does nothing
         """
@@ -298,8 +305,12 @@ class SimObj:
             self.sample_inds = np.int32(np.floor(self.sample_times / self.dt))
 
         # Collect the sample values from M(t)
-        sample_array = np.linalg.norm(self.M[self.sample_inds, 0:2], axis=1) * (1 - CBV) \
+        sample_array = (self.M[self.sample_inds, 0] + self.M[self.sample_inds, 1] * 1j) * (1 - CBV) \
                     + self.s[self.sample_inds] * CBV
+        
+        sample_array = sample_array.astype(np.complex64)
+
+        
 
         # Now we return an array of the actual samples.
         if self.avg_samples:
@@ -310,14 +321,42 @@ class SimObj:
             return sample_array
     
 
+    def deoptimize_time(self):
+        """
+        This method reverts the current sim block back to its original state, where all timepoints
+        are equally spaced. This must be run (or the current block must be in the deoptimized-state)
+        for the self.optimize_time() method to work properly.
+        """
+        if not self.currently_optimized:
+            # We are already in the deoptimized state, nothing to do
+            return
+        
+        if not self.dynamic_time:
+            # We aren't even optimizing in the first place, nothing to do
+            return
+
+        
+        # Reset time arrays and values to non-optimized
+        self.ntime = int(np.ceil(self.T / self.dt))         # Number of time samples
+        self.time = np.arange(self.ntime) * self.dt         # Vector of Timepoints [ms]
+
+        # We must also reset the B(t) and s(t) values for this block
+        self.B = np.zeros((self.ntime, 3))                  # (ntime, 3) array of B vectors [T] (initally set to 0s)
+        self.s = np.zeros((self.ntime, ))                   # (ntime, ) array of arterial magnetization values (initially set to 0s)
+
+        self.set_rf()
+
+
     def optimize_time(self):
         if not self.dynamic_time:
             # If we are not running a dynamic time dim, do nothing
             return
         
-        # Reset time arrays and values to non-optimized
-        self.ntime = int(np.ceil(self.T / self.dt))      # Number of time samples
-        self.time = np.arange(self.ntime) * self.dt        # Vector of Timepoints [ms]
+        if self.currently_optimized:
+            # We are already optimized. To re-optimize, we must revert
+            # back to the non-optimized state. 
+            self.deoptimize_time()
+
 
         # Get B and s change times
         B_change_arr = isnapprox(self.B[1:, :], self.B[0:-1, :])
@@ -325,10 +364,10 @@ class SimObj:
 
         # Get crusher and sample points
         crush_arr = np.zeros((self.ntime - 1, ), dtype=bool)
-        crush_arr[np.ceil(self.crusher_times[1:] / self.dt).astype(int)] = True
+        crush_arr[np.ceil(self.crusher_times / self.dt).astype(int)] = True
 
         sample_arr = np.zeros((self.ntime - 1, ), dtype=bool)
-        sample_arr[np.ceil(self.sample_times[1:] / self.dt).astype(int)] = True
+        sample_arr[np.ceil(self.sample_times / self.dt).astype(int)] = True
 
         # Boolean array of change indices
         change_arr = np.zeros((self.ntime, ), dtype=bool)
@@ -348,8 +387,12 @@ class SimObj:
         self.sample_inds = np.searchsorted(self.time, self.sample_times, side="left")
 
         # We finally clip the B and S arrays down to their final sizes
+        # TODO: Modify these two lines.
+        #       Instead of sampling one value, take the average of all that come before it in that block
         self.B = self.B[change_arr]
         self.s = self.s[change_arr]
+
+        self.currently_optimized = True
 
 
 

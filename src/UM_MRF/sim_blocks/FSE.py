@@ -30,7 +30,7 @@ class FSE(SimObj):
     absorption = 1.0    
 
 
-    def set_rf(self, params):
+    def set_rf(self):
         """
         This method overrides SimObj's definition of set_gradients(). Here we use
         the fse_pulsetrain() function to create a fast spin echo RF pulsetrain.

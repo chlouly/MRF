@@ -47,7 +47,7 @@ class pCASL(SimObj):
         super().__init__(T, 0, 0, 0, 0, dt, dynamic_time=dynamic_time, crusher_times=crusher_times, sample_times=sample_times, avg_samples=avg_samples)
 
 
-    def set_rf(self, params):
+    def set_rf(self):
         """
         This method overrides SimObj's definition of set_rf(). We don't directly
         simulate the effects of a pCASL pulse train, we merely simulate its expected

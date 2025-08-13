@@ -36,6 +36,13 @@ src/UM_MRF/sim_blocks/pCASL.c
 src/UM_MRF/sim_blocks/pCASL.py
 src/UM_MRF/simulators/np_blochsim_ljn.c
 src/UM_MRF/simulators/np_blochsim_ljn.py
+src/sim_blocks/BIR8.py
+src/sim_blocks/Custom.py
+src/sim_blocks/DeadAir.py
+src/sim_blocks/FSE.py
+src/sim_blocks/GRE.py
+src/sim_blocks/SimObj.py
+src/sim_blocks/pCASL.py
 test/test_1.py
 test/test_2.py
 test/test_3.py

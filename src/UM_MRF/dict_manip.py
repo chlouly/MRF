@@ -46,7 +46,7 @@ def init_dict(name, params, num_samples):
     
     # Set asside space for the actual dictionary
     #dict.create_dataset(dict_name, params.get_shape() + (num_samples,), compression='gzip')
-    d.create_dataset(dict_name, params.get_shape() + (num_samples,))
+    d.create_dataset(dict_name, params.get_shape() + (num_samples,), dtype=np.complex64)
     #dict.visititems(lambda name, obj: print(name))
     d.close()
     # except Exception as e:

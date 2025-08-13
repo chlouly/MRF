@@ -32,7 +32,7 @@ class GRE(SimObj):
     absorption = 1.0  
 
 
-    def  __init__(self, PW, ETL, delay, ESP, dt, dynamic_time=False, crusher_times=np.array([]), sample_times=np.array([]), avg_samples=True):
+    def  __init__(self, PW, ETL, delay, ESP, dt, flip, dynamic_time=False, crusher_times=np.array([]), sample_times=np.array([]), avg_samples=True):
         # This is the time of the block
         T = delay + (ETL * ESP)
 
@@ -41,30 +41,19 @@ class GRE(SimObj):
         elif (T <= 0):
             raise ValueError("Error: The provided timing parameters created a block with 0 or negative time.")
         
+        self.flip = flip
         super().__init__(T, PW, ETL, delay, ESP, dt, dynamic_time=dynamic_time, crusher_times=crusher_times, sample_times=sample_times, avg_samples=avg_samples)
 
 
-    def set_rf(self, params):
+    def set_rf(self):
         """
         This method overrides SimObj's definition of set_gradients(). Here we use
         the fse_pulsetrain() function to create a gradient echo RF pulsetrain.
         """
 
         # Get an array of the x and y components of the RF pulsetrain
-        rf = gre_pulsetrain(self.PW, self.ESP, self.ETL, self.delay, self.T, self.dt, params.flip)
+        rf = gre_pulsetrain(self.PW, self.ESP, self.ETL, self.delay, self.T, self.dt, self.flip)
 
-        # # We will sample after the first echo for the center of k space
-        # RO_samples = np.array([self.delay + self.PW + self.dt])
-
-        # # Append the ReadOut sample times to the sample times array
-        # #self.sample_times = np.append(self.sample_times, RO_samples)
-        # self.sample_times = RO_samples
-
-        # # Add Crushers
-        # self.crusher_inds = np.int32((np.arange(self.ETL) * np.ceil(self.ESP / self.dt)) + np.ceil((self.delay - crusher_offset) / self.dt))
-
-        # Call the parent class' definition of set_rf() to add the pulse to
-        # the objects effective B field.
         super().set_rf(rf)
 
 
@@ -79,17 +68,17 @@ class GRE(SimObj):
         pass
 
 
-    def set_flip(self, params):
+    def set_flip(self, new_flip):
         """
         This method lets you change the flip angle and RF phase of this block. It re-calls
         the method that sets the RF series.
         """
 
-        # Reset the Effective B-Field
-        self.B = np.zeros((self.ntime, 3))
+        # Rescale the RF pulse to reflect the new flip angle
+        self.B = self.B * (new_flip / self.flip)
+        self.flip = new_flip
 
-        self.set_rf(params)
-        self.set_gradients()    # Currently does nothing
+        
 
 
 # 117 mG * 1 ms = 180 degree flip

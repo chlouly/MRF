@@ -1,36 +1,3 @@
-from src import *
-import matplotlib.pyplot as plt
-from copy import deepcopy
-import numpy as np
-#from py_files = glob.glob("./src/*.py", recursive=True) + glob.glob("./src/*/*.py", recursive=True) 
-print()
-print()
-print(os.getcwd())
-print(py_files)
-print()
-print()
-print()
-
-extensions=[]
-for filepath in py_files:
-    # Convert file path to module name (e.g., src/myfastlib/core.pyx → myfastlib.core)
-    module_name = os.path.splitext(filepath.replace("src/", "").replace(os.sep, "."))[0]
-    extensions.append(Extension(name=module_name, sources=[filepath])).test.test_globals import *
-py_files = glob.glob("./src/*.py", recursive=True) + glob.glob("./src/*/*.py", recursive=True) 
-print()
-print()
-print(os.getcwd())
-print(py_files)
-print()
-print()
-print()
-
-extensions=[]
-for filepath in py_files:
-    # Convert file path to module name (e.g., src/myfastlib/core.pyx → myfastlib.core)
-    module_name = os.path.splitext(filepath.replace("src/", "").replace(os.sep, "."))[0]
-    extensions.append(Extension(name=module_name, sources=[filepath]))
-from numpy import ceil, arange
 
 ###########################
 #        Constants        #
@@ -60,28 +27,6 @@ rf_amp = 15* (10**-7)                # RF amplitude [T]
 g_max = 0.00000006
 g_ave = 0.000000006
 max_slew = 0.5
-
-# white py_files = glob.glob("./src/*.py", recursive=True) + glob.glob("./src/*/*.py", recursive=True) 
-print()
-print()
-print(os.getcwd())
-print(py_files)
-print()
-print()
-print()
-
-extensions=[]
-for filepath in py_files:
-    # Convert file path to module name (e.g., src/myfastlib/core.pyx → myfastlib.core)
-    module_name = os.path.splitext(filepath.replace("src/", "").replace(os.sep, "."))[0]
-    extensions.append(Extension(name=module_name, sources=[filepath]))matter values
-F = 50 / 60 / 1000 / 100
-lam = 0.9
-CBV = 0.02
-BAT = 4000
-a_0 = 2
-
-T1_s = 100
 
 
 ###########################

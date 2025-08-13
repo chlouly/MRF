@@ -2276,6 +2276,7 @@ static const char __pyx_k_size[] = "size";
 static const char __pyx_k_spec[] = "__spec__";
 static const char __pyx_k_test[] = "__test__";
 static const char __pyx_k_close[] = "close";
+static const char __pyx_k_dtype[] = "dtype";
 static const char __pyx_k_enter[] = "__enter__";
 static const char __pyx_k_entry[] = "entry";
 static const char __pyx_k_numpy[] = "numpy";
@@ -2302,6 +2303,7 @@ static const char __pyx_k_set_name[] = "__set_name__";
 static const char __pyx_k_T1_f_vals[] = "T1_f_vals";
 static const char __pyx_k_T1_s_vals[] = "T1_s_vals";
 static const char __pyx_k_T2_f_vals[] = "T2_f_vals";
+static const char __pyx_k_complex64[] = "complex64";
 static const char __pyx_k_cur_index[] = "cur_index";
 static const char __pyx_k_dict_name[] = "dict_name";
 static const char __pyx_k_flip_name[] = "flip_name";
@@ -2324,7 +2326,7 @@ static const char __pyx_k_UM_MRF_dict_manip[] = "UM_MRF.dict_manip";
 static const char __pyx_k_asyncio_coroutines[] = "asyncio.coroutines";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_src_UM_MRF_dict_manip_py[] = "src/UM_MRF/dict_manip.py";
-static const char __pyx_k_uCq_E__AZr_q_m5_a__AZr_q_m5_a[] = "\200\001\360\n\000\005\010\200u\210C\210q\340\010\t\360\010\000\005\t\210\004\210E\220\021\220&\230\001\340\004\005\200_\220A\220Z\230r\240\026\240q\250\006\250m\2705\300\006\300a\330\004\005\200_\220A\220Z\230r\240\026\240q\250\006\250m\2705\300\006\300a\330\004\005\200_\220A\220Z\230r\240\026\240q\250\006\250m\2705\300\006\300a\330\004\005\200_\220A\220\\\240\022\2406\250\021\250&\260\016\270e\3006\310\021\330\004\005\200_\220A\220X\230R\230v\240Q\240f\250J\260e\2706\300\021\330\004\005\200_\220A\220Y\230b\240\006\240a\240v\250[\270\005\270V\3001\330\004\005\200_\220A\220Y\230b\240\006\240a\240v\250[\270\005\270V\3001\330\004\005\200_\220A\220Z\230r\240\026\240q\250\006\250l\270%\270v\300Q\330\004\005\200_\220A\220Z\230r\240\026\240q\250\006\250l\270%\270v\300Q\330\004\005\200_\220A\220[\240\002\240&\250\001\250\026\250}\270E\300\026\300q\360\006\000\005\006\200_\220A\220Z\230r\240\025\240a\240v\250Z\260q\360\010\000\005\006\200_\220A\220[\240\006\240j\260\003\2603\260a\340\004\005\200V\2101";
+static const char __pyx_k_uCq_E__AZr_q_m5_a__AZr_q_m5_a[] = "\200\001\360\n\000\005\010\200u\210C\210q\340\010\t\360\010\000\005\t\210\004\210E\220\021\220&\230\001\340\004\005\200_\220A\220Z\230r\240\026\240q\250\006\250m\2705\300\006\300a\330\004\005\200_\220A\220Z\230r\240\026\240q\250\006\250m\2705\300\006\300a\330\004\005\200_\220A\220Z\230r\240\026\240q\250\006\250m\2705\300\006\300a\330\004\005\200_\220A\220\\\240\022\2406\250\021\250&\260\016\270e\3006\310\021\330\004\005\200_\220A\220X\230R\230v\240Q\240f\250J\260e\2706\300\021\330\004\005\200_\220A\220Y\230b\240\006\240a\240v\250[\270\005\270V\3001\330\004\005\200_\220A\220Y\230b\240\006\240a\240v\250[\270\005\270V\3001\330\004\005\200_\220A\220Z\230r\240\026\240q\250\006\250l\270%\270v\300Q\330\004\005\200_\220A\220Z\230r\240\026\240q\250\006\250l\270%\270v\300Q\330\004\005\200_\220A\220[\240\002\240&\250\001\250\026\250}\270E\300\026\300q\360\006\000\005\006\200_\220A\220Z\230r\240\025\240a\240v\250Z\260q\360\010\000\005\006\200_\220A\220[\240\006\240j\260\003\2603\260o\300V\3102\310Q\340\004\005\200V\2101";
 /* #### Code section: decls ### */
 static PyObject *__pyx_pf_6UM_MRF_10dict_manip_init_dict(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_name, PyObject *__pyx_v_params, PyObject *__pyx_v_num_samples); /* proto */
 static PyObject *__pyx_pf_6UM_MRF_10dict_manip_2store_entry(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_name, PyObject *__pyx_v_param_idx, PyObject *__pyx_v_entry); /* proto */
@@ -2370,7 +2372,7 @@ typedef struct {
   PyObject *__pyx_slice[1];
   PyObject *__pyx_tuple[2];
   PyObject *__pyx_codeobj_tab[2];
-  PyObject *__pyx_string_tab[65];
+  PyObject *__pyx_string_tab[67];
 /* #### Code section: module_state_contents ### */
 /* CommonTypesMetaclass.module_state_decls */
 PyTypeObject *__pyx_CommonTypesMetaclassType;
@@ -2429,50 +2431,52 @@ static __pyx_mstatetype * const __pyx_mstate_global = &__pyx_mstate_global_stati
 #define __pyx_n_u_class_getitem __pyx_string_tab[18]
 #define __pyx_n_u_cline_in_traceback __pyx_string_tab[19]
 #define __pyx_n_u_close __pyx_string_tab[20]
-#define __pyx_n_u_create_dataset __pyx_string_tab[21]
-#define __pyx_n_u_cur_index __pyx_string_tab[22]
-#define __pyx_n_u_d __pyx_string_tab[23]
-#define __pyx_n_u_data __pyx_string_tab[24]
-#define __pyx_n_u_dict __pyx_string_tab[25]
-#define __pyx_n_u_dict_name __pyx_string_tab[26]
-#define __pyx_n_u_dictionary __pyx_string_tab[27]
-#define __pyx_n_u_enter __pyx_string_tab[28]
-#define __pyx_n_u_entry __pyx_string_tab[29]
-#define __pyx_n_u_exit __pyx_string_tab[30]
-#define __pyx_n_u_flip_angle_vals __pyx_string_tab[31]
-#define __pyx_n_u_flip_name __pyx_string_tab[32]
-#define __pyx_n_u_flip_vals __pyx_string_tab[33]
-#define __pyx_n_u_func __pyx_string_tab[34]
-#define __pyx_n_u_get_shape __pyx_string_tab[35]
-#define __pyx_n_u_h5py __pyx_string_tab[36]
-#define __pyx_n_u_idx_name __pyx_string_tab[37]
-#define __pyx_n_u_init_dict __pyx_string_tab[38]
-#define __pyx_n_u_initializing __pyx_string_tab[39]
-#define __pyx_n_u_is_coroutine __pyx_string_tab[40]
-#define __pyx_n_u_kf_name __pyx_string_tab[41]
-#define __pyx_n_u_kf_vals __pyx_string_tab[42]
-#define __pyx_n_u_ks_name __pyx_string_tab[43]
-#define __pyx_n_u_ks_vals __pyx_string_tab[44]
-#define __pyx_n_u_main __pyx_string_tab[45]
-#define __pyx_n_u_module __pyx_string_tab[46]
-#define __pyx_n_u_name __pyx_string_tab[47]
-#define __pyx_n_u_name_2 __pyx_string_tab[48]
-#define __pyx_n_u_np __pyx_string_tab[49]
-#define __pyx_n_u_num_samples __pyx_string_tab[50]
-#define __pyx_n_u_numpy __pyx_string_tab[51]
-#define __pyx_n_u_param_idx __pyx_string_tab[52]
-#define __pyx_n_u_params __pyx_string_tab[53]
-#define __pyx_n_u_pop __pyx_string_tab[54]
-#define __pyx_n_u_qualname __pyx_string_tab[55]
-#define __pyx_kp_u_r __pyx_string_tab[56]
-#define __pyx_n_u_set_name __pyx_string_tab[57]
-#define __pyx_n_u_shape __pyx_string_tab[58]
-#define __pyx_n_u_size __pyx_string_tab[59]
-#define __pyx_n_u_spec __pyx_string_tab[60]
-#define __pyx_kp_u_src_UM_MRF_dict_manip_py __pyx_string_tab[61]
-#define __pyx_n_u_store_entry __pyx_string_tab[62]
-#define __pyx_n_u_test __pyx_string_tab[63]
-#define __pyx_n_u_w __pyx_string_tab[64]
+#define __pyx_n_u_complex64 __pyx_string_tab[21]
+#define __pyx_n_u_create_dataset __pyx_string_tab[22]
+#define __pyx_n_u_cur_index __pyx_string_tab[23]
+#define __pyx_n_u_d __pyx_string_tab[24]
+#define __pyx_n_u_data __pyx_string_tab[25]
+#define __pyx_n_u_dict __pyx_string_tab[26]
+#define __pyx_n_u_dict_name __pyx_string_tab[27]
+#define __pyx_n_u_dictionary __pyx_string_tab[28]
+#define __pyx_n_u_dtype __pyx_string_tab[29]
+#define __pyx_n_u_enter __pyx_string_tab[30]
+#define __pyx_n_u_entry __pyx_string_tab[31]
+#define __pyx_n_u_exit __pyx_string_tab[32]
+#define __pyx_n_u_flip_angle_vals __pyx_string_tab[33]
+#define __pyx_n_u_flip_name __pyx_string_tab[34]
+#define __pyx_n_u_flip_vals __pyx_string_tab[35]
+#define __pyx_n_u_func __pyx_string_tab[36]
+#define __pyx_n_u_get_shape __pyx_string_tab[37]
+#define __pyx_n_u_h5py __pyx_string_tab[38]
+#define __pyx_n_u_idx_name __pyx_string_tab[39]
+#define __pyx_n_u_init_dict __pyx_string_tab[40]
+#define __pyx_n_u_initializing __pyx_string_tab[41]
+#define __pyx_n_u_is_coroutine __pyx_string_tab[42]
+#define __pyx_n_u_kf_name __pyx_string_tab[43]
+#define __pyx_n_u_kf_vals __pyx_string_tab[44]
+#define __pyx_n_u_ks_name __pyx_string_tab[45]
+#define __pyx_n_u_ks_vals __pyx_string_tab[46]
+#define __pyx_n_u_main __pyx_string_tab[47]
+#define __pyx_n_u_module __pyx_string_tab[48]
+#define __pyx_n_u_name __pyx_string_tab[49]
+#define __pyx_n_u_name_2 __pyx_string_tab[50]
+#define __pyx_n_u_np __pyx_string_tab[51]
+#define __pyx_n_u_num_samples __pyx_string_tab[52]
+#define __pyx_n_u_numpy __pyx_string_tab[53]
+#define __pyx_n_u_param_idx __pyx_string_tab[54]
+#define __pyx_n_u_params __pyx_string_tab[55]
+#define __pyx_n_u_pop __pyx_string_tab[56]
+#define __pyx_n_u_qualname __pyx_string_tab[57]
+#define __pyx_kp_u_r __pyx_string_tab[58]
+#define __pyx_n_u_set_name __pyx_string_tab[59]
+#define __pyx_n_u_shape __pyx_string_tab[60]
+#define __pyx_n_u_size __pyx_string_tab[61]
+#define __pyx_n_u_spec __pyx_string_tab[62]
+#define __pyx_kp_u_src_UM_MRF_dict_manip_py __pyx_string_tab[63]
+#define __pyx_n_u_store_entry __pyx_string_tab[64]
+#define __pyx_n_u_test __pyx_string_tab[65]
+#define __pyx_n_u_w __pyx_string_tab[66]
 /* #### Code section: module_state_clear ### */
 #if CYTHON_USE_MODULE_STATE
 static CYTHON_SMALL_CODE int __pyx_m_clear(PyObject *m) {
@@ -2496,7 +2500,7 @@ static CYTHON_SMALL_CODE int __pyx_m_clear(PyObject *m) {
   for (int i=0; i<1; ++i) { Py_CLEAR(clear_module_state->__pyx_slice[i]); }
   for (int i=0; i<2; ++i) { Py_CLEAR(clear_module_state->__pyx_tuple[i]); }
   for (int i=0; i<2; ++i) { Py_CLEAR(clear_module_state->__pyx_codeobj_tab[i]); }
-  for (int i=0; i<65; ++i) { Py_CLEAR(clear_module_state->__pyx_string_tab[i]); }
+  for (int i=0; i<67; ++i) { Py_CLEAR(clear_module_state->__pyx_string_tab[i]); }
   return 0;
 }
 #endif
@@ -2520,7 +2524,7 @@ static CYTHON_SMALL_CODE int __pyx_m_traverse(PyObject *m, visitproc visit, void
   for (int i=0; i<1; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_slice[i]); }
   for (int i=0; i<2; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_tuple[i]); }
   for (int i=0; i<2; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_codeobj_tab[i]); }
-  for (int i=0; i<65; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_string_tab[i]); }
+  for (int i=0; i<67; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_string_tab[i]); }
   return 0;
 }
 #endif
@@ -3376,7 +3380,7 @@ static PyObject *__pyx_pf_6UM_MRF_10dict_manip_init_dict(CYTHON_UNUSED PyObject 
   /* "UM_MRF/dict_manip.py":49
  *     # Set asside space for the actual dictionary
  *     #dict.create_dataset(dict_name, params.get_shape() + (num_samples,), compression='gzip')
- *     d.create_dataset(dict_name, params.get_shape() + (num_samples,))             # <<<<<<<<<<<<<<
+ *     d.create_dataset(dict_name, params.get_shape() + (num_samples,), dtype=np.complex64)             # <<<<<<<<<<<<<<
  *     #dict.visititems(lambda name, obj: print(name))
  *     d.close()
 */
@@ -3403,32 +3407,42 @@ static PyObject *__pyx_pf_6UM_MRF_10dict_manip_init_dict(CYTHON_UNUSED PyObject 
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 49, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_mstate_global->__pyx_n_u_complex64); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 49, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_t_6 = 0;
   {
-    PyObject *__pyx_callargs[3] = {__pyx_t_4, __pyx_t_9, __pyx_t_8};
-    __pyx_t_1 = __Pyx_PyObject_FastCallMethod(__pyx_mstate_global->__pyx_n_u_create_dataset, __pyx_callargs+__pyx_t_6, (3-__pyx_t_6) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+    PyObject *__pyx_callargs[3 + ((CYTHON_VECTORCALL) ? 1 : 0)] = {__pyx_t_4, __pyx_t_9, __pyx_t_8};
+    __pyx_t_7 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 49, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_7);
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_dtype, __pyx_t_5, __pyx_t_7, __pyx_callargs+3, 0) < 0) __PYX_ERR(0, 49, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_Object_VectorcallMethod_CallFromBuilder(__pyx_mstate_global->__pyx_n_u_create_dataset, __pyx_callargs+__pyx_t_6, (3-__pyx_t_6) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_7);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 49, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "UM_MRF/dict_manip.py":51
- *     d.create_dataset(dict_name, params.get_shape() + (num_samples,))
+ *     d.create_dataset(dict_name, params.get_shape() + (num_samples,), dtype=np.complex64)
  *     #dict.visititems(lambda name, obj: print(name))
  *     d.close()             # <<<<<<<<<<<<<<
  *     # except Exception as e:
  *     #     raise e
 */
-  __pyx_t_8 = __pyx_v_d;
-  __Pyx_INCREF(__pyx_t_8);
+  __pyx_t_7 = __pyx_v_d;
+  __Pyx_INCREF(__pyx_t_7);
   __pyx_t_6 = 0;
   {
-    PyObject *__pyx_callargs[2] = {__pyx_t_8, NULL};
+    PyObject *__pyx_callargs[2] = {__pyx_t_7, NULL};
     __pyx_t_1 = __Pyx_PyObject_FastCallMethod(__pyx_mstate_global->__pyx_n_u_close, __pyx_callargs+__pyx_t_6, (1-__pyx_t_6) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
-    __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
+    __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 51, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
@@ -4413,6 +4427,7 @@ static const __Pyx_StringTabEntry __pyx_string_tab[] = {
   {__pyx_k_class_getitem, sizeof(__pyx_k_class_getitem), 0, 1, 1}, /* PyObject cname: __pyx_n_u_class_getitem */
   {__pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 1, 1}, /* PyObject cname: __pyx_n_u_cline_in_traceback */
   {__pyx_k_close, sizeof(__pyx_k_close), 0, 1, 1}, /* PyObject cname: __pyx_n_u_close */
+  {__pyx_k_complex64, sizeof(__pyx_k_complex64), 0, 1, 1}, /* PyObject cname: __pyx_n_u_complex64 */
   {__pyx_k_create_dataset, sizeof(__pyx_k_create_dataset), 0, 1, 1}, /* PyObject cname: __pyx_n_u_create_dataset */
   {__pyx_k_cur_index, sizeof(__pyx_k_cur_index), 0, 1, 1}, /* PyObject cname: __pyx_n_u_cur_index */
   {__pyx_k_d, sizeof(__pyx_k_d), 0, 1, 1}, /* PyObject cname: __pyx_n_u_d */
@@ -4420,6 +4435,7 @@ static const __Pyx_StringTabEntry __pyx_string_tab[] = {
   {__pyx_k_dict, sizeof(__pyx_k_dict), 0, 1, 1}, /* PyObject cname: __pyx_n_u_dict */
   {__pyx_k_dict_name, sizeof(__pyx_k_dict_name), 0, 1, 1}, /* PyObject cname: __pyx_n_u_dict_name */
   {__pyx_k_dictionary, sizeof(__pyx_k_dictionary), 0, 1, 1}, /* PyObject cname: __pyx_n_u_dictionary */
+  {__pyx_k_dtype, sizeof(__pyx_k_dtype), 0, 1, 1}, /* PyObject cname: __pyx_n_u_dtype */
   {__pyx_k_enter, sizeof(__pyx_k_enter), 0, 1, 1}, /* PyObject cname: __pyx_n_u_enter */
   {__pyx_k_entry, sizeof(__pyx_k_entry), 0, 1, 1}, /* PyObject cname: __pyx_n_u_entry */
   {__pyx_k_exit, sizeof(__pyx_k_exit), 0, 1, 1}, /* PyObject cname: __pyx_n_u_exit */
@@ -4541,7 +4557,7 @@ static int __Pyx_CreateCodeObjects(__pyx_mstatetype *__pyx_mstate) {
   PyObject* tuple_dedup_map = PyDict_New();
   if (unlikely(!tuple_dedup_map)) return -1;
   {
-    const __Pyx_PyCode_New_function_description descr = {3, 0, 0, 4, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 20, 332};
+    const __Pyx_PyCode_New_function_description descr = {3, 0, 0, 4, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 20, 338};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_name, __pyx_mstate->__pyx_n_u_params, __pyx_mstate->__pyx_n_u_num_samples, __pyx_mstate->__pyx_n_u_d};
     __pyx_mstate_global->__pyx_codeobj_tab[0] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_UM_MRF_dict_manip_py, __pyx_mstate->__pyx_n_u_init_dict, __pyx_k_uCq_E__AZr_q_m5_a__AZr_q_m5_a, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[0])) goto bad;
   }
