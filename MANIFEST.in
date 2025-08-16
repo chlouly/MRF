@@ -1,0 +1,9 @@
+# Exclude all generated C/C++ files from source distribution
+exclude src/**/*.c
+exclude src/**/*.cpp
+
+# If you also want to be safe about backup/temporary files
+exclude **/*~
+exclude **/*.pyo
+exclude **/*.pyd
+exclude **/*.so

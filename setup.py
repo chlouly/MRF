@@ -1,11 +1,7 @@
 from setuptools import setup, Extension
 from setuptools.command.build_ext import build_ext
 from Cython.Build import cythonize
-import numpy as np
-import glob
-import os
 
-# This is a stupid way of doing this VVV
 extensions = cythonize(
     [
         Extension(
@@ -14,7 +10,8 @@ extensions = cythonize(
             include_dirs=["src"],
         )
     ],
-    compiler_directives={"language_level": "3"}
+    compiler_directives={"language_level": "3"},
+    build_dir="build/intermeds"
 )
 
 setup(
